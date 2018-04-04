@@ -1,0 +1,13 @@
+#header{
+    height:100px;
+    width:60%;
+    margin:0 auto;
+}
+#header .logo{
+    display:block;
+    height:80px;
+    width:200px;
+    text-decoration: none;
+    background:url("../image/logo.png.png") no-repeat center center;
+    
+}

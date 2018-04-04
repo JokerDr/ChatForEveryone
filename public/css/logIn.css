@@ -1,0 +1,173 @@
+html,body {
+    background: url(../image/logIn/logInPic.jpg) no-repeat center fixed; 
+     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/logIn/logInPic.jpg', sizingMethod='scale');
+    -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../image/logIn/logInPic.jpg', sizingMethod='scale'); 
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;  
+   
+}
+
+#right_bg{
+  position:absolute;
+  top:0;
+  right:0;
+  width:25%;  
+  height:100%;
+  overflow: hidden;
+  background:rgba(0, 0, 0, 0.637);
+  /* background:#fd6d1c; */
+  filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000, endcolorstr=#7F000000);
+}
+
+#right_bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+    /* background:rgba(0, 0, 0, 0.637); */
+    /* background:#fd6d1c; */
+    filter: progid: DXImageTransform.Microsoft.gradient(startcolorstr=#fd6d1c, endcolorstr=#fd6d1c);
+}
+
+.layer {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 570px;
+    margin-top: -285px;
+}
+
+.cont {
+    position: absolute;
+    right: 15%;
+    width: 282px;
+    font: 13px / 16px "Microsoft YaHei";
+    color: #b02c00;
+    overflow: hidden;  
+    -moz-user-select:none;
+    /*火狐*/
+    -webkit-user-select:none;
+    /*webkit浏览器*/
+    -ms-user-select:none;
+    /*IE10*/
+    -khtml-user-select:none;
+    /*早期浏览器*/
+    user-select:none;
+}
+
+.cont img {
+    display: block;
+    margin: 0 auto;
+}
+
+.cont .inp01 {
+    width: 240px;
+    height: 42px;
+    margin-top: 20px;
+    padding: 0 20px;
+    font: 18px / 40px "Microsoft YaHei";
+    color: #ccc;
+    background: #fff;
+}
+
+.cont .refresh {
+    display: none;
+    padding-top: 20px;
+    overflow: hidden;
+    zoom: 1;
+}
+
+/* 验证码 start */
+.cont .captcha {  
+    width:284px;
+    margin: 0 auto;
+    padding-top: 20px;    
+}
+
+.cont .captcha input {
+    width: 80px;
+    height: 42px;   
+    padding: 0 20px;
+    margin-right: 36px;
+    text-align: center;
+}
+.cont .captcha .showCaptcha img {
+    height: 46px;
+    width:120px;
+    display: inline-block;
+    *display: inline;/*兼容ie 6 7*/
+    *zoom:1;/*兼容ie 6 7*/
+    vertical-align: middle;/*兼容ie 6 7*/
+    right: 0;
+}
+/* 验证码end */
+
+.cont .line {
+    height:20px;
+    line-height: 20px;  
+    margin-top: 13px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.cont .line a {
+    float: right;
+    text-decoration: none;
+    color: #fff
+}
+
+.cont .line .checkbox {
+    float: left;
+    position: relative;
+    top: 2px;
+    _top: -2px;
+    margin-right: 8px;
+    _margin-right: 0;
+}
+/* 复选框 */
+.cont .line label {
+    cursor: pointer;
+
+}
+/* 登录按钮 */
+.cont .btn {
+    display: block;
+    width: 282px;
+    height: 44px;
+    margin: 16px auto;
+    font: 22px / 24px "Microsoft YaHei";
+    color: #600;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    background: #ffbf11;
+    border-radius: 3px;
+}
+
+.cont .noLogin {
+    display: inline-block;
+    height: 17px;
+    padding-left: 26px;
+    line-height: 17px;
+    color: #00ff00;
+}
+
+.cont .register {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff
+}
+
+.cont .msg {
+    display: none;
+    width: 100%;
+    height: 23px;
+    line-height: 23px;
+    margin-top: 8px;
+    padding-left: 22px;
+    text-indent: 4px;
+    background: url("../image/sprit.png") no-repeat left -57px;
+}
