@@ -1,13 +1,164 @@
 #header{
+    position: relative;
     height:100px;
     width:60%;
     margin:0 auto;
 }
 #header .logo{
-    display:block;
+     display: inline-block;
+     *display: inline;
+     /*兼容ie 6 7*/
+     *zoom:1;
+     /*兼容ie 6 7*/
+     vertical-align: middle;
+     /*兼容ie 6 7*/
+     
+     color:#999999;
     height:80px;
     width:200px;
     text-decoration: none;
     background:url("../image/logo.png.png") no-repeat center center;
+    margin-top:20px;
     
+}
+#header h1{
+       display: inline-block;
+       *display: inline;
+       /*兼容ie 6 7*/
+       *zoom:1;
+       /*兼容ie 6 7*/
+       vertical-align: middle;
+       /*兼容ie 6 7*/    
+       color:#999999;
+       margin-left:6%;
+       padding-top:47px;
+}
+#header span {
+   padding:0 10px;
+}
+#header #login{
+    position: absolute;
+    right: 0;
+    top:70px;
+    width:92px;
+    height:32px;
+    margin-top:-16px;
+    text-decoration: none;
+    letter-spacing: 4px;
+    border: 1px solid #999999;
+    font-size: 18px;
+    text-align: center;
+    line-height:32px;
+    
+}
+
+/* content -s */
+.content{
+      position: relative;
+      height:100px;
+      width:60%;
+      margin:0 auto;
+      background: #fff;
+}
+.content input ,label{
+    display:inline-block;
+      *display: inline;
+      /*兼容ie 6 7*/
+      *zoom:1;
+      /*兼容ie 6 7*/
+      vertical-align: middle;
+      /*兼容ie 6 7*/
+  
+}
+/* .cont span,.cont label{   
+    width:80px;
+    height:45px;
+    padding-right:15px;
+} */
+.content .conbg{
+    display: block;
+    width:134px;
+    height:26px;
+    background: url('../image/register/账号信息.png') no-repeat center center;
+    margin-left: 30px;
+    margin-top:30px;
+    margin-bottom: 15px;
+}
+.content .apply{
+    width:100%;
+    padding: 0 10%;
+
+}
+.content .apply .regWay .pos {
+    display: inline-block;
+     *display: inline;
+     /*兼容ie 6 7*/
+     *zoom:1;
+     /*兼容ie 6 7*/
+     vertical-align: middle;
+     /*兼容ie 6 7*/
+    width:150px;
+    height:45px;
+    margin-bottom:15px;
+    line-height: 45px;
+}
+.content .apply .regWay span{
+    display: inline-block;
+     *display: inline;
+     /*兼容ie 6 7*/
+     *zoom:1;
+     /*兼容ie 6 7*/
+     vertical-align: middle;
+     /*兼容ie 6 7*/
+    width:115px;
+    height:45px;
+    padding-right:15px;
+    margin-bottom:15px;
+    line-height: 45px;
+    text-align: right;
+    font-size: 20px;
+    line-height: 45px;
+}
+
+#infoStatu1{
+    height:250px;
+}
+#infoStatu1 .pos{
+    height: 45px;
+    margin-bottom:15px;
+}
+#infoStatu1 .pos label{
+    text-align: right;
+    width:120px;
+    height:40px;
+    line-height:40px;
+    margin-right:15px;
+    font-size: 18px;
+}
+
+#infoStatu1 input{
+    width:330px;
+    height:30px;
+    padding:0 15px;
+}
+ #infoStatu1  .captcha {
+    width: 100px;
+}
+#captcha{
+
+    width:80px;
+    height:30px;
+    
+}
+#infoStatu1 .refresh{
+    height:45px;
+    width:45px;
+    display: inline-block;
+    *display: inline;
+    /*兼容ie 6 7*/
+    *zoom:1;
+    /*兼容ie 6 7*/
+    vertical-align: middle;
+    /*兼容ie 6 7*/
+    background: url('../../public/image/register/loading.gif') no-repeat center center;
 }

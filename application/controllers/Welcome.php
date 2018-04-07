@@ -6,12 +6,41 @@
         public function __construct()
         {
             parent::__construct();
-            $this->load->model("Home_model");
+            $this->load->model("Welcome_model");
         }
-       
+        // 在登录页登录后跳转到-》我的资料卡
+        public function index_logined(){
+        $this->load->library('pagination');
+        $user = $this->session->userdata('user');
+        // $total = $this->Article_model->get_logined_count_article($user->user_id);
+        $config['base_url'] = base_url().'welcome/index_logined';//当前控制器方法
+        // $config['total_rows'] = $total;//总数
+        // $config['per_page'] = 1;//每页显示条数
+        $this->pagination->initialize($config);
+        $links = $this->pagination->create_links();
+        // $results = $this->Article_model->get_logined_article_list($this->uri->segment(3),$config['per_page'],$user->user_id);
+        // $types = $this->Article_model->get_logined_article_type($user->user_id);
+        $this->load->view('index',array('links'=>$links));//'list'=>$results,'types'=>$types,
     }
-    
-    
-    /* End of file Controllername.php */
+
+    // 自动跳转到主页（未登录状态下）
+     public function index()
+    {
+        $this->load->library('pagination');
+        $total = $this->Article_model->get_count_article();
+        $config['base_url'] = base_url().'welcome/index';//当前控制器方法
+        // $config['total_rows'] = $total;//总数
+        // $config['per_page'] = 1;//每页显示条数
+//
+//		$config['first_link'] = 'one';
+//
+//		$config['next_link'] = '**';
+        // $this->pagination->initialize($config);
+        // $links = $this->pagination->create_links();
+        // $results = $this->Article_model->get_article_list($this->uri->segment(3),$config['per_page']);
+        // $types = $this->Article_model->get_article_type();
+        $this->load->view('index',array('list'=>$results,'types'=>$types,'links'=>$links));
+    }
+} 
     
 ?>

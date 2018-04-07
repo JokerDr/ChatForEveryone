@@ -104,6 +104,7 @@ class CI_Session {
 
 		$class = new $class($this->_config);
 		if ($class instanceof SessionHandlerInterface)
+		// system\libraries\Session\Session.php 107行 session_set_save_handler
 		{
 			if (is_php('5.4'))
 			{

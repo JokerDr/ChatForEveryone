@@ -9,6 +9,11 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <?php echo ?>
+    <?php
+
+    Phpinfo();
+
+?>
+    <?php echo $captcha?>
 </body>
 </html>

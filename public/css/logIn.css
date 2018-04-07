@@ -12,7 +12,8 @@ html,body {
   position:absolute;
   top:0;
   right:0;
-  width:25%;  
+  /* width:25%;   */
+  width:400px;
   height:100%;
   overflow: hidden;
   background:rgba(0, 0, 0, 0.637);
@@ -20,7 +21,7 @@ html,body {
   filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000, endcolorstr=#7F000000);
 }
 
-#right_bg {
+/* #right_bg {
     position: absolute;
     top: 0;
     right: 0;
@@ -29,8 +30,8 @@ html,body {
     overflow: hidden;
     /* background:rgba(0, 0, 0, 0.637); */
     /* background:#fd6d1c; */
-    filter: progid: DXImageTransform.Microsoft.gradient(startcolorstr=#fd6d1c, endcolorstr=#fd6d1c);
-}
+    /* filter: progid: DXImageTransform.Microsoft.gradient(startcolorstr=#fd6d1c, endcolorstr=#fd6d1c);
+} */ 
 
 .layer {
     position: absolute;
@@ -106,7 +107,7 @@ html,body {
 /* 验证码end */
 
 .cont .line {
-    height:20px;
+    height: 20px;
     line-height: 20px;  
     margin-top: 13px;
     color: #fff;
@@ -170,4 +171,5 @@ html,body {
     padding-left: 22px;
     text-indent: 4px;
     background: url("../image/sprit.png") no-repeat left -57px;
+    background-color: #fff;
 }

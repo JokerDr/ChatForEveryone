@@ -31,24 +31,25 @@
                     
                     <span class="msg" id="txtLoginPwd_e" ></span>
                     <!-- 验证码 -->
-                    <div class="captcha">
+                    <!-- <div class="captcha">
                         <input type="text" class="inpCap" name="passcode">
                         <span class="showCaptcha">                                   
-                               <?php echo $img;?>                               
+                                <!-- php echo $img;?>                                -->
                            <!-- <a href="javascript:;" id="change-code">点我刷新</a> -->
-                        </span>
-                    </div>
+                        <!-- </span>
+                        <span .class='errorCaptcha'></span>
+                    </div> --> 
                     
                     <div class="line">
-                        <a href="" target="_blank" onclick="b">忘记密码？</a>
-                        <input type="checkbox"  value="Yes" name="chkRememberMe" id="chkRememberMe" class="checkbox">
-                        <label for="chkRememberMe">自动登录</label>
+                        <a href="" target="_blank" >忘记密码？</a>
+                        <input type="checkbox"  checked="true" value="Yes" name="chkRememberMe" id="chkRememberMe" class="checkbox">
+                        <label for="chkRememberMe" >三天内自动登录</label>
                     </div>
 
                     <input class="btn" type="button"  value="登 录">
                     
                     <span class="noLogin">没有账号？</span>
-                    <a href="./register" class="register" onclick="">立即注册&gt;</a>
+                    <a href="user/register" class="register" onclick="">立即注册&gt;</a>
                     
                 </div>
             </form>

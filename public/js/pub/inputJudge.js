@@ -31,12 +31,13 @@ define(["jquery"],function($){
                 $errors.css( {"display": "none"} )
             }
         }
+        //针对账号
         // 验证邮箱格式
         function checkEmail(str,obj) {
             var re = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
             return re.test(str)?true:false;        
         }
-            //check手机号格式
+        //check手机号格式
         function
             checkMobile(str) {
             var re = /^1\d{10}$/;
