@@ -34,7 +34,7 @@
                     <!-- <div class="captcha">
                         <input type="text" class="inpCap" name="passcode">
                         <span class="showCaptcha">                                   
-                                <!-- php echo $img;?>                                -->
+                                <!-- php echo $img;?>    //加一个请输入验证码的placehoder                            -->
                            <!-- <a href="javascript:;" id="change-code">点我刷新</a> -->
                         <!-- </span>
                         <span .class='errorCaptcha'></span>

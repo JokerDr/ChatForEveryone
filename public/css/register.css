@@ -1,18 +1,20 @@
+form{
+     background: #f8f8f8;
+     width:100%;
+     height:926px;
+}
+/* header开始 */
 #header{
     position: relative;
     height:100px;
-    width:60%;
+    width:50%;
     margin:0 auto;
 }
 #header .logo{
-     display: inline-block;
-     *display: inline;
-     /*兼容ie 6 7*/
-     *zoom:1;
-     /*兼容ie 6 7*/
-     vertical-align: middle;
-     /*兼容ie 6 7*/
-     
+    display: inline-block;
+   *display: inline; /*兼容ie 6 7*/
+   *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/
      color:#999999;
     height:80px;
     width:200px;
@@ -22,23 +24,20 @@
     
 }
 #header h1{
-       display: inline-block;
-       *display: inline;
-       /*兼容ie 6 7*/
-       *zoom:1;
-       /*兼容ie 6 7*/
-       vertical-align: middle;
-       /*兼容ie 6 7*/    
-       color:#999999;
-       margin-left:6%;
-       padding-top:47px;
+    display: inline-block;
+   *display: inline; /*兼容ie 6 7*/
+   *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/ 
+    color:#999999;
+    margin-left:6%;
+    padding-top:47px;
 }
 #header span {
    padding:0 10px;
 }
 #header #login{
     position: absolute;
-    right: 0;
+    right: -94px;
     top:70px;
     width:92px;
     height:32px;
@@ -49,39 +48,44 @@
     font-size: 18px;
     text-align: center;
     line-height:32px;
+    color:#000;
     
 }
-
+/* header结束 */
 /* content -s */
+.pos {
+    height: 45px;
+    margin-bottom: 15px;
+}
+
+.pos label {
+    text-align: right;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 15px;
+    font-size: 18px;
+}
 .content{
       position: relative;
-      height:100px;
-      width:60%;
+      width:50%;
       margin:0 auto;
       background: #fff;
 }
 .content input ,label{
-    display:inline-block;
-      *display: inline;
-      /*兼容ie 6 7*/
-      *zoom:1;
-      /*兼容ie 6 7*/
-      vertical-align: middle;
-      /*兼容ie 6 7*/
-  
+    display: inline-block;
+   *display: inline; /*兼容ie 6 7*/
+   *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/
 }
-/* .cont span,.cont label{   
-    width:80px;
-    height:45px;
-    padding-right:15px;
-} */
 .content .conbg{
     display: block;
     width:134px;
     height:26px;
     background: url('../image/register/账号信息.png') no-repeat center center;
     margin-left: 30px;
-    margin-top:30px;
+    padding-top:30px;
+    /* margin-top:30px; */
     margin-bottom: 15px;
 }
 .content .apply{
@@ -91,74 +95,194 @@
 }
 .content .apply .regWay .pos {
     display: inline-block;
-     *display: inline;
-     /*兼容ie 6 7*/
-     *zoom:1;
-     /*兼容ie 6 7*/
-     vertical-align: middle;
-     /*兼容ie 6 7*/
-    width:150px;
+   *display: inline; /*兼容ie 6 7*/
+   *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/
+    width:145px;
     height:45px;
     margin-bottom:15px;
     line-height: 45px;
+    text-align: left;
 }
-.content .apply .regWay span{
+.content .apply .regWay .pos label{
+    text-align:left;
+    width:100px;
+}
+
+.content .otherInfor {
     display: inline-block;
-     *display: inline;
-     /*兼容ie 6 7*/
-     *zoom:1;
-     /*兼容ie 6 7*/
-     vertical-align: middle;
-     /*兼容ie 6 7*/
+   *display: inline; /*兼容ie 6 7*/
+   *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/
     width:115px;
     height:45px;
     padding-right:15px;
     margin-bottom:15px;
     line-height: 45px;
     text-align: right;
-    font-size: 20px;
-    line-height: 45px;
+    font-size: 24px;
+    line-height: 45px;   
 }
-
+.content .apply .regWay span {
+    font-size: 20px;
+}
 #infoStatu1{
     height:250px;
 }
-#infoStatu1 .pos{
-    height: 45px;
-    margin-bottom:15px;
-}
-#infoStatu1 .pos label{
-    text-align: right;
-    width:120px;
-    height:40px;
-    line-height:40px;
-    margin-right:15px;
-    font-size: 18px;
-}
+
 
 #infoStatu1 input{
-    width:330px;
-    height:30px;
+    width:328px;
+    height:32px;
     padding:0 15px;
+}
+#infoStatu1 .pwdConfirm{
+    margin-left:5px;
 }
  #infoStatu1  .captcha {
     width: 100px;
 }
 #captcha{
-
+    display: inline-block;
+   *display: inline; /*兼容ie 6 7*/
+   *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/
     width:80px;
-    height:30px;
-    
+    height:36px;
+    margin-left:30px;
+
 }
 #infoStatu1 .refresh{
     height:45px;
     width:45px;
     display: inline-block;
-    *display: inline;
-    /*兼容ie 6 7*/
-    *zoom:1;
-    /*兼容ie 6 7*/
-    vertical-align: middle;
-    /*兼容ie 6 7*/
+   *display: inline; /*兼容ie 6 7*/
+   *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/
     background: url('../../public/image/register/loading.gif') no-repeat center center;
+    cursor: pointer;
+}
+/* #infoStatu1-e */
+/* infoStatu2-s */
+#infoStatu2 input {
+    margin-left: 5px;
+    width: 328px;
+    height: 32px;
+    padding: 0 15px;
+}
+.sex{
+     display: inline-block;
+    *display: inline; /*兼容ie 6 7*/
+    *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    border:1px solid #999999;
+    margin-right:14px;
+    text-align:center;
+    font-size:12px;
+    cursor: pointer;
+}
+#man {
+    background: #ffe8d9;
+}
+#distpicker{
+    display: inline-block;
+   *display: inline; /*兼容ie 6 7*/
+   *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/
+    height: 32px;
+    border: 0px;
+    
+
+}
+#distpicker select {
+    cursor: pointer;
+    border: 1px solid #a9a9a9;
+    height: 32px;
+    width:118px;
+}
+#infoStatu2 .hAndS{
+    display: inline-block;
+   *display: inline; /*兼容ie 6 7*/
+   *zoom:1; /*兼容ie 6 7*/
+    vertical-align: middle; /*兼容ie 6 7*/ 
+}
+#infoStatu2 .hAndS input{
+    width:100px;
+    height: 30px;
+    margin-left: 0;
+}
+#infoStatu2 .study{
+    width:70px;
+}
+#infoStatu2 .ok {
+    display: block;
+    width: 18px;
+    height: 18px;
+  
+}
+#sub{
+    display: block;
+    width: 250px;
+    height: 50px;
+    margin: 0 auto;
+    font: 22px/48px Microsoft Yahei;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    background: #ff8000;
+    overflow: hidden;
+    zoom: 1;
+}
+/* 右侧div开始 */
+.intro{
+    width:260px;
+    height:474px;
+    position: absolute;
+    right:-260px;
+    top:90px;
+}
+.intro p {
+    margin: 0 20px;
+    line-height:25px;
+    color: #999999;
+    font-size:14px;
+}
+.intro strong{
+    display: block;
+    padding-bottom: 20px;
+    font-size: 24px;
+    color: #ff8000;
+}
+.intro b{
+    font-size: 20px;
+}
+.intro a{
+     color: #999999;
+     text-decoration-line: none
+}
+.intro .introImg {
+    background: url('../image/register/right_01.gif') no-repeat center center;
+    background-size: contain;
+    width:100%;
+    height:238px;
+    margin: 20px 0;
+}
+.intro .bto{
+    padding-top:10px;
+    border-top: 1px dashed #999999;
+}
+.intro span{
+    font-size: 12px;
+    font-family: Verdana;
+}
+
+/* 右侧div结束 */
+#divbg{
+    width:100%;
+    height:215px;
+    background: url("../image/register/bj_01.gif") no-repeat center center;
 }

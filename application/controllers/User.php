@@ -36,8 +36,7 @@ class User extends CI_Controller{
         $cap = create_captcha($vals);
         $img = $cap['image'];
         // echo $img;
-        return  $img;
-     
+        return  $img; 
     }
     // 刷新验证码
     public function change_code(){
