@@ -1,10 +1,11 @@
 //输入判断
 requirejs.config({
     path: {
-        jquery: 'jquery.min'
+        jquery: 'jquery.min',
+        check:'../pub/check'
     }
 })
-define(["jquery"],function($){
+define(["jquery", 'check'], function ($, arrFun){
      function InputJudge(settings){
             this.defaultSettings={
                 accountIdSelector: "",
@@ -19,7 +20,7 @@ define(["jquery"],function($){
             if($account.focus()){
                 $account.keyup(function (param) {    
                     //如果符合正则要求        
-                    if (checkEmail($account.val()) == true || checkMobile($account.val()) == true){
+                    if (arrFun[0]($account.val()) == true || arrFun[1]($account.val()) == true){
                         $errors.css({ "color": "green", "display": "block" }).text("格式正确");
                     } else if ($account.val() == ""){
                         $errors.css({ "color": "red", "display": "block" }).text("账号不能为空");
@@ -30,18 +31,6 @@ define(["jquery"],function($){
             }else{
                 $errors.css( {"display": "none"} )
             }
-        }
-        //针对账号
-        // 验证邮箱格式
-        function checkEmail(str,obj) {
-            var re = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
-            return re.test(str)?true:false;        
-        }
-        //check手机号格式
-        function
-            checkMobile(str) {
-            var re = /^1\d{10}$/;
-            return re.test(str) ? true : false;           
         }
   
     return InputJudge;

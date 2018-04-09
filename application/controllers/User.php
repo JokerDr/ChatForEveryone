@@ -96,7 +96,19 @@ class User extends CI_Controller{
 //    public function remember_pwd(){
         
 //     }
-    //自动跳转
+    //搜寻账号
+   public function searchAccount(){
+        $account = $this->input->get('account');
+        $result = $this->User_model->get_user_by_account($account);//对数据库搜索
+        if(count($result) == 0){
+            //若数据库搜索结果不存在
+            echo 'account not exist';
+        }else{//若数据库搜索结果存在
+            echo 'account already exist';
+        }
+
+   } 
+   
    public function auto_login(){
         $account = $this->input->get('account');//接收ajax数据    
         $result = $this->User_model->get_user_by_email($account);

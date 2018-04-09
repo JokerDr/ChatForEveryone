@@ -3,8 +3,9 @@ requirejs.config({
         jquery: '../jquery.min',
         placeholder: '../pub/placeholder',
         changeCaptcha: '../pub/changeCaptcha',
-        sub: '../pub/sub',
-        inputJudge: '../pub/inputJudge'
+        sub: '../login/sub',
+        inputJudge: '../login/inputJudge',
+        check: '../pub/check'
     }
 }); 
 //调用兼容placeholder模块
@@ -28,7 +29,7 @@ require(["jquery", "changeCaptcha"], function ($, ChangeCaptcha){
 
 })
 // 提交以及校检
-require(["jquery", "sub"], function ($, Sub) {
+require(["jquery", "sub","check"], function ($, Sub) {
     var settings1 = {
         inpSelector: ["#txtLoginEMail", "#txtLoginPwd",".inpCap"],//账号输入选择器,密码输入选择器,验证码输入框选择器
         captchaSessionURL: ["check_login", "Welcome/index_logined"],// 后端文件接收地址，登录成功后跳转的地址
@@ -43,7 +44,7 @@ require(["jquery", "sub"], function ($, Sub) {
     sub1.submit();
 })
 // 校检账号
-require(["jquery", "inputJudge"], function ($, InputJudge){
+require(["jquery", "inputJudge","check"], function ($, InputJudge){
     var settings1 = {
         accountIdSelector: "txtLoginEMail",
         pwdIdSelector: "txtLoginPwd",
