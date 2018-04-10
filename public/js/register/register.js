@@ -6,7 +6,7 @@ requirejs.config({
         regWay:'./regWay',
         birSelect:'../pub/birSelect',
         regInputJudge:'./regInputJudge',
-        check: '../pub/check'
+        check: '../pub/check',
     }
     
 }); 
@@ -52,13 +52,17 @@ require(['jquery', ''], function ($ ) {
 
 });
 // 数据校验
-require(['jquery', 'regInputJudge','check'], function ($, checkInp) {
+require(['jquery', 'regInputJudge'], function ($, checkInp) {
     var settings1 = {
         selectors: ['.account', '.captcha', '.pwd', '.pwdConfirm', '.uname','.uheight'],//账号，验证码，密码，确认密码，昵称，身高
         regWaySelector: ['.phone', '.email'],//手机注册/邮箱注册选择器radio/checkbox
-        errorShow: ['.error','#account_msg', '#captcha_msg', '#pwd_msg','#pwdConfirm_msg'],//报错文字信息的选择器.账号，验证码
-        accept: 'searchAccount'//php
+        errorShow: ['#account_msg', '#captcha_msg', '#pwd_msg','#pwdConfirm_msg'],//报错文字信息的选择器.账号，验证码
+        errorPic: ['.error1','.error2','.error3','.error4'],
+        accept: ['searchAccount', 'change_code', 'checkCaptcha'],//php
+        captchaAndRefresh: ['#captcha', '.refresh','.showCaptcha']//验证码图片id，刷新按钮id,存放验证码的容器
     }
     var checkInp1 = new checkInp(settings1);
     checkInp1.checkAccount();
+    checkInp1.checkCaptcha();
+    checkInp1.checkPwdConfirm();
 });

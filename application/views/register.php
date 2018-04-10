@@ -39,33 +39,35 @@
                         </div> 
                         <div id="infoStatu1">
                             <div class="pos">
-                                <label for="account">账号</label> <input type="text" class="account" value="" name="account">
-                                <div class="prompt" id="account_msg">                              
-                                </div>
-                                <div class="error" ></div>
+                                <label for="account">账号</label> <input type="text" class="account"  name="account">
+                                 <div class="error error1" ></div>        
+                                <div class="prompt" id="account_msg"></div>                               
                             </div>
                             <div class="pos">
-                                <label for="account">验证码</label> <input type="text" class="captcha" value="" name="account">                             
-                                <?php echo $img?>
+                                <label for="account">验证码</label> <input type="text" class="captcha"  name="account"> 
+                                <div class="showCaptcha"><?php echo $img?></div>                            
+                                
                                 <span class="refresh"></span>
                                 <div class="prompt" id="captcha_msg">
                                    
                                     验证码错误
-                                </div> <div class="error"></div>
+                                </div> 
+                                <!-- <div class="error"></div> -->
                             </div>
                             <div class="pos">
                                 <label for="account">密码</label> <input type="text" value="" class="pwd" name="account">
-                                 <div class="prompt" id="pwd_msg">
-                                    
+                                 <div class="prompt" id="pwd_msg">                                   
                                     6-16位英文字母,数字,以及下划线
-                                </div><div class="error"></div>
+                                </div>
+                                <div class="error error2"></div>
                             </div>
                             <div class="pos">
                                 <label for="account">确认密码</label><input type="text" value="" class="pwdConfirm" name="account">
                                    <div class="prompt" id="pwdConfirm_msg">
                                     
                                     密码正确
-                                  </div>  <div class="error"></div>
+                                  </div> 
+                                   <!-- <div class="error"></div> -->
                             </div>
                             
                          

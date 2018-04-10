@@ -96,6 +96,15 @@ class User extends CI_Controller{
 //    public function remember_pwd(){
         
 //     }
+    public function checkCaptcha(){
+         $captcha = $this->input->get('captchaVal');
+         $data = $this->session->userdata('captcha');//获取name为captcha的session的值  
+         if($data == $captcha){
+             echo 'right';
+         }else{
+             echo 'error';
+         }
+    }
     //搜寻账号
    public function searchAccount(){
         $account = $this->input->get('account');

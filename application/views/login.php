@@ -49,7 +49,7 @@
                     <input class="btn" type="button"  value="登 录">
                     
                     <span class="noLogin">没有账号？</span>
-                    <a href="user/register" class="register" onclick="">立即注册&gt;</a>
+                    <a href="./register" class="register" onclick="">立即注册&gt;</a>
                     
                 </div>
             </form>

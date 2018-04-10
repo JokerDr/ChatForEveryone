@@ -146,12 +146,15 @@ form{
  #infoStatu1  .captcha {
     width: 100px;
 }
-#captcha{
-    display: inline-block;
+.showCaptcha{ 
+      display: inline-block;
    *display: inline; /*兼容ie 6 7*/
    *zoom:1; /*兼容ie 6 7*/
     vertical-align: middle; /*兼容ie 6 7*/
-    width:80px;
+   
+}
+#captcha{
+   width:80px;
     height:36px;
     margin-left:30px;
 
