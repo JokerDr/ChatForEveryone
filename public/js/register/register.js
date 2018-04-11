@@ -59,10 +59,15 @@ require(['jquery', 'regInputJudge'], function ($, checkInp) {
         errorShow: ['#account_msg', '#captcha_msg', '#pwd_msg','#pwdConfirm_msg'],//报错文字信息的选择器.账号，验证码
         errorPic: ['.error1','.error2','.error3','.error4'],
         accept: ['searchAccount', 'change_code', 'checkCaptcha'],//php
-        captchaAndRefresh: ['#captcha', '.refresh','.showCaptcha']//验证码图片id，刷新按钮id,存放验证码的容器
+        captchaAndRefresh: ['#captcha', '.refresh','.showCaptcha'],//验证码图片id，刷新按钮id,存放验证码的容器
+        sex: ['#man','#woman'],//性别
+        ok:'.ok'
     }
     var checkInp1 = new checkInp(settings1);
     checkInp1.checkAccount();
     checkInp1.checkCaptcha();
+    checkInp1.checkPwd();
     checkInp1.checkPwdConfirm();
+    checkInp1.checkName(); 
+    checkInp1.sex(); 
 });

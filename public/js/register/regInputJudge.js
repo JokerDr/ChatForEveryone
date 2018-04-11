@@ -14,6 +14,7 @@ define(['jquery', 'check'], function ($, arrFun) {
             errorPic: [],
             accept:[],
             captchaAndRefresh: [],//验证码图片的选择器，刷新按钮的选择器
+            sex:[]//性别
         }
         $.extend(this.defaultSettings,settings);
     }
@@ -98,8 +99,7 @@ define(['jquery', 'check'], function ($, arrFun) {
     }
     // 检查验证码
     checkInp.prototype.checkCaptcha=function(){
-        var that = this.defaultSettings;
-        
+        var that = this.defaultSettings;   
         //点击刷新按钮验证码刷新
         $(that.captchaAndRefresh[1]).on('click', function () {
             arrFun[2](that.accept[1], that.captchaAndRefresh[2]);
@@ -125,17 +125,82 @@ define(['jquery', 'check'], function ($, arrFun) {
         })    
     }
     //密码验证
-    checkInp.prototype.checkPwdConfirm=function(){
-       var that = this.defaultSettings;
-       var pwd =  $(that.selectors[2]).val();
-       var pwdConfirm = $(that.selectors[3]).val();
-       //console.log(11);
-       $(that.selectors[2]).focus(function(){
-           $(that.errorShow[2]).css('display','inline-block').text('6-16位英文字母或者数字');
-        }).blur(function(){
-            $(that.errorShow[2]).css('display', 'inline-block').text('格式不正确');
+    checkInp.prototype.checkPwd=function(){
+       var that = this.defaultSettings;  
+       $(that.selectors[2]).focus(function(){//得到焦点
+           if ($(that.selectors[2]).val()==""){
+              $(that.errorShow[2]).css('display','inline-block').text('6-16位英文字母或者数字');              
+           }
+        }).blur(function(){//失去焦点
+            if ($(that.selectors[2]).val() == ""){
+                $(that.errorShow[2]).css('display', 'none')
+                $(that.errorPic[1]).css('display', 'none');
+            }else if(arrFun[3]($(that.selectors[2]).val())){//如果格式与要求符合
+                $(that.errorPic[1]).css({ 'display': 'inline-block', 'background-position': '-21px -46px' });
+                $(that.errorShow[2]).css('display', 'none')
+                test[2]=true;
+            } else if ($(that.selectors[2]).val().length < 6) {
+                $(that.errorPic[1]).css({ 'display': 'inline-block', 'background-position': '-39px -46px' });
+                $(that.errorShow[2]).css('display', 'inline-block').text('长度与要求不符');
+            }else{
+                $(that.errorPic[1]).css({ 'display': 'inline-block', 'background-position': '-39px -46px' });
+                $(that.errorShow[2]).css('display', 'inline-block').text('格式与要求不符');
+                test[2]=false;
+            }
+            
        }          
         )
+    }
+   //密码确认
+    checkInp.prototype.checkPwdConfirm = function(){
+        var that = this.defaultSettings;
+        $(that.selectors[3]).focus(function(){
+            $(that.errorShow[3]).css('display', 'inline-block').text('重复输入一次密码');
+        }).blur(function(){
+            if ($(that.selectors[3]).val() == "") {
+                $(that.errorPic[2]).css('display', 'none');
+                $(that.errorShow[3]).css('display', 'none');
+            }else if ($(that.selectors[2]).val() == $(that.selectors[3]).val()) {//如果pwd=pwdConfirm
+                 $(that.errorPic[2]).css({ 'display': 'inline-block', 'background-position': '-21px -46px' });
+                 $(that.errorShow[3]).css('display', 'none')
+            } else {
+                $(that.errorPic[2]).css({ 'display': 'inline-block', 'background-position': '-39px -46px' });
+                $(that.errorShow[3]).css('display', 'inline-block').text('两次输入的密码不一致');
+            }
+        })
+       
+    }
+    //检查昵称
+    checkInp.prototype.checkName = function(){
+        var that = this.defaultSettings;
+        $(that.selectors[4]).focus(function(){
+            $(that.errorShow[4]).css('display', 'inline-block').text('最多12个汉字、字母、数字或者下划线');
+        }).blur(function () { 
+            if ($(that.selectors[4]).val() == "") {//文本框值为空
+                $(that.errorPic[3]).css('display', 'none');
+                $(that.errorShow[4]).css('display', 'none');
+            } else if (arrFun[4]($(that.selectors[4]).val())==true){//文本不为空，且合格
+                $(that.errorPic[3]).css({ 'display': 'inline-block', 'background-position': '-21px -46px' });
+                $(that.errorShow[4]).css('display', 'none');
+            } else {//文本不为空，但是非法
+                $(that.errorPic[3]).css({ 'display': 'inline-block', 'background-position': '-39px -46px' });
+                $(that.errorShow[4]).css('display', 'inline-block').text('昵称与要求不符');
+            }
+
+            });
+    }
+    //切换性别
+    checkInp.prototype.sex = function(){
+        var that = this.defaultSettings;
+        change(that.sex[0], that.sex[1]);
+        change(that.sex[1], that.sex[0]);
+        function change(sex1,sex2){
+            $(sex1).on('click',function(){
+                $(sex1).css('background','#ffe8d9');
+                $(sex2).css('background','#fff');               
+            })
+        }
+       
     }
     return checkInp;
 })
