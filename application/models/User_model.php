@@ -3,10 +3,10 @@
 class User_model extends CI_Model
 {
 
-    // public function add($user){
-    //     $this->db->insert('t_user',$user);
-    //     return $this->db->affected_rows();
-    // }
+    public function add($user){
+        $this->db->insert('t_user',$user);
+        return $this->db->affected_rows();
+    }
 
 //     public function user_list(){
 //         $query = $this -> db -> get("t_user");

@@ -14,7 +14,10 @@ define(['jquery', 'check'], function ($, arrFun) {
             errorPic: [],
             accept:[],
             captchaAndRefresh: [],//验证码图片的选择器，刷新按钮的选择器
-            sex:[]//性别
+            sex:[],//性别
+            ok: [],
+            birth:[],//年，月，日
+            areas:[]//省，市，区/县
         }
         $.extend(this.defaultSettings,settings);
     }
@@ -135,6 +138,7 @@ define(['jquery', 'check'], function ($, arrFun) {
             if ($(that.selectors[2]).val() == ""){
                 $(that.errorShow[2]).css('display', 'none')
                 $(that.errorPic[1]).css('display', 'none');
+                test[2] = false;
             }else if(arrFun[3]($(that.selectors[2]).val())){//如果格式与要求符合
                 $(that.errorPic[1]).css({ 'display': 'inline-block', 'background-position': '-21px -46px' });
                 $(that.errorShow[2]).css('display', 'none')
@@ -142,6 +146,7 @@ define(['jquery', 'check'], function ($, arrFun) {
             } else if ($(that.selectors[2]).val().length < 6) {
                 $(that.errorPic[1]).css({ 'display': 'inline-block', 'background-position': '-39px -46px' });
                 $(that.errorShow[2]).css('display', 'inline-block').text('长度与要求不符');
+                test[2] = false;
             }else{
                 $(that.errorPic[1]).css({ 'display': 'inline-block', 'background-position': '-39px -46px' });
                 $(that.errorShow[2]).css('display', 'inline-block').text('格式与要求不符');
@@ -155,17 +160,23 @@ define(['jquery', 'check'], function ($, arrFun) {
     checkInp.prototype.checkPwdConfirm = function(){
         var that = this.defaultSettings;
         $(that.selectors[3]).focus(function(){
-            $(that.errorShow[3]).css('display', 'inline-block').text('重复输入一次密码');
+            if ($(that.selectors[3]).val() == ""){
+             $(that.errorShow[3]).css('display', 'inline-block').text('重复输入一次密码');            
+            }
+
         }).blur(function(){
             if ($(that.selectors[3]).val() == "") {
                 $(that.errorPic[2]).css('display', 'none');
                 $(that.errorShow[3]).css('display', 'none');
+                test[3]=false;
             }else if ($(that.selectors[2]).val() == $(that.selectors[3]).val()) {//如果pwd=pwdConfirm
                  $(that.errorPic[2]).css({ 'display': 'inline-block', 'background-position': '-21px -46px' });
-                 $(that.errorShow[3]).css('display', 'none')
+                 $(that.errorShow[3]).css('display', 'none');
+                 test[3]=true;
             } else {
                 $(that.errorPic[2]).css({ 'display': 'inline-block', 'background-position': '-39px -46px' });
                 $(that.errorShow[3]).css('display', 'inline-block').text('两次输入的密码不一致');
+                test[3] = false;
             }
         })
        
@@ -174,19 +185,26 @@ define(['jquery', 'check'], function ($, arrFun) {
     checkInp.prototype.checkName = function(){
         var that = this.defaultSettings;
         $(that.selectors[4]).focus(function(){
-            $(that.errorShow[4]).css('display', 'inline-block').text('最多12个汉字、字母、数字或者下划线');
+            if ($(that.selectors[4]).val() == ""){
+                 $(that.errorShow[4]).css('display', 'inline-block').text('最多12个汉字、字母、数字或者下划线');
+            }   
         }).blur(function () { 
-            if ($(that.selectors[4]).val() == "") {//文本框值为空
-                $(that.errorPic[3]).css('display', 'none');
-                $(that.errorShow[4]).css('display', 'none');
-            } else if (arrFun[4]($(that.selectors[4]).val())==true){//文本不为空，且合格
-                $(that.errorPic[3]).css({ 'display': 'inline-block', 'background-position': '-21px -46px' });
-                $(that.errorShow[4]).css('display', 'none');
-            } else {//文本不为空，但是非法
-                $(that.errorPic[3]).css({ 'display': 'inline-block', 'background-position': '-39px -46px' });
-                $(that.errorShow[4]).css('display', 'inline-block').text('昵称与要求不符');
-            }
-
+                if ($(that.selectors[4]).val() == "") {//文本框值为空
+                    $(that.errorPic[3]).css('display', 'none');
+                    $(that.errorShow[4]).css('display', 'none');
+                    test[4]=false;
+                } else if (arrFun[4]($(that.selectors[4]).val())==true){//文本不为空，且合格
+                    $(that.errorPic[3]).css({ 'display': 'inline-block', 'background-position': '-21px -46px' });
+                    $(that.errorShow[4]).css('display', 'none');
+                    test[4] = true;                
+                } else {//文本不为空，但是非法
+                    $(that.errorPic[3]).css({
+                         'display': 'inline-block',
+                          'background-position': '-39px -46px'
+                         });
+                    $(that.errorShow[4]).css('display', 'inline-block').text('昵称与要求不符');
+                    test[4] = false;                
+                }
             });
     }
     //切换性别
@@ -196,11 +214,117 @@ define(['jquery', 'check'], function ($, arrFun) {
         change(that.sex[1], that.sex[0]);
         function change(sex1,sex2){
             $(sex1).on('click',function(){
-                $(sex1).css('background','#ffe8d9');
-                $(sex2).css('background','#fff');               
+                $(sex1).css('background', '#ffe8d9').attr('value','true');
+                // $(sex1).val(true);
+                $(sex2).css('background', '#fff').attr('value', 'false');  
+                // $(sex2).val(false);             
             })
+        }  
+    }
+   //检查生日
+    checkInp.prototype.birth = function(){
+        var that = this.defaultSettings;
+        $(that.birth[3]).on('click',function(){
+            if ($(that.birth[0]).val() != "" && $(that.birth[1]).val() != "" && $(that.birth[2]).val() != "") {
+                   $(that.errorPic[4]).css({
+                       'display': 'inline-block',
+                       'background-position': '-21px -46px'
+                   });
+            }else{
+                    $(that.errorPic[4]).css('display', 'none');
+            }
+        })
+       
+
+    }
+    //检查地区
+    checkInp.prototype.area = function(){
+        var that = this.defaultSettings;
+        $(that.areas[0]).on('click',function(){
+            if ($(that.areas[0])[0].value != "" && $(that.areas[0])[1].value != "" && $(that.areas[0])[2].value != "") {
+                $(that.errorPic[5]).css({
+                    'display': 'inline-block',
+                    'background-position': '-21px -46px'
+                });
+            } else {
+                $(that.errorPic[5]).css('display', 'none');
+            }
+        })
         }
+    // 身高
+    checkInp.prototype.heights = function(){
+        var that = this.defaultSettings;
+        $(that.selectors[5]).focus(function(){
+            if ($(that.selectors[5]).val() == "") {
+                $(that.ok[0]).css('display', 'none');
+            }
+        }).blur(function(){
+        if ($(that.selectors[5]).val()==""){
+                    $(that.ok[0]).css('display','none');
+                    test[5] = false;
+                }else if(arrFun[5]($(that.selectors[5]).val())==false){
+                    $(that.ok[0]).css({
+                        'display': 'inline-block',
+                        'background-position': '-39px -46px'
+                    });
+                    test[5] = false;
+                }else{
+                    $(that.ok[0]).css({
+                        'display': 'inline-block',
+                        'background-position': '-21px -46px'
+                    });
+                    test[5]=true;
+                }
+        })  
+    }
+    // 学历 
+    checkInp.prototype.diplomas = function(){
+        var that = this.defaultSettings;
+        $(that.selectors[6]).on('click',function(){
+            if($(that.selectors[6]).val()==""){
+                $(that.ok[1]).css('display', 'none');
+                test[6] = false;
+            }else{
+                $(that.ok[1]).css({
+                    'display': 'inline-block',
+                    'background-position': '-21px -46px'
+                });
+                test[6] = true;
+            }
+        });     
+    }
+    // 提交数据
+    checkInp.prototype.sub = function(){
+        var that = this.defaultSettings;
+        $(that.selectors[8]).on('click',function(){
+            var count = 0;
+            for(var i in test){
+                if(test[i]==true){
+                    count = +1;
+                }else{
+                    count = -1;  
+                }
+            }
+            if (count == 7 && $(that.selectors[7]).is('checked')==true){//同意服务条款的前提下
+                var sexs = $(that.sex[0]).attr('value')?0:1;//如果男的是true
+                $.post(that.accept[3],{
+                    account: $(that.selectors[0]).val(),
+                    pwd: $(that.selectors[1]).val(),
+                    uname:$(that.selectors[4]).val(),
+                    sex: sexs,//0男，1女,
+                    birth: $(that.birth[0]).val() + "-" + $(that.birth[1]).val() + "-" + $(that.birth[2]).val(),
+                    province:$(that.areas[0])[0].value,
+                    city:$(that.areas[0])[1].value ,
+                    others: $(that.areas[0])[2].value,
+                    height: $(that.selectors[5]).val(),
+                    diplomas: $(that.selectors[6]).val()
+                },function(data){},'text')
+            }else{
+                
+            }
+        })
        
     }
-    return checkInp;
-})
+    return checkInp;    
+    })
+

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>疯言疯语网 | 用户注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../../public/image/favicon.ico" media="screen" />
     <link rel="stylesheet" href="../../public/css/reset.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../public/css/register.css" />
 </head>
@@ -55,14 +56,20 @@
                                 <!-- <div class="error"></div> -->
                             </div>
                             <div class="pos">
-                                <label for="account">密码</label> <input type="text" value="" class="pwd" name="account">
+                                <label for="account">密码</label> 
+                                <input type="password" value="" class="pwd" name="account" rows="3" maxlength="16" 
+                                onchange="this.value=this.value.substring(0, 16)" onkeydown="this.value=this.value.substring(0, 16)" onkeyup="this.value=this.value.substring(0, 16)" >
+                                   <div class="error error2"></div>
                                  <div class="prompt" id="pwd_msg">                                   
-                                    6-16位英文字母,数字,以及下划线
+                                    6-16位英文字母,数字
                                 </div>
-                                <div class="error error2"></div>
+                              
                             </div>
                             <div class="pos">
-                                <label for="account">确认密码</label><input type="text" value="" class="pwdConfirm" name="account">
+                                <label for="account">确认密码</label>
+                                <input type="password" value="" class="pwdConfirm" name="account"  maxlength="16" 
+                                onchange="this.value=this.value.substring(0, 16)" onkeydown="this.value=this.value.substring(0, 16)" onkeyup="this.value=this.value.substring(0, 16)" >
+                                    <div class="error error3"></div>                                  
                                    <div class="prompt" id="pwdConfirm_msg">
                                     
                                     密码正确
@@ -79,17 +86,20 @@
                                      <label for="">手机 </label><input type="text" name="name" value="">
                             </div>
                             <div class="pos">
-                                     <label for="">昵称 </label><input type="text" name="name" value="" class="uname">
+                                     <label for="">昵称 </label>
+                                     <input type="text" name="name" value="" class="uname"  maxlength="12" 
+                                onchange="this.value=this.value.substring(0, 12)" onkeydown="this.value=this.value.substring(0, 12)" onkeyup="this.value=this.value.substring(0, 12)" >
+                                     <div class="error error4"></div>
                                      <div class="prompt" id="uname">
                                     
-                                    最多12个汉字，字母或者数字
+                                    
                                      </div>
-                                     <div class="error"></div>
+                                     
                             </div>
                             <div class="pos">
                                 <label>性别 </label> 
-                                <span class="sex" id="man">我是男生</span>
-                                <span class="sex" id="woman">我是女生</span>
+                                <span class="sex" id="man" value=''>我是男生</span>
+                                <span class="sex" id="woman" value=''>我是女生</span>
                             </div>
                             <div class="pos">
                                 <label for="">生日 </label>
@@ -104,6 +114,7 @@
                                         <option value="">选择日期</option>
                                     </select>
                                 </div>
+                                <div class="error error5"></div>
                             </div>
                             <div class="pos">
                                 <label for="">地区 </label>
@@ -112,27 +123,29 @@
                                     <select data-city="---- 选择市 ----"></select>
                                     <select data-district="---- 选择区 ----"></select>
                                 </div>
+                                <div class="error error6"></div>
                             </div>
                             <div class="pos hAndS">
                                 <label for="">身高</label>
-                                <input type="text" value="" class="uheight"> <div class="ok"></div>
+                                <input type="text" value="" class="uheight" placeholder="1.85" maxlength="4"> 
+                                <div class="ok ok1"></div>
                             </div>
                             <div class="pos hAndS">
                                 <label for="" class="study">学历</label>
-                                <select>
-                                    <option value="">初中</option>
-                                    <option value="">中专/职高/技校</option>
-                                    <option value="">高中</option>
-                                    <option value="">大专</option>
-                                    <option value="">本科</option>
-                                    <option value="">硕士</option>
-                                    <option value="">博士</option>
-                                    <option value="">博士后</option>
+                                <select class='diplomas'>
+                                     <option value="">选择学历</option>
+                                    <option value="初中">初中</option>
+                                    <option value="中专/职高/技校">中专/职高/技校</option>
+                                    <option value="高中">高中</option>
+                                    <option value="大专">大专</option>
+                                    <option value="本科">本科</option>
+                                    <option value="硕士">硕士</option>
+                                    <option value="博士后">博士后</option>
                                 </select>
-                                <div class="ok"></div>                      
+                                <div class="ok ok2"></div>                      
                             </div> 
                         <div id="readMe">
-                            <input type="checkbox" name="readme">
+                            <input type="checkbox" name="readme" id="agree">
                             <label for="readme">已经阅读并已经同意<a href="">疯言疯语服务条款</a></label>
                         </div>
                         <input name="" type="button" value="注册完成" class="icon" id="sub">                 

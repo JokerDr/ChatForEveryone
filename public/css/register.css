@@ -237,9 +237,9 @@ select {
     margin-left: 0;
 }
 #infoStatu2 .hAndS select{
-    width:100px;
+    width:134px;
     height:32px;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 #infoStatu2 .study{
     width:70px;
@@ -251,6 +251,7 @@ select {
     vertical-align: middle; /*兼容ie 6 7*/ 
     width: 18px;
     height: 18px;
+    line-height:18px;
     background: url('../image/icon.gif')-21px -46px;
 }
 #readMe{

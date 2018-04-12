@@ -89,8 +89,7 @@ class User extends CI_Controller{
                     // }else{
                         
                     //     echo 'captcha error' ;                   
-                    // }
-      
+                    // }  
     }
     //记住密码
 //    public function remember_pwd(){
@@ -116,8 +115,39 @@ class User extends CI_Controller{
             echo 'account already exist';
         }
 
-   } 
-   
+   }  
+   //添加账户
+    public function add_user(){
+        $account = $this->input->post('account');
+        $uname = $this->input->post('uname');
+        $pwd = $this->input->post('pwd');
+        $sex = $this->input->post('sex');
+        $birth = $this->input->post('birth');
+        $province = $this->input->post('province');
+        $city = $this->input->post('city');
+        $others = $this->input->post('others');
+        $height = $this->input->post('height');
+        $diplomas = $this->input->post('diplomas');
+        $rows = $this->User_model->add(array(
+            'email'=>$email
+            'phone'=>$phone
+            'user_name'=>$uname
+            'password'=>$pwd
+            'sex'=>$sex
+            'birthday'=>$birth
+            'province'=>$province
+            'city'=>$city
+            'others'=>$others
+            'height'=>$height
+            'diplomas'=>$diplomas
+        ));
+        if($rows > 0){
+//			redirect('user/login');
+            echo 'success';
+        }else{
+            echo 'fail';
+        }
+    }
    public function auto_login(){
         $account = $this->input->get('account');//接收ajax数据    
         $result = $this->User_model->get_user_by_email($account);
