@@ -44,7 +44,7 @@ require(["jquery", "placeholder"], function ($) {
 //表单 数据校验
 require(['jquery', 'regInputJudge'], function ($, checkInp) {
     var settings1 = {
-        selectors: ['.account', '.captcha', '.pwd', '.pwdConfirm', '.uname', '.uheight','.diplomas','#agree','#sub'],//账号，验证码，密码，确认密码，昵称，身高
+        selectors: ['.account', '.captcha', '.pwd', '.pwdConfirm', '.uname', '.uheight', '.diplomas', '#agree', '#sub','.phoneinpt'],//账号，验证码，密码，确认密码，昵称，身高
         regWaySelector: ['.phone', '.email'],//手机注册/邮箱注册选择器radio/checkbox
         errorShow: ['#account_msg', '#captcha_msg', '#pwd_msg', '#pwdConfirm_msg','#uname'],//报错文字信息的选择器.账号，验证码
         errorPic: ['.error1','.error2','.error3','.error4','.error5','.error6'],
@@ -54,8 +54,6 @@ require(['jquery', 'regInputJudge'], function ($, checkInp) {
         ok: ['.ok1','.ok2'],
         birth: ['#yeah', '#month', '#days','#date select'],//年，月，日
         areas: ['#distpicker select']//省，市，区/县
-        
-
     }
     var checkInp1 = new checkInp(settings1);
     checkInp1.checkAccount();
@@ -68,4 +66,5 @@ require(['jquery', 'regInputJudge'], function ($, checkInp) {
     checkInp1.area();
     checkInp1.heights();
     checkInp1.diplomas();
+    checkInp1.subAll();
 });

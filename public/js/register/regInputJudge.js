@@ -21,7 +21,7 @@ define(['jquery', 'check'], function ($, arrFun) {
         }
         $.extend(this.defaultSettings,settings);
     }
-    
+  
     //检查账号
     var test = [];
     checkInp.prototype.checkAccount=function () {
@@ -54,7 +54,7 @@ define(['jquery', 'check'], function ($, arrFun) {
                 if ($(that.selectors[0]).val() == "") {//如果账号为空    
                     $(that.errorShow[0]).css('display', 'inline-block').text('账号不能为空');
                 } else if (arrFun[0]($(that.selectors[0]).val()) == false) {//如果邮箱格式错误
-                    $(that.errorPic[0]).css('display', 'inline-block');    
+                    $(that.errorPic[0]).css({ 'display': 'inline-block', 'background-position': '-39px -46px' }); 
                     $(that.errorShow[0]).css('display', 'inline-block').text('邮箱格式错误，重新填写');
                     flag = false;
                 } else {
@@ -294,36 +294,55 @@ define(['jquery', 'check'], function ($, arrFun) {
         });     
     }
     // 提交数据
-    checkInp.prototype.sub = function(){
+    checkInp.prototype.subAll = function(){
         var that = this.defaultSettings;
+        console.log(11);
         $(that.selectors[8]).on('click',function(){
             var count = 0;
             for(var i in test){
                 if(test[i]==true){
-                    count = +1;
+                    count ++;
                 }else{
-                    count = -1;  
+                    count --;  
                 }
-            }
-            if (count == 7 && $(that.selectors[7]).is('checked')==true){//同意服务条款的前提下
-                var sexs = $(that.sex[0]).attr('value')?0:1;//如果男的是true
-                $.post(that.accept[3],{
-                    account: $(that.selectors[0]).val(),
-                    pwd: $(that.selectors[1]).val(),
-                    uname:$(that.selectors[4]).val(),
-                    sex: sexs,//0男，1女,
-                    birth: $(that.birth[0]).val() + "-" + $(that.birth[1]).val() + "-" + $(that.birth[2]).val(),
-                    province:$(that.areas[0])[0].value,
-                    city:$(that.areas[0])[1].value ,
-                    others: $(that.areas[0])[2].value,
-                    height: $(that.selectors[5]).val(),
-                    diplomas: $(that.selectors[6]).val()
-                },function(data){},'text')
+            }   
+            console.log(count);  
+            console.log($(that.selectors[7]).is(':checked')); 
+            if (count == 7 && $(that.selectors[7]).is('checked') == true){//同意服务条款的前提下
+                 var sexs = $(that.sex[0]).attr('value')?0:1;//如果男的是true
+                 if ($(that.regWaySelector[0]).is(':checked')){
+                      $.post(that.accept[3],{
+                        account: $(that.selectors[0]).val(),
+                        pwd: $(that.selectors[1]).val(),
+                        uname:$(that.selectors[4]).val(),
+                        sex: sexs,//0男，1女,
+                        birth: $(that.birth[0]).val() + "-" + $(that.birth[1]).val() + "-" + $(that.birth[2]).val(),
+                        province:$(that.areas[0])[0].value,
+                        city:$(that.areas[0])[1].value ,
+                        others: $(that.areas[0])[2].value,
+                        height: $(that.selectors[5]).val(),
+                        diplomas: $(that.selectors[6]).val()
+                 },function(data){},'text');
+                }else{
+                     $.post(that.accept[3], {
+                         account: $(that.selectors[0]).val(),
+                         pwd: $(that.selectors[1]).val(),
+                         uname: $(that.selectors[4]).val(),
+                         sex: sexs,//0男，1女,
+                         birth: $(that.birth[0]).val() + "-" + $(that.birth[1]).val() + "-" + $(that.birth[2]).val(),
+                         province: $(that.areas[0])[0].value,
+                         city: $(that.areas[0])[1].value,
+                         others: $(that.areas[0])[2].value,
+                         height: $(that.selectors[5]).val(),
+                         diplomas: $(that.selectors[6]).val(),
+                         phone: $(that.selectors[9]).val()
+                     }, function (data) { 
+                     }, 'text')
+                }
             }else{
-                
+                alert('同意服务条款后才能继续提交');
             }
-        })
-       
+        })      
     }
     return checkInp;    
     })
