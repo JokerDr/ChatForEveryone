@@ -31,7 +31,7 @@ define(function(){
     }
     // 校验姓名   
     function checkName(str){
-        var re = /^[\w\_]{1,12}$/;//12个汉字，大小写英文字母，下划线
+        var re = /^[\u4e00-\u9fa5 -~]+$/;//12个汉字，大小写英文字母，下划线
         return re.test(str) ? true : false;
     }   
     // 校验身高

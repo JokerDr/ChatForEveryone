@@ -51,8 +51,9 @@ class User extends CI_Controller{
     //加载注册页
     public function register(){
         $img = $this->captcha();
+        
         $this->load->view('register',array('img'=>$img));
-         }  
+    }  
     //登录校检     
     public function check_login(){
         $pwd = $this->input->post('pwd');
@@ -116,56 +117,94 @@ class User extends CI_Controller{
         }
 
    }  
-   //添加账户
-    public function add_user(){
-        $account = $this->input->post('account');
-        $uname = $this->input->post('uname');
-        $pwd = $this->input->post('pwd');
-        $sex = $this->input->post('sex');
-        $birth = $this->input->post('birth');
-        $province = $this->input->post('province');
-        $city = $this->input->post('city');
-        $others = $this->input->post('others');
-        $height = $this->input->post('height');
-        $diplomas = $this->input->post('diplomas');
-        $rows = $this->User_model->add(array(
-            'email'=>$email
-            'phone'=>$phone
-            'user_name'=>$uname
-            'password'=>$pwd
-            'sex'=>$sex
-            'birthday'=>$birth
-            'province'=>$province
-            'city'=>$city
-            'others'=>$others
-            'height'=>$height
-            'diplomas'=>$diplomas
-        ));
-        if($rows > 0){
-//			redirect('user/login');
-            echo 'success';
-        }else{
-            echo 'fail';
+   //注册跳转
+     public function add_user(){
+         $account = $this->input->post('account');
+         $uname = $this->input->post('uname');
+         $pwd = $this->input->post('pwd');
+         $sex = $this->input->post('sex');
+         $year = $this->input->post('year');
+         $month = $this->input->post('month');
+         $days = $this->input->post('days');
+         $province = $this->input->post('province');
+         $city = $this->input->post('city');
+         $others = $this->input->post('others');
+         $height = $this->input->post('height');
+         $diplomas = $this->input->post('diplomas');     
+         $result = $this->User_model->get_user_by_account($account);//对数据库搜索
+        if(count($result) == 0){  
+            if($this->validate_email($account)==true){
+                $email =  $account;
+                $phone = $this->input->post('phone');
+                $rows = $this->User_model->add(array(
+                    'email'=>$email,
+                    'phone'=>$phone,
+                    'user_name'=>$uname,
+                    'password'=>$pwd,
+                    'sex'=>$sex,
+                    'year'=> $year,
+                    'month'=>$month,
+                    'days'=>$days,
+                    'province'=>$province,
+                    'city'=>$city,
+                    'others'=>$others,
+                    'height'=>$height,
+                    'diplomas'=>$diplomas
+                ));              
+            }else{
+                $phone =  $account;
+                $rows = $this->User_model->add(array(
+                    'phone'=>$phone,
+                    'user_name'=>$uname,
+                    'password'=>$pwd,
+                    'sex'=>$sex,
+                    'year'=> $year,
+                    'month'=>$month,
+                    'days'=>$days,
+                    'province'=>$province,
+                    'city'=>$city,
+                    'others'=>$others,
+                    'height'=>$height,
+                    'diplomas'=>$diplomas
+                ));                
+            } 
+         
+             if($rows > 0){
+                $result = $this->User_model->get_user_by_account($account);
+                $this->session->set_userdata(array(
+                    'user'=>$result[0]
+                ));
+                echo true;
+            }else{
+
+            } 
+             $this->output->set_header("Access-Control-Allow-Origin: * ");
         }
+      
     }
+
    public function auto_login(){
-        $account = $this->input->get('account');//接收ajax数据    
-        $result = $this->User_model->get_user_by_email($account);
+        $account = $this->input->post('account');//接收ajax数据    
+        $result = $this->User_model->get_user_by_account($account);
         $this->session->set_userdata(array(
             'user'=>$result[0]
         ));
-        redirect("welcome/index");
+        redirect("/welcome/index");
     }
     
-      //    邮箱校检p
-    // public  function checkEmail(str) {
-    //          $re = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
-    //         return strstr(str，$re)?true:false;        
-    //     }
-    //     //check手机号格式
-    // public function checkMobile(str) {
-    //         $re = /^1\d{10}$/;
-    //         return  strstr(str，$re) ? true : false;           
+        //  邮箱校检p
+   function validate_email($email){
+        $pattern = "/^[a-z'0-9]+([._-][a-z'0-9]+)*@([a-z0-9]+([._-][a-z0-9]+))+$/";
+        if(preg_match($pattern,$email)){  
+           return true;  
+        } else{  
+            return false;  
+        }  
+    }
+        //check手机号格式
+    // public function checkMobile($str) {
+    //         $re = '/^1\d{10}$/';
+    //         return  strstr($str,$re) ? true : false;           
     //     } 
     
     

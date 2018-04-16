@@ -48,11 +48,11 @@ require(['jquery', 'regInputJudge'], function ($, checkInp) {
         regWaySelector: ['.phone', '.email'],//手机注册/邮箱注册选择器radio/checkbox
         errorShow: ['#account_msg', '#captcha_msg', '#pwd_msg', '#pwdConfirm_msg','#uname'],//报错文字信息的选择器.账号，验证码
         errorPic: ['.error1','.error2','.error3','.error4','.error5','.error6'],
-        accept: ['searchAccount', 'change_code', 'checkCaptcha','add_user'],//php
+        accept: ['user/searchAccount', 'user/change_code', 'user/checkCaptcha','user/add_user','welcome/index'],//php
         captchaAndRefresh: ['#captcha', '.refresh','.showCaptcha'],//验证码图片id，刷新按钮id,存放验证码的容器
         sex: ['#man','#woman'],//性别
         ok: ['.ok1','.ok2'],
-        birth: ['#yeah', '#month', '#days','#date select'],//年，月，日
+        birth: ['#year', '#month', '#days','#date select'],//年，月，日
         areas: ['#distpicker select']//省，市，区/县
     }
     var checkInp1 = new checkInp(settings1);

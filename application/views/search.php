@@ -3,56 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>疯言疯语首页</title>
+    <title>搜索</title>
     <base href="<?php echo site_url() ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="public/image/favicon.ico" media="screen" />
     <link rel="stylesheet" href="public/css/reset.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="public/css/public.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="public/css/lunbo.css" />   
+     <link rel="stylesheet" type="text/css" media="screen" href="public/css/search.css" />  
     <script src="public/js/jquery.min.js"></script>
-    <!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
-    <!-- <srciptsrc="public/js/index/pubu/jquery.waterfall.js"></script> -->
-    <!-- <script src="public/js/index/pubu/dataShow.js"> -->
-    <!-- <script>
-        $("#div1").waterfall({
-            itemClass: ".box",
-            minColCount: 2,
-            spacingHeight: 10,
-            resizeable: true,
-            ajaxCallback: function (success, end) {
-                var data = {
-                    "data":
-                        [
-                            { "src": "03.jpg" },
-                            { "src": "04.jpg" },
-                            { "src": "02.jpg" },
-                            { "src": "05.jpg" },
-                            { "src": "01.jpg" },
-                            { "src": "06.jpg" }
-                        ]
-                };
-                var str = "";
-                var templ = '<div class="box" style="opacity:0;filter:alpha(opacity=0);"><div class="pic"><img src="img/{{src}}" /></div></div>'
-
-                for (var i = 0; i < data.data.length; i++) {
-                    str += templ.replace("{{src}}", data.data[i].src);
-                }
-                $(str).appendTo($("#div1"));
-                success();
-                end();
-            }
-     });
-    </script> -->
-    <!-- <link rel='stylesheet' href='public/css/style.css' media='screen' />
-    <script type="text/javascript" src="public/js/index/pubu/jquery.min.js"></script>
-    <script type="text/javascript" src="public/js/jquery.lazyload.min.js"></script>
-    <script type="text/javascript" src="public/js/blocksit.min.js"></script> -->
-
+    <script src="public/js/search/search.js"></script>
     
 </head>
 <body>
-    <div id="header">       
+
+     <div id="header">       
         <div id="headerTop">
             <div class="containerHead">
                 <div class="unlogin">
@@ -78,77 +40,22 @@
                 </div>
             </div>           
             
-        </div>   
+        </div>     
         <div class="wrip">
-            <div id="nav">
+              <div id="nav">
                 <a href="" class="home"></a>
                 <div id="select">
                     <a href="welcome/index">首页</a>
                     <a href="">我的疯言疯语</a>
-                    <a href="welcome/searched">搜索</a>
+                    <a href="">搜索</a>
                 </div>
             </div>
-        </div>     
-        
-    </div> 
+        </div>
+          
+     </div>  
+     <div class="container">
 
-    <div id="content">
-            <div class="my-photo">
-            </div>
-            <div class="login">
-                    <div id = "right_bg">
-        
-                        <div class="layer">
-                            <form name="loginForm" id="loginForm" ,action = "" target="_self" method="post">
-                            <div class="cont">
-                                <!-- 手机号、邮箱 -->
-                                <input class="inp01" type="text" name="txtLoginEMail" id="txtLoginEMail" size="16" maxlength="40"                   
-                                placeholder="邮箱/手机号" >
-                                <!-- 错误信息 -->
-                                <span class="msg" id="txtLoginEMail_e" ></span>
-
-                                <!-- 密码 -->
-                                <input class="inp01" name="txtLoginPwd" id="txtLoginPwd" placeholder="密码" type="password" size="16" maxlength="16">
-                                
-                                <span class="msg" id="txtLoginPwd_e" ></span>
-                                <!-- 验证码 -->
-                                <!-- <div class="captcha">
-                                    <input type="text" class="inpCap" name="passcode">
-                                    <span class="showCaptcha">                                   
-                                            <!-- php echo $img;?>    //加一个请输入验证码的placehoder                            -->
-                                    <!-- <a href="javascript:;" id="change-code">点我刷新</a> -->
-                                    <!-- </span>
-                                    <span .class='errorCaptcha'></span>
-                                </div> --> 
-                                
-                                <div class="line">
-                                    <a href="" target="_blank" >忘记密码？</a>
-                                    <!-- <input type="checkbox"  checked="true" value="Yes" name="chkRememberMe" id="chkRememberMe" class="checkbox">
-                                    <label for="chkRememberMe" >三天内自动登录</label> -->
-                                </div>
-
-                                <input class="btn" type="button"  value="登 录">
-                                
-                                <span class="noLogin">没有账号？</span>
-                                <a href="user/register" class="register" onclick="">立即注册&gt;</a>
-                                <a href="" target="_blank" class='forgetpwd'>忘记密码？</a>
-                                
-                            </div>
-                            </form>
-                
-                        </div>
-                    </div>
-            </div>
-            <div class="title">
-            我的推荐   
-            <a href='' class="learnMore">点击我了解更多</a>
-            </div>
-            <div id="pubuliu">
-            
-            </div>
-            
-    </div>
-    
+     </div>
     <div id="BHFooter">
         <div class="cont">
             	<div class="logo">
@@ -215,6 +122,12 @@
             </div>
     </div>
     
-    <script src="public/js/require.js" data-main="public/js/index/index.js"></script>
+    <script>
+       $('.setting').mouseenter(function(){
+        $('.select').show();
+    }).mouseleave(function(){
+        $('.select').hide();
+    }); 
+    </script>
 </body>
-</html>     
+</html>

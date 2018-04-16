@@ -27,7 +27,7 @@ require([""], function () {
 require(["jquery", "sub"], function ($, Sub) {
     var settings1 = {
         inpSelector: ["#txtLoginEMail", "#txtLoginPwd",".inpCap"],//账号输入选择器,密码输入选择器,验证码输入框选择器
-        captchaSessionURL: ["check_login", "Welcome/index_logined"],// 后端文件接收地址，登录成功后跳转的地址
+        captchaSessionURL: ["user/check_login", "welcome/index_logined"],// 后端文件接收地址，登录成功后跳转的地址
         subSelector: ".btn",//提交按钮
         errorShow: "#txtLoginEMail_e",// 验证码错误显示
         autoload:"#chkRememberMe",//自动登录选择器

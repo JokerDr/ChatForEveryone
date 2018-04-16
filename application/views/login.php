@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>疯言疯语网会员登录</title>
+    <base href="<?php echo site_url() ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="../../public/image/favicon.ico" media="screen" />
-     <link rel="stylesheet" href="../../public/css/reset.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../public/css/logIn.css" /> 
+    <link rel="shortcut icon" type="image/x-icon" href="public/image/favicon.ico" media="screen" />
+     <link rel="stylesheet" href="public/css/reset.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="public/css/login.css" /> 
 </head>
 <body>
     
@@ -18,7 +19,7 @@
                 <div class="cont">
                     <!-- 图标 -->
                     <a href="./home">
-                        <img src="../../public/image/logo.png.png" alt="疯言疯语">
+                        <img src="public/image/logo.png.png" alt="疯言疯语">
                     </a>
                     <!-- 手机号、邮箱 -->
                     <input class="inp01" type="text" name="txtLoginEMail" id="txtLoginEMail" size="16" maxlength="40"                   
@@ -42,20 +43,20 @@
                     
                     <div class="line">
                         <a href="" target="_blank" >忘记密码？</a>
-                        <input type="checkbox"  checked="true" value="Yes" name="chkRememberMe" id="chkRememberMe" class="checkbox">
-                        <label for="chkRememberMe" >三天内自动登录</label>
+                        <!-- <input type="checkbox"  checked="true" value="Yes" name="chkRememberMe" id="chkRememberMe" class="checkbox">
+                        <label for="chkRememberMe" >三天内自动登录</label> -->
                     </div>
 
                     <input class="btn" type="button"  value="登 录">
                     
                     <span class="noLogin">没有账号？</span>
-                    <a href="./register" class="register" onclick="">立即注册&gt;</a>
+                    <a href="user/register" class="register" onclick="">立即注册&gt;</a>
                     
                 </div>
             </form>
            
         </div>
     </div>
-    <script src="../../public/js/require.js" data-main="../../public/js/logIn/logIn.js"></script>
+    <script src="public/js/require.js" data-main="public/js/logIn/logIn.js"></script>
 </body>
 </html>

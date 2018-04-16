@@ -4,14 +4,15 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>疯言疯语网 | 用户注册</title>
+        <base href="<?php echo site_url() ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="../../public/image/favicon.ico" media="screen" />
-    <link rel="stylesheet" href="../../public/css/reset.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../public/css/register.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="public/image/favicon.ico" media="screen" />
+    <link rel="stylesheet" href="public/css/reset.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="public/css/register.css" />
 </head>
 <body>
     <div id="header">
-      <a href="./index" class="logo"></a>
+      <a href="index.php" class="logo"></a>
       <h1>
         5亿人的选择
           <span>|</span>
@@ -20,10 +21,10 @@
           一起畅所欲言吧
           
       </h1> 
-      <a href='./login' id="login">登录</a>
+      <a href='user/login' id="login">登录</a>
     </div>
     <div id="wriper">
-        <form action="" methods="post">
+        <div>
             <div class="content">  
                     <span class="conbg"></span>
                     <div class="apply">              
@@ -44,17 +45,7 @@
                                  <div class="error error1" ></div>        
                                 <div class="prompt" id="account_msg"></div>                               
                             </div>
-                            <div class="pos">
-                                <label for="account">验证码</label> <input type="text" class="captcha"  name="account"> 
-                                <div class="showCaptcha"><?php echo $img?></div>                            
-                                
-                                <span class="refresh"></span>
-                                <div class="prompt" id="captcha_msg">
-                                   
-                                    验证码错误
-                                </div> 
-                                <!-- <div class="error"></div> -->
-                            </div>
+                            
                             <div class="pos">
                                 <label for="account">密码</label> 
                                 <input type="password" value="" class="pwd" name="account" rows="3" maxlength="16" 
@@ -76,14 +67,24 @@
                                   </div> 
                                    <!-- <div class="error"></div> -->
                             </div>
-                            
+                           <div class="pos">
+                                <label for="account">验证码</label> <input type="text" class="captcha"  name="account"> 
+                                <div class="showCaptcha"><?php echo $img?></div>                            
+                                
+                                <span class="refresh"></span>
+                                <div class="prompt" id="captcha_msg">
+                                   
+                                    验证码错误
+                                </div> 
+                                <!-- <div class="error"></div> -->
+                            </div> 
                          
                             
                         </div>
                         <div id="infoStatu2">
                             <span class="otherInfor">完善资料</span>
                            <div class="pos" id="phoneInp">
-                                     <label for="">手机 </label><input type="text" name="name" value="">
+                                     <label for="">手机 </label><input type="text" name="name" value="" class='phoneinpt'>
                             </div>
                             <div class="pos">
                                      <label for="">昵称 </label>
@@ -168,10 +169,10 @@
                         </div>
                         </div> 
             </div>
-        </form>
+        </div>
     </div>
     <div id="divbg"></div>
     <div id="topicsFooter">	疯言疯语网股份有限公司　|　版权所有© 2005 - 2018 疯言疯语 　京ICP证041124号　 京公网安备110105000655号</div>
-    <script src="../../public/js/require.js" data-main="../../public/js/register/register.js"></script>
+    <script src="public/js/require.js" data-main="public/js/register/register.js"></script>
 </body>
 </html>
