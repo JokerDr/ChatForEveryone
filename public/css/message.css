@@ -1,3 +1,4 @@
+/* 通用部分 */
 #header {
     height: 90px;
 }
@@ -77,7 +78,7 @@
 
 .top:hover {
     color: #ff7f00;
-    background: #fff;   
+    background: #fff;
 }
 
 .select {
@@ -102,10 +103,12 @@
     margin: 0 auto;
     /* border-bottom: 2px solid #ff5e00; */
 }
-.wrip{
-    width:100%;
+
+.wrip {
+    width: 100%;
     border-bottom: 2px solid #ff5e00;
 }
+
 #select {
     margin-right: -12px;
     float: right;
@@ -134,6 +137,7 @@
     background: #ff7f00;
     color: #fff
 }
+
 .hat {
     display: inline-block;
     *display: inline;
@@ -147,8 +151,6 @@
     line-height: 14px;
     background: url('../image/nav_icon.gif') no-repeat center center;
 }
-
-
 
 #BHhomeFooter {
     height: 250px;
@@ -301,184 +303,41 @@
     color: #999;
 }
 
+/* 结束 */
 
 
-.container {
-    width:1000px;
-    height:840px;
-    margin:0 auto;
-}
-.wayWriper{
-    height:60px;
-    border-bottom: 1px solid #ccc;
-    margin-top:2px;
-}
-.Way {
-    float: left;
-    margin-left:50px;
-    /* height:60px; */
-    
-}
-.Way div{
-    display:inline-block;
-    *display: inline;
-    *zoom: 1;
-    vertical-align:middle;
-    height:60px;
-    width:300px;
-    text-align: center;  
-}
-/* .way1 {
-     background:#ff7f00;
-     color:#fff;
-} */
-.way1,.way2{
+/* content 开始 */
+#content{
     position: relative;
-}
-.way1{
-    background: #ff7f00;
-    color: #fff;
-}
-.Way label{
-    display: block;
-    height:60px;
-    line-height: 60px;
-    /* margin-top:0%; */
-
-}
-.Way div label{
-    font-size:18px;
-    letter-spacing: 2px;
-}
-/* .Way div label:hover{
-    background:#ff7f00;
-    color:#fff;
-} */
-.container span {
-    float: left;
-    display: block;
-    height:60px;
-    font-size:24px;
-    line-height: 60px;
-    margin-right: 20px;
-}
-
-.condition{
     width:1000px;
-    height:100px;
-    margin: 0 auto;
-    border-bottom: 1px solid #ccc;
-
-}
-.inpt input{
-    padding:15px 10px   ;
-    width:500px;
-    height:25px;
-    /* margin:0 auto; */
-    margin:25px 238px;
-
-}   
-.conditions{
-    display: none;
-}
-.conditions div{
-    width:600px;
-    height:30px;
-    margin: 0 auto;
-    text-align: center;
-    /* margin-top:3px; */
-}
-.conditions label{
-    display: block;
-    height:30px;
-    width:200px;
-    float: left;
-    line-height: 30px;
-}
-.conditions input{
-    height:18px;
-    width:200px;
-    float: left;
-    padding:3px 2px;
-    margin-top:3px;
-    line-height: 18px;
-    /* display:inline-block;
-    *display:inline;
-    *zoom:1;
-    vertical-align: middle */
-}
-.conditions span{
-    height: 30px;
-    font-size: 12px;
-    width:40px;
-    text-align: center;
-    line-height: 30px;
-}
-.startSearch{   
-    width: 200px;
-    height:50px;
+    height:900px;
     margin:0 auto;
-    letter-spacing: 4px;
-    text-align: center;
-    font-size:20px;
-    line-height: 50px;
-    cursor: pointer;
-    /* border-top: 2px solid #ff7f00; */
-    border-bottom: 2px solid #ff7f00;
 }
-.results{
-    width:1000px;
-    height:600px;
-    margin: 0 auto;
+.msg_left{
+    position: absolute;
+    width:280px;
+    height:900px;
+    left:0;
 }
-/* 结果展示 */
-#message-container {
-    float: left;
-    width: 347px;
-    height: 185px;
-    color: #333;
-    overflow: hidden;
-    zoom: 1;
+.msg_right{
+    position: absolute;
+    width:720px;
+    height:900px;
+    right:0;
 }
-
-#message-container .photo {
-    float: left;
-    width: 120px;
-    height: 150px;
-    overflow: hidden;
-    zoom: 1;
+.msg_show{
+    width:720px;
+    height:700px;
 }
-
-#message-container .infor {
-    float: left;
-    width: 184px;
-    height: 150px;
-    padding: 0 0 0 15px;
-    overflow: hidden;
-    zoom: 1;
+.msg_inpt{
+    width:720px;
+    height:200px;
 }
-
-#message-container strong {
-    display: block;
-    height: 29px;
-    font-size: 16px;
-    line-height: 26px;
-}
-
-#message-container span {
-    display: block;
-    height: 40px;
-    padding: 3px 0;
-}
-
-#message-container p {
-    width: 172px;
-    height: 50px;
-    color: #bdbdbd;
-}
-
-#message-container a {
-    float: left;
-    width: 80px;
-    margin-right: 12px;
+.msg_inpt textarea{
+    width:720px;
+    height:100px;
+    padding:20px 5px;
+    resize:none;/*限制拖动*/
+    overflow:scroll;
+    overflow-x:hidden;/*禁止水平滚动条*/
 }

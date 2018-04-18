@@ -1,16 +1,14 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>疯言疯语首页</title>
-    <base href="<?php echo site_url() ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>疯言疯语---消息盒子</title>
+    <base href="<?php echo site_url() ?>">  
     <link rel="shortcut icon" type="image/x-icon" href="public/image/favicon.ico" media="screen" />
-    <link rel="stylesheet" href="public/css/reset.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="public/css/public.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="public/css/lunbo.css" />   
-    <script src="public/js/jquery.min.js"></script> 
+    <?php $user = $this->session->userdata('user');?>
+    <link rel="stylesheet" type="text/css" media="screen" href="public/css/reset.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="public/css/message.css">
 </head>
 <body>
     <div id="header">       
@@ -35,7 +33,7 @@
                     </div>
                     <div class="setting">设置
                         <div class="select">
-                            <div ><a href='user/info'>我的疯言疯语</a></div>
+                            <div ><a href=''>我的疯言疯语</a></div>
                             <div ><a href='user/logout'>退出</a></div>
                         </div>
                         
@@ -51,11 +49,13 @@
                 <div id="select">
                     <a href="welcome/index">首页</a>
                     <?php if(isset($user) ){?>
-                    <a href="user/info">我的疯言疯语</a>
+                    <a href="?uid=<?php if(isset($user)){
+                        $user->user_id;
+                    } ?>">我的疯言疯语</a>
                     <a href="welcome/searched">搜索</a>
                     <?php }else{?>
                     <a href="user/login">我的疯言疯语</a>
-                    <a href="user/login">搜索</a>
+                    <!-- <a href="user/login">搜索</a> -->
                     <?php } ?>
 
                 </div>
@@ -63,103 +63,36 @@
         </div>     
         
     </div> 
-
     <div id="content">
-            <div class="my-photo">
-            </div>
-            <?php if(isset($user)==false) {?>
-            <div class="login" >
-                    <div id = "right_bg">
-        
-                        <div class="layer">
-                            <form name="loginForm" id="loginForm" ,action = "" target="_self" method="post">
-                            <div class="cont">
-                                <!-- 手机号、邮箱 -->
-                                <input class="inp01" type="text" name="txtLoginEMail" id="txtLoginEMail" size="16" maxlength="40"                   
-                                placeholder="邮箱/手机号" >
-                                <!-- 错误信息 -->
-                                <span class="msg" id="txtLoginEMail_e" ></span>
-
-                                <!-- 密码 -->
-                                <input class="inp01" name="txtLoginPwd" id="txtLoginPwd" placeholder="密码" type="password" size="16" maxlength="16">
-                                
-                                <span class="msg" id="txtLoginPwd_e" ></span>
-                                <!-- 验证码 -->
-                                <!-- <div class="captcha">
-                                    <input type="text" class="inpCap" name="passcode">
-                                    <span class="showCaptcha">                                   
-                                            <!-- php echo $img;?>    //加一个请输入验证码的placehoder                            -->
-                                    <!-- <a href="javascript:;" id="change-code">点我刷新</a> -->
-                                    <!-- </span>
-                                    <span .class='errorCaptcha'></span>
-                                </div> --> 
-                                
-                                <div class="line">
-                                    <a href="" target="_blank" >忘记密码？</a>
-                                    <!-- <input type="checkbox"  checked="true" value="Yes" name="chkRememberMe" id="chkRememberMe" class="checkbox">
-                                    <label for="chkRememberMe" >三天内自动登录</label> -->
-                                </div>
-
-                                <input class="btn" type="button"  value="登 录">
-                                
-                                <span class="noLogin">没有账号？</span>
-                                <a href="user/register" class="register" onclick="">立即注册&gt;</a>
-                                <a href="" target="_blank" class='forgetpwd'>忘记密码？</a>
-                                
-                            </div>
-                            </form>
+        <div class="msg_left">
+            <div class="data"></div>
+            <div class="page">
                 
+            </div>
+        </div>
+        <div class="msg_right">
+            <div class="msg_show">
+                <div class="two">
+                    <div class="time"></div>
+                    <div class="mine">
+                        <div class="inforCont">
+                            <span><?php echo "";?>echo  my_content</span>
+                        </div>
+                        <div class="inforPhoto">
+                            echo photo
                         </div>
                     </div>
-           
+                </div>
+                    
+                   
             </div>
-            <?php } else { ?>
-            <div class="login logined" >
-                    <div id = "right_bg">       
-                        <div class="layer">
-                            <form name="loginForm" id="loginForm" ,action = "" target="_self" method="post" enctype="multipart/form-data">
-                            <div class="cont">
-                               <a href='?id=<?php echo $user->user_id?>' id='uid'>
-                                    <img src="public/image/upload_pic.jpg" alt="上传图片">
-                               </a>
-                                <p><?php echo $user->user_name?></p>
-                                <ul class='list'>
-                                    <li>
-                                        <a>
-                                            <strong></strong>
-                                            <span>未读消息</span>
-                                        </a>
-                                        
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <strong></strong>
-                                            <span>我的好友</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <!-- <input class="btn" type="button"  value="我的资料"> -->
-                                <div class="btn"><a>我的疯言疯语</a></div>
-                                
-                                
-                            </div>
-                            </form>
-                
-                        </div>
-                    </div>
-           
-            </div>    
-            <?php }?>
-            <div class="title">
-            我的推荐   
-            <a href='welcome/searched' class="learnMore">点击我了解更多</a>
+            <div class="msg_inpt">
+                <textarea name="" id="content_input" >
+                   
+                </textarea>
             </div>
-            <div id="pubuliu">
-            
-            </div>
-            
-    </div>
-    
+        </div>
+    </div>    
     <div id="BHFooter">
         <div class="cont">
             	<div class="logo">
@@ -225,7 +158,7 @@
                
             </div>
     </div>
-    
-    <script src="public/js/require.js" data-main="public/js/index/index.js"></script>
+   <script type="text/javascript" src="public/js/jquery.min.js"></script>
+   <script src="public/js/message/message.js"></script>
 </body>
-</html>     
+</html

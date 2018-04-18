@@ -15,8 +15,8 @@
     padding-right:5%;
 }
 .unlogin a{
-    /* display: inline-block; */
-    display:none;
+    display: inline-block;
+    /* display:none; */
     *display: inline;
     /*兼容ie 6 7*/
     *zoom: 1;
@@ -368,12 +368,20 @@
     height: 44px;
     margin: 16px auto;
     font: 22px / 24px "Microsoft YaHei";
-    color: #600;
+    color: #fff;
     text-align: center;
     border: none;
     cursor: pointer;
-    background: #ffbf11;
+    background: #ff7f00;
     border-radius: 3px;
+}
+.cont .btn a{
+    display: block;
+    padding-top:8px;
+    color:#fff;
+    font-size:16px;
+    text-align: center;
+    letter-spacing: 5px;
 }
 .hat{
     display: inline-block;
@@ -388,6 +396,58 @@
     line-height: 14px;
     background: url('../image/nav_icon.gif') no-repeat center center;
 }
+#uid img{
+    width:100px;
+    height:100px;
+    margin:0 auto;
+    border-radius: 50%;
+}
+.list{
+    width:234px;
+    height:100px;
+    margin:10px auto;
+}
+.list li{
+    display: inline-block;
+    *display: inline;
+    /*兼容ie 6 7*/
+    *zoom: 1;
+    /*兼容ie 6 7*/
+    vertical-align: middle;
+    /*兼容ie 6 7*/
+    /* padding-top:50px; */
+    width:80px;
+    height:80px;
+    color:#bdbdbd
+}
+.list li strong{
+     display: inline-block;
+    *display: inline;
+    /*兼容ie 6 7*/
+    *zoom: 1;
+    /*兼容ie 6 7*/
+    vertical-align: middle;
+    /*兼容ie 6 7*/
+    width:78px;
+    height:44px;
+    padding-top: 20px;
+    font-size: 24px;
+    font-family: Arial;
+    color: #f60;
+    line-height: 44px;
+}
+.list li span{
+     display: inline-block;
+    *display: inline;
+    /*兼容ie 6 7*/
+    *zoom: 1;
+    /*兼容ie 6 7*/
+    vertical-align: middle;
+    /*兼容ie 6 7*/
+    width:100%;
+    height:17px;
+}
+
 .login{
     /* width: 1000px;
     height:472px; */
@@ -419,6 +479,15 @@
     text-indent: 4px;
     background: url("../image/sprit.png") no-repeat left -57px;
     background-color: #fff;
+}
+.cont p{
+    padding-top:10px;
+    height: 37px;
+    _height: 24px;
+    _padding-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 40px;
 }
 .forgetpwd{   
     display: inline-block;
@@ -463,7 +532,7 @@
 }
 #message-container{
     float: left;
-    width: 347px;
+    width: 333px;
     height: 185px;
     color: #333;
     overflow: hidden;
@@ -506,7 +575,7 @@
     margin-right: 12px;
 }
 #BHhomeFooter {
-    height:250px;
+    height: 250px;
     padding-top: 25px;
     text-align: center;
     font: 12px/20px microsoft yahei;
@@ -523,7 +592,6 @@
     text-decoration: none;
     color: #bdbdbd;
 }
-
 
 #BHhomeFooter a.Icon1,
 #BHFooter a.Icon1 {
@@ -591,7 +659,7 @@
 }
 
 #BHFooter {
-    height:200px;
+    height: 200px;
     padding-top: 25px;
     font-size: 12px;
     line-height: 24px;
@@ -601,7 +669,7 @@
     background: #fff;
     overflow: hidden;
     zoom: 1;
-    margin-top:40px;
+    margin-top: 40px;
 }
 
 #BHFooter a {
@@ -651,7 +719,9 @@
 #BHFooter a.Icon4 {
     color: #fff;
 }
+
 #BHFooter li,
-#BHFooter li span{
-        color: #999;
+#BHFooter li span {
+    color: #999;
 }
+
