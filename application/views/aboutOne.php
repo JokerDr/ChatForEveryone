@@ -244,15 +244,16 @@
 
     //加为好友
     $('.addFriend').on('click',function () {
-        var accepter_id = $(this).attr('uid')
+        var accepter_id = $(this).attr('uid');
+        console.log({
+            user_id:<?php echo $user->user_id;?>,
+            accepter_id:accepter_id
+            });       
         $.post('Welcome/addfriend',{
             user_id:<?php echo $user->user_id;?>,
             accepter_id:accepter_id
         },function(data){
-            console.log({
-            user_id:<?php echo $user->user_id;?>,
-            accepter_id:accepter_id
-            });
+            console.log(data);
          },'text')
     })
 </script>

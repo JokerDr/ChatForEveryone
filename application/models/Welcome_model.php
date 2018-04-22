@@ -38,7 +38,7 @@
              return $query->result();
         }
 
-        // // 昵称搜索,获取其用户表的资料,其自我介绍，其作为头像的图片
+        //  昵称搜索,获取其用户表的资料,其自我介绍，其作为头像的图片
         public function name_search($user_name){
              $sql = 'SELECT  * FROM  `t_user` 
                     LEFT JOIN `t_photo` on `t_photo`.u_id = `t_user`.user_id AND `t_photo`.using_or_not = "true"
@@ -73,8 +73,8 @@
 
         //添加朋友 u_id f_name f_
         public function add_friends($user_id,$accept_id){
-            $sql =$this->db->insert('t_friend',array('uid'=>$accept_id,'accept'=>$user_id));
-            return $sql->result();//返回受影响的行数
+            $sql =$this->db->insert('t_friends',array('uid'=>$accept_id,'friends'=>$user_id));
+            return $this->db->affected_rows();//返回受影响的行数
         }
         // 查找是否有该好友
         public function visit_someone($asker,$friend){//需要询问者的u_id和被询问者的u_id
@@ -118,7 +118,7 @@
             $arr = array('sender_uid'=>$sender,'reciver_uid'=>$reciver,'create_time_YMD'=>$time);
             $this->db->where($arr);
             $this->db->delete('t_message');
-            return $this->db->affected_rows();;
+            return $this->db->affected_rows();
         }
         //删除所有信息{
         public function del_messages($uid){
@@ -130,6 +130,33 @@
             $this->db->insert('t_message',$arr);
             return $this->db->affected_rows();
         }
+        // 查找好友
+        public function find_one($asker,$friend){//需要询问者的u_id和被询问者的u_id
+            $sql  = 'SELECT * FROM t_friend WHERE user_id = $asker AND friend_id = $friend';
+            $query = $this->db->query($sql);
+            return $query->row();
+        }
+        //  public function SendMessge($message){
+        // //    $sql = "insert into message values(NULL ,'{$reciverUid}','{$senderUid}','{$message}','{$time}','1')";       
+        //     $sql = $this->insert($message);
+        //     return $query->result(); 
+        // }
+        // // 更新聊天信息
+        // public function update_message($ids){
+        //     $sql = "update t_message set status = 2 where id in ({$ids})";
+        //     $query = $this->db->query($sql);
+        //     return $query->result();   
+        // }
+        // public function getMessage($reciver_uid,$sender_uid){
+        //     $sql = "select * from t_message where 
+        //     reciver_uid='{$reciver_uid}'
+        //      and sender_uid='{$sender_uid}' 
+        //      and status='1'";
+        //      $query = $this->db->query($sql);
+        //      return $query->result();
+        // }
+
+        
     }   
 
 ?>

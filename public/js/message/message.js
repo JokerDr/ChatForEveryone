@@ -4,6 +4,7 @@
 }).mouseleave(function(){
  $('.select').hide();
 }); 
+<<<<<<< HEAD
 
 
 
@@ -16,3 +17,5 @@
 // })
 
 // console.log(time)
+=======
+>>>>>>> 3419982a0b9c32e73d97679330e6af14cf98c3b2

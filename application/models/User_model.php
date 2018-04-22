@@ -46,12 +46,9 @@ class User_model extends CI_Model
     //     return $this->db->affected_rows();
     // }
 
-    
-<<<<<<< HEAD
-    // 更新头像
-=======
+
     // 跟新头像
->>>>>>> 3419982a0b9c32e73d97679330e6af14cf98c3b2
+
     public function update_avatar() {
         
     }

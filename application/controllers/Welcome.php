@@ -165,8 +165,8 @@
         }
         //  添加好友
         public function addfriend(){
-            $asker = $this->input->get('user_id');//询问者
-            $accept  = $this->input->get('accepter_id');//接受者
+            $asker = $this->input->post('user_id');//询问者
+            $accept  = $this->input->post('accepter_id');//接受者
             $results = $this->Welcome_model->add_friends($asker,$accept);//
             $results = $this->Welcome_model->add_friends($accept,$asker);
             if(count($results)>0){
