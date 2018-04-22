@@ -1,0 +1,66 @@
+﻿@charset "utf-8";
+/* CSS Document yz */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { padding:0; margin:0; } 
+table { border-collapse:collapse; border-spacing:0; } 
+fieldset,img { border:0; } 
+address,caption,cite,code,dfn,em,strong,th,var { font-weight:normal; font-style:normal; } 
+ol,ul { list-style:none; } 
+caption,th { text-align:left; } 
+h1,h2,h3,h4,h5,h6 { font-weight:normal; font-size:100%; } 
+.clear{ clear:both; font-size:0; visibility:hidden; line-height:1px; height:1px; margin-top:-1px;}
+.fixfloat:after{content:".";display:block;clear:both;visibility:hidden;height:0;}
+.fixfloat{zoom:1}
+
+body { margin:0px; padding:0px; background:#fff; overflow-x:hidden; }
+a { text-decoration:none; outline:none}
+/* a{blr:expression(this.onFocus=this.close());} /* 只支持IE，过多使用效率低 */ 　 
+/* a{blr:expression(this.onFocus=this.blur());} 只支持IE，过多使用效率低 */ 　  
+
+/*---公共---*/
+.selDate { width:45px; }
+.sel01 { width:150px; }
+.selCity { position: relative; float:left; padding-right:5px;}
+.selCity input { cursor:pointer;}
+.city_input { width:167px; _width:166px; background:#fff url(../images/droparrow_1.gif) no-repeat right center;}
+.mb35 { margin-bottom:35px;}
+.mT25 { margin-top:-25px;}
+.mr2 { margin-right:2px;}
+.cf60 { color:#f60; }
+.c333 { color:#333; }
+.cbd { color:#bdbdbd;}
+.orange { display:block; height:25px; font:13px/24px "Microsoft Yahei"; color:#fff; text-align:center; cursor:pointer; background:#ff7f00; overflow:hidden; zoom:1;}
+.orange:hover { background:#f36500; }
+.orangeT { font:13px/24px "Microsoft Yahei"; color:#f60}
+.yellow { display:block; float:left; width:90px; height:38px; font:13px/36px "Microsoft Yahei"; color:#ff8b00; text-align:center; cursor:pointer; border:1px solid #fbb425; border-radius:3px; overflow:hidden; zoom:1;}
+.yellow:hover { color:#ff6a00; border-color:#ff8b01;}
+.yellowT { font:13px/24px "Microsoft Yahei"; color:#fe8b00}
+.red { display:block; height:25px; font:13px/24px "Microsoft Yahei"; color:#fff; text-align:center; background:#ff5a4d; overflow:hidden; zoom:1;}
+.red:hover { background:#f34133; }
+.grey { display:block; height:25px; font:13px/24px "Microsoft Yahei"; color:#fff; text-align:center; background:#d1d1d1; cursor:default; overflow:hidden; zoom:1; }
+.greyB { height:23px; font:13px/23px "Microsoft Yahei"; color:#bdbdbd; text-align:center; border:1px solid #bdbdbd; background:#fff; cursor:default; overflow:hidden; zoom:1; }
+.likeIcon {height:23px; padding-left:24px; font:13px/23px "Microsoft Yahei"; color:#f60; border:1px solid #ff7f00; background:#fff url(../images/icon_like_1.gif) no-repeat; overflow:hidden; zoom:1;   }
+.likeIcon:hover { background-position:0 -23px;}
+.blue { font:13px/24px "Microsoft Yahei"; color:#1d51c6; overflow:hidden; zoom:1;}
+.blueT { color:#1d51c6; }
+.black { color:#252525; text-decoration:underline}
+.black:hover { color:#ff8000}
+.error { float:left; margin-left:6px; padding:0 0 0 16px; background:url(../images/icon_11_1.gif) no-repeat left center; color:#f00; }
+input { float:left; font-family:"Microsoft Yahei"; color:#bdbdbd; }
+textarea {font:14px/22px "Microsoft Yahei"; color:#bdbdbd; resize: none; overflow-y:auto; overflow-x:hidden;}
+a.BHclose { display:block; position:absolute; width:15px; height:15px; top:10px; right:10px; background:url(../images/close_1.gif) no-repeat; text-indent:-99999px; overflow:hidden; zoom:1; }
+
+#BAIHE { width:1000px; margin:0 auto; padding:25px 0 0 0; font:13px/20px microsoft yahei; color:#666; background:#fff; overflow:hidden; zoom:1; }
+#BAIHE a.more { float:right; font-size:13px; color:#bdbdbd; }
+#BAIHE a.more:hover { text-decoration:underline; }
+#BAIHE h2 { position:relative; height:33px; font-size:18px; color:#333; margin-bottom:10px; border-bottom:1px solid #dddddd; zoom:1;}
+#BAIHE .adv90 { width:1000px; height:90px; clear:both; padding-bottom:35px; text-align:center; overflow:hidden; zoom:1; }
+#BAIHE .adv230 { width:230px; clear:both; padding-bottom:25px; text-align:center; overflow:hidden; zoom:1; }
+#BAIHE .adv815 { width:815px; clear:both; margin:30px 0; text-align:center; overflow:hidden; zoom:1; }
+#BAIHE .advMyBh { height:95px; clear:both; overflow:hidden; zoom:1; }
+#BAIHE #leftCont { float:left; width:160px; margin-bottom:35px; overflow:hidden; zoom:1;}
+#BAIHE #rightCont { float:right; width:815px; margin-bottom:35px; zoom:1; }
+#BAIHE .bor { margin-bottom:25px; border:1px solid #ebf0f0; }
+
+
+

@@ -8,7 +8,7 @@ class User extends CI_Controller{
         $this->load->model("User_model");
     }  
     //验证码生成
-     public function captcha(){
+    public function captcha(){
         $this->load->helper('captcha');
         $rand = rand(1000,9999);
         $this->session->set_userdata(array(
@@ -35,7 +35,6 @@ class User extends CI_Controller{
         );
         $cap = create_captcha($vals);
         $img = $cap['image'];
-        // echo $img;
         return  $img; 
     }
     // 刷新验证码
@@ -43,18 +42,17 @@ class User extends CI_Controller{
         $img = $this->captcha();
         echo $img;
     }
-     //加载登录页
+     //登录页
     public function login(){
         $img = $this->captcha();
         $this->load->view('login',array('img'=>$img));
          }
-    //加载注册页
+    //注册页
     public function register(){
-        $img = $this->captcha();
-        
+        $img = $this->captcha();   
         $this->load->view('register',array('img'=>$img));
     }  
-    //登录校检     
+     //登录校检     
     public function check_login(){
         $pwd = $this->input->post('pwd');
         $account = $this->input->post('account');//接收ajax数据    
@@ -72,30 +70,44 @@ class User extends CI_Controller{
         // $data = $this->session->userdata('captcha');//获取name为captcha的session的值  
         // $data_1 = $this->session->userdata('time');//获取存在session里的时间
             // if($data == $captcha){                 
-                        $result = $this->User_model->get_user_by_account($account);//对数据库搜索
-                        if(count($result) == 0){
-                        //若数据库搜索结果不存在
-                             echo 'email or phone not exist';
-                        }else{//若数据库搜索结果存在
-                            if($result[0]->password == $pwd){ 
-                                $this->session->set_userdata(array(
-                                    'user' => $result[0]
-                            // 将搜索结果存在session里，方便使用
-                                ));
-                                echo 'success';
-                             }else{
-                                echo 'password error';
-                             }
-                         }
-                    // }else{
-                        
+        $result = $this->User_model->get_user_by_account($account);//对数据库搜索 //用户表搜索
+        $result_2 =$this->User_model->get_admin_by_account($account);//搜索管理员表
+        if(count($result_2) == 0){ //优先检索管理员表
+            if(count($result) == 0){
+            //若数据库搜索结果不存在
+                 echo 'email or phone not exist';
+            }else{//若数据库搜索结果存在
+                 if($result[0]->password == $pwd){ 
+                     $this->session->set_userdata(array(
+                    'user' => $result[0]
+                    // 将搜索结果存在session里，方便使用
+                    ));
+                    echo 'success';
+                }else{
+                    echo 'password error';
+                }
+            }
+        }else{//存在admin账号
+            if($result_2[0]->password == $pwd){ 
+                $this->session->set_userdata(array(
+               'user' => $result_2[0]
+               // 将搜索结果存在session里，方便使用
+               ));
+               echo 'adminAccount';
+           }else{
+               echo 'password error';
+           }
+        }
+                    // }else{                     
                     //     echo 'captcha error' ;                   
                     // }  
     }
-    //记住密码
-//    public function remember_pwd(){
-        
-//     }
+    // 登出
+    public function logout(){
+        $this->session->unset_userdata('user');
+        redirect("welcome/index");
+    }
+    // 验证码校验
     public function checkCaptcha(){
          $captcha = $this->input->get('captchaVal');
          $data = $this->session->userdata('captcha');//获取name为captcha的session的值  
@@ -106,7 +118,7 @@ class User extends CI_Controller{
          }
     }
     //搜寻账号
-   public function searchAccount(){
+    public function searchAccount(){
         $account = $this->input->get('account');
         $result = $this->User_model->get_user_by_account($account);//对数据库搜索
         if(count($result) == 0){
@@ -115,10 +127,9 @@ class User extends CI_Controller{
         }else{//若数据库搜索结果存在
             echo 'account already exist';
         }
-
-   }  
+    }  
    //注册跳转
-     public function add_user(){
+    public function add_user(){
          $account = $this->input->post('account');
          $uname = $this->input->post('uname');
          $pwd = $this->input->post('pwd');
@@ -183,32 +194,143 @@ class User extends CI_Controller{
       
     }
 
-   public function auto_login(){
+    public function auto_login(){
         $account = $this->input->post('account');//接收ajax数据    
         $result = $this->User_model->get_user_by_account($account);
         $this->session->set_userdata(array(
             'user'=>$result[0]
         ));
         redirect("/welcome/index");
-    }
-    
-        //  邮箱校检p
-   function validate_email($email){
+    }  
+    //  邮箱校检
+    public function validate_email($email){
         $pattern = "/^[a-z'0-9]+([._-][a-z'0-9]+)*@([a-z0-9]+([._-][a-z0-9]+))+$/";
         if(preg_match($pattern,$email)){  
            return true;  
         } else{  
             return false;  
         }  
+    }   
+    // check手机号格式
+    public function checkMobile($str) {
+            $re = '/^1\d{10}$/';
+            return  strstr($str,$re) ? true : false;           
+    } 
+    // 用户权限：好友查看，谁都能看
+    // public function look_me(){
+    //     // if(  == true){
+    //         //跳转到资料页
+    //     }else{
+    //         echo 'not allow'
+    //     }
+    // }
+    
+    // by ccy
+    //跳转到用户资料页
+    public function info(){
+        $this->load->view("userInfo");
     }
-        //check手机号格式
-    // public function checkMobile($str) {
-    //         $re = '/^1\d{10}$/';
-    //         return  strstr($str,$re) ? true : false;           
-    //     } 
-    
-    
+    // 更新用户信息
+    public function updateUserInfo(){
+        // 提交到数据库
+        // 重新设置session
+        // 刷新页面
+    }
+    // 设置头像
+    public function uploadPhoto() {
+        // 更新头像
+        // 更新数据库
+        // 刷新页面(前台跳转)
 
+        //获取当前用户的id
+        $id = $this->session->userdata('user_id');
+        // $id = 2;
+        // 获取photo数量
+        $photo_result = $this->User_model->get_user_photo($id);
+        $photo_list_length = count($photo_result);
+        $photo_data = $_FILES['photo'];
+        $config['upload_path'] = base_url().'photo/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['file_name'] = 'photo_'.$id.'_'.$photo_list_length;
+        $file_type = substr(strrchr($photo_data['name'], '.'), 1);
+        $file_path = 'photo/photo_'.$id.'_'.$photo_list_length.'.'.$file_type;//图片文件的引用路径
+        
+        //加载上传类
+        $this->load->library('upload', $config);
+        // $this->User_model->
+        $upload_result = $this->upload->do_upload('photo');
+        //存入数据库
+        $photo_result = $this->User_model->insert_user_photo($id, $file_path);
+        
+        if($upload_result && $photo_result > 0){
+            echo "success";
+        }else{
+            echo 'fail';
+        }
+    }
+    // 更新用户自我介绍
+    public function updateContent(){
+        $content = $this->input->get("content");
+        $id = $this->session->userdata('user_id');
+        $flag = $this->check_user_content();
+        // var_dump($flag);
+        // die();
+        if($flag){
+            $result = $this->User_model->update_user_content($id, $content, $flag);
+        }else{
+            $result = $this->User_model->update_user_content($id, $content, $flag);
+        }
+        if($result > 0){
+            echo 'success';
+        }else{
+            var_dump($result);
+            die();
+        }
+    }
+    //  检查是否存在 自我介绍
+    public function check_user_content() {
+        $id = $this->session->userdata('user_id');
+        $result = $this->User_model->get_user_content($id);
+        $result_length = count($result);
+        if($result_length > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    // 检查旧密码是否正确
+    public function chackPasswd(){
+        // 更新密码
+        $passwd_old_input = $this->input->get('passwdOld');
+        $passwd_old = $this->session->userdata("password");
+
+        if($passwd_old_input == $passwd_old){
+            echo 'yes';
+        }else{
+            echo 'not';
+        }
+        
+    }
+    public function updatePasswd() {
+        // 更新密码
+        // 更新数据库
+        // 跳转到登陆页
+
+
+        // 重新设置session
+        // 后台刷新页面
+        $passwd = $this->input->get("passwd");
+        $id = $this->session->userdata('user_id');
+        $result = $this->User_model->update_user_passwd($id, $passwd);
+        if($result > 0){
+            // 成功就跳转到登陆页
+            // redirect("user/login");
+            echo 'success';
+        }else{
+            var_dump($result);
+            die();
+        }
+    }
 }
 ?>
 

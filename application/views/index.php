@@ -5,77 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>疯言疯语首页</title>
     <base href="<?php echo site_url() ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">                                
     <link rel="shortcut icon" type="image/x-icon" href="public/image/favicon.ico" media="screen" />
     <link rel="stylesheet" href="public/css/reset.css">
     <link rel="stylesheet" type="text/css" media="screen" href="public/css/public.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="public/css/lunbo.css" />   
-    <script src="public/js/jquery.min.js"></script>
-    <!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
-    <!-- <srciptsrc="public/js/index/pubu/jquery.waterfall.js"></script> -->
-    <!-- <script src="public/js/index/pubu/dataShow.js"> -->
-    <!-- <script>
-        $("#div1").waterfall({
-            itemClass: ".box",
-            minColCount: 2,
-            spacingHeight: 10,
-            resizeable: true,
-            ajaxCallback: function (success, end) {
-                var data = {
-                    "data":
-                        [
-                            { "src": "03.jpg" },
-                            { "src": "04.jpg" },
-                            { "src": "02.jpg" },
-                            { "src": "05.jpg" },
-                            { "src": "01.jpg" },
-                            { "src": "06.jpg" }
-                        ]
-                };
-                var str = "";
-                var templ = '<div class="box" style="opacity:0;filter:alpha(opacity=0);"><div class="pic"><img src="img/{{src}}" /></div></div>'
-
-                for (var i = 0; i < data.data.length; i++) {
-                    str += templ.replace("{{src}}", data.data[i].src);
-                }
-                $(str).appendTo($("#div1"));
-                success();
-                end();
-            }
-     });
-    </script> -->
-    <!-- <link rel='stylesheet' href='public/css/style.css' media='screen' />
-    <script type="text/javascript" src="public/js/index/pubu/jquery.min.js"></script>
-    <script type="text/javascript" src="public/js/jquery.lazyload.min.js"></script>
-    <script type="text/javascript" src="public/js/blocksit.min.js"></script> -->
-
-    
+    <script src="public/js/jquery.min.js"></script> 
 </head>
 <body>
     <div id="header">       
         <div id="headerTop">
             <div class="containerHead">
+               <?php 
+                $user = $this->session->userdata('user');
+                if(isset($user)==false){?>
                 <div class="unlogin">
                     <a href='user/login'>登陆</a>
                     <a href='user/register'>注册</a> 
                 </div>
+                <?php }else{?>
                 <div class="logined">
                     <div class="uinfor">
-                         hi,
+                         hi,<?php echo $user->user_name ?>
                         <span class="uname"></span>
                         <span class="hat"></span>
                     </div>
                     <div class=" top message">
-                         <a href="" class="message">消息</a>
+                         <a href="welcome/message" class="message">消息</a>
                     </div>
                     <div class="setting">设置
                         <div class="select">
-                            <div value=""><a>我的疯言疯语</a></div>
-                            <div value=""><a>退出</a></div>
+                            <div ><a href='user/info'>我的疯言疯语</a></div>
+                            <div ><a href='user/logout'>退出</a></div>
                         </div>
                         
                     </div>
                 </div>
+                <?php }?>
             </div>           
             
         </div>   
@@ -84,8 +50,14 @@
                 <a href="" class="home"></a>
                 <div id="select">
                     <a href="welcome/index">首页</a>
-                    <a href="">我的疯言疯语</a>
+                    <?php if(isset($user) ){?>
+                    <a href="user/info">我的疯言疯语</a>
                     <a href="welcome/searched">搜索</a>
+                    <?php }else{?>
+                    <a href="user/login">我的疯言疯语</a>
+                    <a href="welcome/searched">搜索</a>
+                    <?php } ?>
+
                 </div>
             </div>
         </div>     
@@ -95,7 +67,8 @@
     <div id="content">
             <div class="my-photo">
             </div>
-            <div class="login">
+            <?php if(isset($user)==false) {?>
+            <div class="login" >
                     <div id = "right_bg">
         
                         <div class="layer">
@@ -138,17 +111,72 @@
                 
                         </div>
                     </div>
+           
             </div>
+            <?php } else { ?>
+            <div class="login logined" >
+                    <div id = "right_bg">       
+                        <div class="layer">
+                            <form name="loginForm" id="loginForm" ,action = "" target="_self" method="post" enctype="multipart/form-data">
+                            <div class="cont">
+                               <a href='user/info?id=<?php echo $user->user_id?>' id='uid'>
+                                    <img src="public/image/upload_pic.jpg" alt="上传图片">
+                               </a>
+                                <p><?php echo $user->user_name?></p>
+                                <ul class='list'>
+                                    <li>
+                                        <a>
+                                            <strong></strong>
+                                            <span>我的消息</span>
+                                        </a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <strong></strong>
+                                            <span>我的好友</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- <input class="btn" type="button"  value="我的资料"> -->
+                                <div class="btn"><a href="user/info">我的疯言疯语</a></div>
+                                
+                                
+                            </div>
+                            </form>
+                
+                        </div>
+                    </div>
+           
+            </div>    
+            <?php }?>
             <div class="title">
             我的推荐   
-            <a href='' class="learnMore">点击我了解更多</a>
+            <a href='welcome/searched' class="learnMore">点击我了解更多</a>
             </div>
             <div id="pubuliu">
             
+                <?php for($x=0; $x<12; $x++){ ?>
+                    <div id="message-container">
+                       
+                        <!-- {"user_id":"32","user_name":"00","password":"000000","phone":"12345678912","email":null,"sex":"1","province":"\u5317\u4eac\u5e02","city":"\u5317\u4eac\u5e02\u5e02\u8f96\u533a","others":"\u5bc6\u4e91\u533a","height":"1","diplomas":"\u521d\u4e2d","mood":null,"year":"2003","month":"2","days":"17","photo_id":null,"u_id":null,"photo":null,"using_or_not":null,"intro_id":null,"intro_content":null}, -->
+                        <div class="photo">
+                            <img src="" alt="">
+                        </div>
+                        <div class = "infor">
+                            <strong></strong>
+                            <span > </span>
+                            <p></p>
+                            <a class="findHer"  href="javascript:;">给他/她留言</a>
+                            <!-- <a class="addfriend">添加好友</a> -->
+                        </div>
+
+                    </div>
+                <?php }?>
             </div>
             
     </div>
-    
+
     <div id="BHFooter">
         <div class="cont">
             	<div class="logo">
@@ -214,7 +242,89 @@
                
             </div>
     </div>
-    
+ 
+    <script>     
+        var data = <?php echo $users_width_photos ;?>;           
+        for(var i = 0;i<12;i++){
+             $('.photo img')[i].src="photo/"+ data[i].photo;
+             $('.photo img')[i].setAttribute('uid',data[i].user_id );
+             $('.photo img')[i].alt = data[i].user_name;
+             $('.infor strong')[i].innerHTML = data[i].user_name;
+             $('.infor span')[i].innerHTML = data[i].height +"    "+ data[i].diplomas+"    "+ data[i].province+ data[i].city+data[i].others;          
+             $('.findHer')[i].setAttribute('uid',data[i].user_id );
+        }
+        //cha看资料
+       
+        $('.photo img').on('click',function(){
+            <?php if(isset($user)){?>
+                var another = $(this).attr('uid');
+                $.get('Welcome/about_one',{
+                    uid:<?php echo $user->user_id?>,
+                    another:another
+                },function(data){
+                    var $data = $.trim(data);
+                    console.log($data);
+                },'text')
+            <?php }else{?>
+                alert("请登录后，再查看该用户资料！");
+            <?php }?>
+        })
+        $('.findHer').on('click', function () {
+            <?php if(isset($user)){?>
+                var other = $(this).attr('uid');
+                var date_1 = new Date();
+                var year = date_1.getFullYear();
+                var month = date_1.getMonth();
+                var days = date_1.getDate();
+                var hour = date_1.getHours();
+                var seconds = date_1.getMinutes();
+                var create_time_YMD = year + "-" + month + "-" + days;
+                var create_time_HS = hour + ":" + seconds;
+                // 模板的显隐性切换
+                var dialog = `<div id='dialog_content'>
+                                <div id="mask">
+                                    <div class="msg_inpt" style="display: block;">
+                                        <div class="close">[X]</div>
+                                        <textarea name="" id="content_input">                   
+                                        </textarea>
+                                        <div class="send" >发送</div>
+                                    </div>
+                                </div>
+                            </div>`
+            
+                            $('#content').append(dialog);
+                $('.close').on('click', function () {
+                    $('#dialog_content').remove();
+                });
+                //发送消息
+                
+                $('.send').on('click', function () {
+                        if ($.trim($('#content_input').val()) != "") {
+                            $.post('Welcome/acceptInfo', {
+                                uid:<?php echo $user->user_id?>,
+                                other: other,
+                                content: $.trim($('#content_input').val()),
+                                create_time_YMD: create_time_YMD,
+                                create_time_HS: create_time_HS
+                            }, function(data) {
+                                console.log({
+                                uid:<?php echo $user->user_id?>,
+                                other: other,
+                                content: $.trim($('#content_input').val()),
+                                create_time_YMD: create_time_YMD,
+                                create_time_HS: create_time_HS
+                            });                           
+                                alert('success!!!')
+                            }, 'text')
+                    }else {
+                            alert("发送内容不能为空！！！")
+                    } 
+                })    
+             <?php }else{?>
+                alert("登陆后才能发送消息！");
+            <?php }?>
+        });
+    </script>
     <script src="public/js/require.js" data-main="public/js/index/index.js"></script>
 </body>
 </html>     

@@ -7,7 +7,7 @@
     <base href="<?php echo site_url() ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="public/css/reset.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="public/css/search.css" />  
+    <link rel="stylesheet" type="text/css" media="screen" href="public/css/admin.css" />  
     <link rel="shortcut icon" type="image/x-icon" href="public/image/favicon.ico" media="screen" />
 </head>
 <body>
@@ -15,63 +15,42 @@
     <div id="header">       
         <div id="headerTop">
             <div class="containerHead">
-               <?php 
-                $user = $this->session->userdata('user');
-                if(isset($user)==false){?>
-                <div class="unlogin">
-                    <a href='user/login'>登陆</a>
-                    <a href='user/register'>注册</a> 
-                </div>
-                <?php }else{?>
+               <?php $user = $this->session->userdata('user');?>
                 <div class="logined">
                     <div class="uinfor">
                          hi,<?php echo $user->user_name ?>
                         <span class="uname"></span>
                         <span class="hat"></span>
                     </div>
-                    <div class=" top message">
+                    <!-- <div class=" top message">
                          <a href="welcome/message" class="message">消息</a>
-                    </div>
-                    <div class="setting">设置
-                        <div class="select">
-                            <div ><a href='user/info'>我的疯言疯语</a></div>
-                            <div ><a href='user/logout'>退出</a></div>
-                        </div>
+                    </div> -->
+                    <a href='user/logout'>
+                    <div class="setting">退出
+                        <!-- <div class="select">
+                            <!-- <div ><a href='user/info'>我的疯言疯语</a></div> -->
+                            <!-- <div ><a href='user/logout'>退出</a></div> -->
+                        </div> </a>
                         
                     </div>
                 </div>
-                <?php }?>
+    
             </div>           
             
-        </div>   
-        <div class="wrip">
-            <div id="nav">
-                <a href="" class="home"></a>
-                <div id="select">
-                    <a href="welcome/index">首页</a>
-                    <?php if(isset($user) ){?>
-                    <a href="user/info">我的疯言疯语</a>
-                    <a href="welcome/searched">搜索</a>
-                    <?php }else{?>
-                    <a href="user/login">我的疯言疯语</a>
-                    <a href="welcome/searched">搜索</a>
-                    <?php } ?>
-
-                </div>
-            </div>
-        </div>     
-        
+        </div>  
+        <div class="hello">管理员<span><?php echo '   '.$user->user_name.'   '; ?></span>您好！</div> 
     </div> 
     
     <div class="container">
+    
         <div class="wayWriper">
-                <span>选择搜索方式:</span>
+                <span>你想做的是？</span>
                 <div class="Way">       
                     <div class='way1'>
-                        <label for="">昵称搜索</label>
+                        <label for="">搜索用户</label>
                     </div>         
                     <div class='way2'>
-                        <label for="">条件搜索</label>
+                        <label for="">发送通知</label>
                     </div>
                 </div>
         </div>
@@ -80,23 +59,7 @@
                 <input type="text" class="inpUname" placeholder="输入昵称">
             </div>
             <div class='conditions'>
-                <div class='contWriper'>
-                    <div>
-                        <label for="age">出生年份</label>
-                        <input type="text" placeholder="1998" name="age">
-                        <span for="age">必填</span>
-                    </div>
-                    <div>
-                        <label for="sex">性别</label>
-                         <input type="text" placeholder="男/女" name="sex">
-                         <span for="sex">必填</span>
-                    </div>
-                    <div>
-                          <label for="province">省/直辖市</label>
-                          <input type="text" placeholder="河北省/天津市" name="province">
-                          <span for="province">必填</span>
-                    </div>   
-                </div>              
+                           
                          
             </div>
             
@@ -176,32 +139,14 @@
     </div>
 
     <script src="public/js/jquery.min.js"></script>
-    <script src="public/js/search/search.js"></script>
+    <script src="public/js/admin/admin.js"></script>
     <!-- <script src="public/js/pub/placeholder.js"></script> -->
     <script>
-        // 滑入滑出特效
        $('.setting').mouseenter(function(){
         $('.select').show();
        }).mouseleave(function(){
         $('.select').hide();
        }); 
-    //    根据昵称进行搜索
-     $('.startSearch').on('click',function(){
-        //  console.log($('.inpUname').val());
-        $.get('welcome/search_res',{
-            user_name:$('.inpUname').val()
-        },function(data){
-            var $data = $.parseJSON(data);
-
-        //    $('.pages').text(data.links) ;
-        // console.log(data.user_name);
-        // console.log(data.res);
-        console.log($data);
-        },'text')
-     })  
-    
-
-
     </script>
 </body>
 </html>

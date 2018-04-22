@@ -5,6 +5,10 @@
     background: url('../image/logo.png.png') no-repeat center center;
     background-size: contain;
 }
+.home {
+    background: url('../image/logo.png.png') no-repeat center center;
+    background-size: contain;
+}
 #headerTop {
     background: #f3f3f3;
 }
@@ -80,7 +84,7 @@
 
 .top:hover {
     color: #ff7f00;
-    background: #fff;   
+    background: #fff;
 }
 
 .select {
@@ -105,10 +109,12 @@
     margin: 0 auto;
     /* border-bottom: 2px solid #ff5e00; */
 }
-.wrip{
-    width:100%;
+
+.wrip {
+    width: 100%;
     border-bottom: 2px solid #ff5e00;
 }
+
 #select {
     margin-right: -12px;
     float: right;
@@ -137,6 +143,7 @@
     background: #ff7f00;
     color: #fff
 }
+
 .hat {
     display: inline-block;
     *display: inline;
@@ -150,8 +157,6 @@
     line-height: 14px;
     background: url('../image/nav_icon.gif') no-repeat center center;
 }
-
-
 
 #BHhomeFooter {
     height: 250px;
@@ -304,184 +309,169 @@
     color: #999;
 }
 
-
-
-.container {
-    width:1000px;
-    height:840px;
-    margin:0 auto;
-}
-.wayWriper{
-    height:60px;
-    border-bottom: 1px solid #ccc;
-    margin-top:2px;
-}
-.Way {
-    float: left;
-    margin-left:50px;
-    /* height:60px; */
-    
-}
-.Way div{
-    display:inline-block;
-    *display: inline;
-    *zoom: 1;
-    vertical-align:middle;
-    height:60px;
-    width:300px;
-    text-align: center;  
-}
-/* .way1 {
-     background:#ff7f00;
-     color:#fff;
-} */
-.way1,.way2{
-    position: relative;
-}
-.way1{
-    background: #ff7f00;
-    color: #fff;
-}
-.Way label{
-    display: block;
-    height:60px;
-    line-height: 60px;
-    /* margin-top:0%; */
-
-}
-.Way div label{
-    font-size:18px;
-    letter-spacing: 2px;
-}
-/* .Way div label:hover{
-    background:#ff7f00;
-    color:#fff;
-} */
-.container span {
-    float: left;
-    display: block;
-    height:60px;
-    font-size:24px;
-    line-height: 60px;
-    margin-right: 20px;
-}
-
-.condition{
-    width:1000px;
-    height:100px;
-    margin: 0 auto;
-    border-bottom: 1px solid #ccc;
-
-}
-.inpt input{
-    padding:15px 10px   ;
-    width:500px;
-    height:25px;
-    /* margin:0 auto; */
-    margin:25px 238px;
-
-}   
-.conditions{
-    display: none;
-}
-.conditions div{
-    width:600px;
-    height:30px;
-    margin: 0 auto;
-    text-align: center;
-    /* margin-top:3px; */
-}
-.conditions label{
-    display: block;
-    height:30px;
-    width:200px;
-    float: left;
-    line-height: 30px;
-}
-.conditions input{
-    height:18px;
-    width:200px;
-    float: left;
-    padding:3px 2px;
-    margin-top:3px;
-    line-height: 18px;
-    /* display:inline-block;
-    *display:inline;
-    *zoom:1;
-    vertical-align: middle */
-}
-.conditions span{
-    height: 30px;
-    font-size: 12px;
-    width:40px;
-    text-align: center;
-    line-height: 30px;
-}
-.startSearch{   
-    width: 200px;
-    height:50px;
-    margin:0 auto;
-    letter-spacing: 4px;
-    text-align: center;
-    font-size:20px;
-    line-height: 50px;
-    cursor: pointer;
-    /* border-top: 2px solid #ff7f00; */
-    border-bottom: 2px solid #ff7f00;
-}
-.results{
+#content{
     width:1000px;
     height:600px;
+    margin:0 auto;
+}
+.data {
+    float: left;
+    width: 500px;
+    height: 200px;
+}
+.pic{
+    float: left;
+    width:500px;
+    height:500px;
+}
+.pic img{
+    width:500px;
+    height:500px;
+}
+.others{
+    margin-top:20px;
+    width:500px;
+    height:160px;
+}
+.others div{
+    height:40px;
+    width:200px;
+    line-height: 50PX;
+    display: inline-block;
+    *display:inline;
+    *zoom:1;
+    vertical-align: middle;
+    padding:20px 20px;
+    font-size: 14px;
+}
+/* .others div span{
+} */
+.year,.height,.area,.diploma{
+    font-size: 14px;
+    color:#333;
+}
+.name{
+    font-size: 21px;
+    width:50px;
+    height:30px;
+    line-height: 30px;
+    margin-left:20px;
+    margin-top:20px;
+    color:#333;
+}
+.buttons a{
+    display: block;
+    float: left;
+    width: 160px;
+    height:50px;
+    line-height: 50px;
+    margin: 0 20px;
+    /* padding-left: 45px; */
+    background: #fe8b00;
+    color:#fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5%;
+
+}
+.buttons a:hover{
+    background: #fb5d00;
+}
+.intro{
+    margin-top:40px;
+    float: left;
+    width:500px;
+    height:200px;
+}
+.intro span{
+    margin-bottom:20px;
+    margin-left: 20px;
+    color:#fe8b00;
+}
+.intro p {
+    margin-left: 20px;
+    width: 500px;
+    height: 196px;
+    color:#000;
+    font-size: 14px;
+
+}
+
+/* 对话弹出层 */
+#dialog_content {
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    margin-top: -50%;
+    margin-left: -50%;
     margin: 0 auto;
-}
-/* 结果展示 */
-#message-container {
-    float: left;
-    width: 347px;
-    height: 185px;
-    color: #333;
-    overflow: hidden;
-    zoom: 1;
+    width: 1000px;
+    height: 600px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
 
-#message-container .photo {
-    float: left;
-    width: 120px;
-    height: 150px;
-    overflow: hidden;
-    zoom: 1;
+#mask {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 500px;
+    height: 280px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.5);
 }
 
-#message-container .infor {
-    float: left;
-    width: 184px;
-    height: 150px;
-    padding: 0 0 0 15px;
-    overflow: hidden;
-    zoom: 1;
+#dialog_content textarea {
+    position: absolute;
+    top: 30px;
+    width: 500px;
+    height: 100px;
+    padding: 19px 10px;
+    overflow: auto;
+    margin: 0 auto;
+    text-align: left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border-style: solid;
+    border-color: #FFFFFF;
+    resize: none;
+    overflow: scroll;
+    overflow-x: hidden;
+    border: none;
+    border-top: 1px solid #000;
+    outline: none;
+    background: beige;
 }
 
-#message-container strong {
+.msg_inpt {
+    z-index: 20;
+}
+
+.close {
+    position: absolute;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    text-align: center;
+    margin-right: 0;
+    color: #fff;
+    cursor: pointer;
+}
+
+.send {
+    position: absolute;
+    top: 169px;
+    left: 32.5%;
+    /* margin-left:-50%; */
     display: block;
-    height: 29px;
-    font-size: 16px;
-    line-height: 26px;
-}
-
-#message-container span {
-    display: block;
+    width: 200px;
     height: 40px;
-    padding: 3px 0;
-}
-
-#message-container p {
-    width: 172px;
-    height: 50px;
-    color: #bdbdbd;
-}
-
-#message-container a {
-    float: left;
-    width: 80px;
-    margin-right: 12px;
+    text-align: center;
+    background: #ff7f00;
+    color: #fff;
+    margin: 20px auto;
+    line-height: 40px;
+    cursor: pointer;
 }

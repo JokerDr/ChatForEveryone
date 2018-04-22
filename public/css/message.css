@@ -1,3 +1,4 @@
+/* 通用部分 */
 #header {
     height: 90px;
 }
@@ -80,7 +81,7 @@
 
 .top:hover {
     color: #ff7f00;
-    background: #fff;   
+    background: #fff;
 }
 
 .select {
@@ -105,10 +106,12 @@
     margin: 0 auto;
     /* border-bottom: 2px solid #ff5e00; */
 }
-.wrip{
-    width:100%;
+
+.wrip {
+    width: 100%;
     border-bottom: 2px solid #ff5e00;
 }
+
 #select {
     margin-right: -12px;
     float: right;
@@ -137,6 +140,7 @@
     background: #ff7f00;
     color: #fff
 }
+
 .hat {
     display: inline-block;
     *display: inline;
@@ -150,8 +154,6 @@
     line-height: 14px;
     background: url('../image/nav_icon.gif') no-repeat center center;
 }
-
-
 
 #BHhomeFooter {
     height: 250px;
@@ -304,184 +306,209 @@
     color: #999;
 }
 
+/* 结束 */
 
 
-.container {
+/* content 开始 */
+#content{
+    position: relative;
     width:1000px;
-    height:840px;
+    height:900px;
     margin:0 auto;
 }
-.wayWriper{
-    height:60px;
-    border-bottom: 1px solid #ccc;
+.msg_left{
+    position: absolute;
+    width:280px;
+    height:898px;
+    left:0;
     margin-top:2px;
+    background:#F5F5F5;
 }
-.Way {
-    float: left;
-    margin-left:50px;
-    /* height:60px; */
+.msg_right{
+    position: absolute;
+    width:720px;
+    height:898px;
+    right:0;
+    margin-top:2px;
+    background:#FBFBF7;
+}
+.msg_show{
+    width:720px;
+    height:700px;
+}
+.msg_inpt{
+    width:720px;
+    height:200px;
+}
+.msg_inpt textarea{
+    width:700px;
+    height:100px;
+    padding:19px 10px;
+    overflow:auto;
+    text-align: left;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    border-style:solid; 
+    border-color:#FFFFFF;
+    resize:none;/*限制拖动*/
+    overflow:scroll;
+    overflow-x:hidden;/*禁止水平滚动条*/
+    border:none;
+    border-top:1px solid #000;
+    outline: none;
     
 }
-.Way div{
-    display:inline-block;
-    *display: inline;
-    *zoom: 1;
-    vertical-align:middle;
-    height:60px;
-    width:300px;
-    text-align: center;  
-}
-/* .way1 {
-     background:#ff7f00;
-     color:#fff;
-} */
-.way1,.way2{
-    position: relative;
-}
-.way1{
-    background: #ff7f00;
-    color: #fff;
-}
-.Way label{
-    display: block;
-    height:60px;
-    line-height: 60px;
-    /* margin-top:0%; */
-
-}
-.Way div label{
-    font-size:18px;
-    letter-spacing: 2px;
-}
-/* .Way div label:hover{
+.send{
+    display:block;
+    width:200px;
+    height:40px;
+    text-align: center;
     background:#ff7f00;
     color:#fff;
-} */
-.container span {
+    margin:10px auto;
+    line-height: 40px;
+}
+
+.msg{
+    width:280px;
+    height:90px;
+    margin:16px 0;
+    position: relative;
+    color:#999;
+    font-size: 13px;
+    cursor: pointer;
+    border-bottom:1px solid #999;
+}
+.msg .pic{
+    position: relative;
     float: left;
+    width: 74px;
+    overflow: hidden;
+}
+.del {
+    position: absolute;
+    top: -16px;
+    right: 10px;
     display: block;
-    height:60px;
-    font-size:24px;
-    line-height: 60px;
-    margin-right: 20px;
+    width: 22px;
+    height: 22px;
+    text-indent: -9999px;
+    background: url('../image/del.gif') no-repeat;
+    overflow: hidden;
+    z-index:100;
 }
-
-.condition{
-    width:1000px;
-    height:100px;
-    margin: 0 auto;
-    border-bottom: 1px solid #ccc;
-
+.del_all{
+    position: absolute;
+    bottom:0;
+    left:0;
+    display: block;
+    width: 22px;
+    height: 22px;
+    text-indent: -9999px;
+    background: url('../image/del.gif') no-repeat;
+    overflow: hidden;
+    z-index:100;
 }
-.inpt input{
-    padding:15px 10px   ;
-    width:500px;
-    height:25px;
-    /* margin:0 auto; */
-    margin:25px 238px;
-
-}   
-.conditions{
+/* .del:hover{
     display: none;
-}
-.conditions div{
-    width:600px;
-    height:30px;
-    margin: 0 auto;
-    text-align: center;
-    /* margin-top:3px; */
-}
-.conditions label{
+} */
+.msg img{
     display: block;
-    height:30px;
-    width:200px;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+} 
+.msg .name{
     float: left;
-    line-height: 30px;
+    height: 25px;
+    font-size: 16px;
+    color: #222;
+    max-width: 114px;
+    white-space: nowrap;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
-.conditions input{
-    height:18px;
-    width:200px;
-    float: left;
-    padding:3px 2px;
-    margin-top:3px;
-    line-height: 18px;
-    /* display:inline-block;
+.msg .txt{
+    width: 190px;
+    white-space: nowrap;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.msg .time {
+    /* width:200px; */
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.two{
+    position: relative;
+    width:620px;
+    height:450px;
+    padding:50px  0;
+    margin:0 auto;
+    font-size:18px;
+    text-align: left;
+    word-break: break-all;
+}
+.two .time{
+    width:600px;
+    height:50px;
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+.two .time span{
+    float:right;
+    width:520px;;
+    height:50px;
+    background: #fff;
+    text-align: left;
+    padding-left: 20px;
+    line-height: 50px;
+}
+.author{
+   width:400px;
+   height:50px;
+}
+.inforCont p{
+    width:500px;
+    height:500px;
+    margin-left:60px;
+    background: #fff;
+    padding: 20px;
+}
+.msg_show,
+.msg_inpt {
+    display:none;
+}
+.wriper {
+    width: 280px;
+    height: 90px;
+    margin: 16px 0;
+    position: relative;
+    color: #999;
+    font-size: 13px;
+    cursor: pointer;
+    border-bottom: 1px solid #999;
+}
+.page{
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    text-align: center;
+}
+.page a{
+    display: inline-block;
     *display:inline;
     *zoom:1;
-    vertical-align: middle */
-}
-.conditions span{
-    height: 30px;
-    font-size: 12px;
-    width:40px;
-    text-align: center;
-    line-height: 30px;
-}
-.startSearch{   
-    width: 200px;
-    height:50px;
-    margin:0 auto;
-    letter-spacing: 4px;
-    text-align: center;
-    font-size:20px;
-    line-height: 50px;
-    cursor: pointer;
-    /* border-top: 2px solid #ff7f00; */
-    border-bottom: 2px solid #ff7f00;
-}
-.results{
-    width:1000px;
-    height:600px;
-    margin: 0 auto;
-}
-/* 结果展示 */
-#message-container {
-    float: left;
-    width: 347px;
-    height: 185px;
-    color: #333;
-    overflow: hidden;
-    zoom: 1;
-}
-
-#message-container .photo {
-    float: left;
-    width: 120px;
-    height: 150px;
-    overflow: hidden;
-    zoom: 1;
-}
-
-#message-container .infor {
-    float: left;
-    width: 184px;
-    height: 150px;
-    padding: 0 0 0 15px;
-    overflow: hidden;
-    zoom: 1;
-}
-
-#message-container strong {
-    display: block;
-    height: 29px;
-    font-size: 16px;
-    line-height: 26px;
-}
-
-#message-container span {
-    display: block;
-    height: 40px;
-    padding: 3px 0;
-}
-
-#message-container p {
-    width: 172px;
-    height: 50px;
-    color: #bdbdbd;
-}
-
-#message-container a {
-    float: left;
-    width: 80px;
-    margin-right: 12px;
+    vertical-align: middle;
+    margin-right: 20px;
+    /* width:40px; */
+    height:20px;
+    /* margin: 0 10px; */
+    text-decoration: none;
+    
+    /* color:#fff; */
 }

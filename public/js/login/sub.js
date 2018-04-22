@@ -36,26 +36,38 @@ define(["jquery", "check"], function ($, arrFun) {
                         var $data = $.trim(data);
                         console.log(data);
                         switch ($data) {
-                            // case 'captcha error':
-                            //     $(that.errorShow).css({ "color": "red", "display": "block" }).text("验证码错误");                             
-                                // arrFun[2](that.askCaptchaURL, that.captchaWriperSelector);
-                              
-                             
-                            //     break;
-                            case 'email or phone not exist':
-                                $(that.errorShow).css({ "color": "red", "display": "block" }).text("账号不存在");
-                                // arrFun[2](that.askCaptchaURL, that.captchaWriperSelector);
-                                break;
-                            case 'success':                                       
-                                    location.href = that.captchaSessionURL[1];//跳转到控制器下的方法（登录主页）                             
-                                 break;
-                            case 'password error':
-                                $(that.errorShow).css({ "color": "red", "display": "block" }).text("密码错误");
-                                // arrFun[2](that.askCaptchaURL, that.captchaWriperSelector);
-                                break;
-                            default:
-                                console.log("callback is "+ data +"  but i don't want it");
-                                break;  
+                          // case 'captcha error':
+                          //     $(that.errorShow).css({ "color": "red", "display": "block" }).text("验证码错误");
+                          // arrFun[2](that.askCaptchaURL, that.captchaWriperSelector);
+
+                          //     break;
+                          case "email or phone not exist":
+                            $(that.errorShow)
+                              .css({
+                                color: "red",
+                                display: "block"
+                              })
+                              .text("账号不存在");
+                            // arrFun[2](that.askCaptchaURL, that.captchaWriperSelector);
+                            break;
+                          case "password error":
+                            $(that.errorShow)
+                              .css({
+                                color: "red",
+                                display: "block"
+                              })
+                              .text("密码错误");
+                            // arrFun[2](that.askCaptchaURL, that.captchaWriperSelector);
+                            break;
+                          case "success":
+                            location.href = that.captchaSessionURL[1]; //跳转到控制器下的方法（登录主页）
+                            break;
+                          case "adminAccount":
+                            location.href = that.captchaSessionURL[2]; //跳转到控制器下的方法（admin主页）
+                            break;
+                          default:
+                            console.log("callback is " + data + "  but i don't want it");
+                            break;
                         }
                     },'text')
                 }                     
