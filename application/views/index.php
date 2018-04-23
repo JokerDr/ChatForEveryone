@@ -247,7 +247,7 @@
         var data = <?php echo $users_width_photos ;?>;           
         for(var i = 0;i<12;i++){
              $('.photo img')[i].src="photo/"+ data[i].photo;
-             $('.photo img')[i].setAttribute('uid',data[i].user_id );
+             $('.photo')[i].setAttribute('uid',data[i].user_id );
              $('.photo img')[i].alt = data[i].user_name;
              $('.infor strong')[i].innerHTML = data[i].user_name;
              $('.infor span')[i].innerHTML = data[i].height +"    "+ data[i].diplomas+"    "+ data[i].province+ data[i].city+data[i].others;          
@@ -255,15 +255,27 @@
         }
         //cha看资料
        
-        $('.photo img').on('click',function(){
+        $('.photo').on('click',function(){
             <?php if(isset($user)){?>
                 var another = $(this).attr('uid');
-                $.get('Welcome/about_one',{
-                    uid:<?php echo $user->user_id?>,
+                $.get('Welcome/firend_or_not',{
                     another:another
                 },function(data){
                     var $data = $.trim(data);
-                    console.log($data);
+                    switch ($data) {
+                        case 'all_visit'://所有人都能访问 ，
+                            location.href="Welcome/about_one?uid=<?php echo $user->user_id?>&another="+another//跳转到控制器下的方法里
+                            break;
+                        case 'friend_visit'://只允许朋友访问，且朋友列表里有该用户
+                            location.href="Welcome/about_one?uid=<?php echo $user->user_id?>&another="+another//跳转到控制器下的方法里
+                            break;
+                        case 'not_allow'://只允许朋友访问，但朋友列表里没有它
+                            alert('对方设置了只允许好友访问，请单击头像，添加对方为好友！');
+                            break;
+                        default:
+                        console.log($data);
+                            break;
+                    }
                 },'text')
             <?php }else{?>
                 alert("请登录后，再查看该用户资料！");

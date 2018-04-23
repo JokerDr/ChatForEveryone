@@ -1,10 +1,7 @@
 #header {
     height: 90px;
 }
-.home {
-    background: url('../../image/logo.png.png') no-repeat center center;
-    background-size: contain;
-}
+
 #headerTop {
     background: #f3f3f3;
 }

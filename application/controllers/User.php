@@ -245,7 +245,17 @@ class User extends CI_Controller{
     // by ccy
     //跳转到用户资料页
     public function info(){
-        $this->load->view("userInfo");
+        $id = $this->session->user->user_id;
+        $photo_list = $this->get_user_photos();
+        $avatar = $this->get_user_avatar();
+        $self_content = $this->get_user_content();
+        // var_dump($result);
+        // die();
+        $this->load->view("userInfo", array(
+            "photos" => $photo_list,
+            "avatar" => $avatar,
+            'self_content' => $self_content
+        ));
     }
     // 更新用户信息
     public function updateUserInfo(){
@@ -260,27 +270,29 @@ class User extends CI_Controller{
         // 刷新页面(前台跳转)
 
         //获取当前用户的id
-        $id = $this->session->userdata('user_id');
+        $id = $this->session->user->user_id;
         // $id = 2;
         // 获取photo数量
         $photo_result = $this->User_model->get_user_photo($id);
         $photo_list_length = count($photo_result);
         $photo_data = $_FILES['photo'];
-        $config['upload_path'] = './photo/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['file_name'] = 'photo_'.$id.'_'.$photo_list_length;
         $file_type = substr(strrchr($photo_data['name'], '.'), 1);
-        $file_path = 'photo/photo_'.$id.'_'.$photo_list_length.'.'.$file_type;
-        
-        //加载上传类
-        $this->load->library('upload', $config);
-        // $this->User_model->
-        $upload_result = $this->upload->do_upload('photo');
-        //存入数据库
-        $photo_result = $this->User_model->insert_user_photo($id, $file_path);
-        
-        if($upload_result && $photo_result > 0){
+        $file_path = 'photo/photo_'.$id.'_'.$photo_list_length.'.'.$file_type;//图片文件的引用路径
+
+        copy($photo_data['tmp_name'], $file_path);
+        $upload_result = $this->User_model->insert_user_photo($id, $file_path);
+        if($upload_result > 0){
             echo "success";
+        }else{
+            echo 'fail';
+        }
+    }
+    public function set_avatar() {
+        $photo_id = $this->input->get("photo_id");
+        $u_id = $this->input->get("u_id");
+        $result = $this->User_model->set_user_avatar((int)$photo_id, (int)$u_id);
+        if($result > 0){
+            echo 'success';
         }else{
             echo 'fail';
         }
@@ -288,7 +300,7 @@ class User extends CI_Controller{
     // 更新用户自我介绍
     public function updateContent(){
         $content = $this->input->get("content");
-        $id = $this->session->userdata('user_id');
+        $id = $this->session->user->user_id;
         $flag = $this->check_user_content();
         // var_dump($flag);
         // die();
@@ -306,7 +318,7 @@ class User extends CI_Controller{
     }
     //  检查是否存在 自我介绍
     public function check_user_content() {
-        $id = $this->session->userdata('user_id');
+        $id = $this->session->user->user_id;
         $result = $this->User_model->get_user_content($id);
         $result_length = count($result);
         if($result_length > 0){
@@ -337,118 +349,43 @@ class User extends CI_Controller{
         // 重新设置session
         // 后台刷新页面
         $passwd = $this->input->get("passwd");
-        $id = $this->session->userdata('user_id');
+        $id = $this->session->user->user_id;
         $result = $this->User_model->update_user_passwd($id, $passwd);
         if($result > 0){
             // 成功就跳转到登陆页
             // redirect("user/login");
             echo 'success';
         }else{
-            var_dump($result);
-            die();
+            // var_dump($result);
+            // die();
+            echo 'error';
         }
     }
-    
+    public function get_user_photos() {
+        $id = $this->session->user->user_id;
+        $result = $this->User_model->get_user_photo($id);
+        return $result;
+    }
+    public function get_user_avatar() {
+        $id = $this->session->user->user_id;
+        $result = $this->User_model->get_user_avatar($id);
+        if(count($result) == 1){
+            return $result[0]->photo;
+        }else{
+            return '';
+        }
+    }
+    public function get_user_content() {
+        // self_content
 
-
-
-    
-    
-
-
-
-
-
-
-    //     //获取当前用户的id
-    //     $id = $this->session->userdata('user_id');
-    //     // $id = 2;
-    //     // 获取photo数量
-    //     $photo_result = $this->User_model->get_user_photo($id);
-    //     $photo_list_length = count($photo_result);
-    //     $photo_data = $_FILES['photo'];
-    //     $config['upload_path'] = base_url().'photo/';
-    //     $config['allowed_types'] = 'gif|jpg|png';
-    //     $config['file_name'] = 'photo_'.$id.'_'.$photo_list_length;
-    //     $file_type = substr(strrchr($photo_data['name'], '.'), 1);
-    //     $file_path = 'photo/photo_'.$id.'_'.$photo_list_length.'.'.$file_type;//图片文件的引用路径
-        
-    //     //加载上传类
-    //     $this->load->library('upload', $config);
-    //     // $this->User_model->
-    //     $upload_result = $this->upload->do_upload('photo');
-    //     //存入数据库
-    //     $photo_result = $this->User_model->insert_user_photo($id, $file_path);
-        
-    //     if($upload_result && $photo_result > 0){
-    //         echo "success";
-    //     }else{
-    //         echo 'fail';
-    //     }
-    // }
-    // // 更新用户自我介绍
-    // public function updateContent(){
-    //     $content = $this->input->get("content");
-    //     $id = $this->session->userdata('user_id');
-    //     $flag = $this->check_user_content();
-    //     // var_dump($flag);
-    //     // die();
-    //     if($flag){
-    //         $result = $this->User_model->update_user_content($id, $content, $flag);
-    //     }else{
-    //         $result = $this->User_model->update_user_content($id, $content, $flag);
-    //     }
-    //     if($result > 0){
-    //         echo 'success';
-    //     }else{
-    //         var_dump($result);
-    //         die();
-    //     }
-    // }
-    // //  检查是否存在 自我介绍
-    // public function check_user_content() {
-    //     $id = $this->session->userdata('user_id');
-    //     $result = $this->User_model->get_user_content($id);
-    //     $result_length = count($result);
-    //     if($result_length > 0){
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
-    // // 检查旧密码是否正确
-    // public function chackPasswd(){
-    //     // 更新密码
-    //     $passwd_old_input = $this->input->get('passwdOld');
-    //     $passwd_old = $this->session->userdata("password");
-
-    //     if($passwd_old_input == $passwd_old){
-    //         echo 'yes';
-    //     }else{
-    //         echo 'not';
-    //     }
-        
-    // }
-    // public function updatePasswd() {
-    //     // 更新密码
-    //     // 更新数据库
-    //     // 跳转到登陆页
-
-
-    //     // 重新设置session
-    //     // 后台刷新页面
-    //     $passwd = $this->input->get("passwd");
-    //     $id = $this->session->userdata('user_id');
-    //     $result = $this->User_model->update_user_passwd($id, $passwd);
-    //     if($result > 0){
-    //         // 成功就跳转到登陆页
-    //         // redirect("user/login");
-    //         echo 'success';
-    //     }else{
-    //         var_dump($result);
-    //         die();
-    //     }
-    // }
+        $id = $this->session->user->user_id;
+        $result = $this->User_model->get_user_content($id);
+        if(count($result) == 1){
+            return $result[0]->intro_content;
+        }else{
+            return '';
+        }
+    }
 }
 ?>
 

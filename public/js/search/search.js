@@ -72,8 +72,10 @@ $('.way1').on('click',function(){
         'color': '#000'
     });
     $(this).css({
-    'background': '#ff7f00',
-    'color': '#fff'});
+        'background': '#ff7f00',
+        'color': '#fff'
+    });
+    $(".results").html("");
 });
 
 $('.way2').on('click', function () {
@@ -84,9 +86,10 @@ $('.way2').on('click', function () {
         'color': '#000'
     });
     $(this).css({
-    'background': '#ff7f00',
-    'color': '#fff'
-}); 
+        'background': '#ff7f00',
+        'color': '#fff'
+    }); 
+    $(".results").html("");
 })
 
 

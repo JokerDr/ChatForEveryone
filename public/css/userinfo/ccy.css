@@ -1,0 +1,45 @@
+.data .my-avatar-box{
+    display: flex;
+    background-color: #fff;
+}
+
+.data .my-avatar-box .left{
+    flex: 1;
+}
+
+.data .my-avatar-box .left{
+    /* background-color: #fff; */
+    box-sizing: border-box;
+    border-right: 15px solid #ccc;
+}
+.data .my-avatar-box .left img{
+    display: inline-block;
+    padding: 0 100px;
+    width: 400px;
+    height: 400px;
+}
+
+
+
+
+.data .my-avatar-box .right{
+    /* width: 200px; */
+    flex: 0 0 200px;
+    width: 200px;
+    /* height: 400px; */
+    max-height: 400px;
+    overflow: auto;
+}
+.data .my-avatar-box .right .image-list-item{
+    float: left;
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    padding: 40px;
+    background-color: #fff;
+    border-bottom: 3px solid #ccc;
+}
+.data .my-avatar-box .right .image-list-item img{
+    width: 120px;
+    height: 120px;
+}

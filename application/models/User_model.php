@@ -47,8 +47,7 @@ class User_model extends CI_Model
     // }
 
 
-    // 跟新头像
-
+    // 更新头像
     public function update_avatar() {
         
     }
@@ -89,6 +88,26 @@ class User_model extends CI_Model
         return $this->db->affected_rows();
     }
 
+    public function set_user_avatar($photo_id, $u_id){
+
+        $sql = "SELECT * FROM t_photo WHERE u_id = ".$u_id." and using_or_not = 'using'";
+        $query = $this->db->query($sql);
+        if(count($query->result()) > 0){
+            $photo_iid = $query->result()[0]->photo_id;
+
+            $this->db->where('photo_id', $photo_iid);
+            $this->db->update('t_photo', array(
+                "using_or_not" => "not"
+            ));
+        }
+
+        $this->db->where('photo_id', $photo_id);
+        $this->db->update('t_photo', array(
+            "using_or_not" => "using"
+        ));
+        return $this->db->affected_rows();
+    }
+
     // get用户自我介绍
     public function get_user_content($id) {
         $sql = "SELECT * FROM t_intro WHERE u_id = ?";
@@ -101,5 +120,16 @@ class User_model extends CI_Model
         $query = $this->db->query($sql, array($id));
         return $query->result();
     }
-
+    // get用户头像
+    public function get_user_avatar($u_id) {
+        $sql = "SELECT * FROM t_photo WHERE u_id = ".$u_id." and using_or_not = 'using'";
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+    // get 用户自我介绍
+    // public function get_user_content($u_id) {
+    //     $sql = "SELECT * FROM t_intro WHERE u_id = ".$u_id;
+    //     $query = $this->db->query($sql);
+    //     return $query->result();
+    // }
 }

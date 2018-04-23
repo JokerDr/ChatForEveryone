@@ -30,7 +30,7 @@
         //返回随机ID的12个user数据，相应id的自我介绍 。相应id的，且作为头像的图片url  
         public function get_infor_photo(){
             $sql = 'SELECT  * FROM `t_user`
-                 LEFT JOIN `t_photo` ON `t_user`.user_id = `t_photo`.u_id  AND `t_photo`.using_or_not = true 
+                 LEFT JOIN `t_photo` ON `t_user`.user_id = `t_photo`.u_id  AND `t_photo`.using_or_not = "using" 
                  LEFT JOIN  `t_intro` ON `t_user`.user_id = `t_intro`.u_id 
                  WHERE (user_id >= ((SELECT MAX(user_id) FROM `t_user`)-(SELECT MIN(user_id) FROM `t_user`)) * RAND() 
                     + (SELECT MIN(user_id) FROM `t_user`) )LIMIT 12'   ;          
@@ -41,28 +41,26 @@
         //  昵称搜索,获取其用户表的资料,其自我介绍，其作为头像的图片
         public function name_search($user_name){
              $sql = 'SELECT  * FROM  `t_user` 
-                    LEFT JOIN `t_photo` on `t_photo`.u_id = `t_user`.user_id AND `t_photo`.using_or_not = "true"
+                    LEFT JOIN `t_photo` on `t_photo`.u_id = `t_user`.user_id AND `t_photo`.using_or_not = "using"
                     WHERE `t_user`.user_name in ('.$user_name.')';
             // $query = $this->db->get_where('mytable', array('user_name' => $user_name));
             $query = $this->db->query($sql);
             return $query->result();
         }
-        // // 条件搜索
-        // public function condition($age,$sex,$province){
-            
-        //     $sql = 'SELECT  * FROM  `t_user` 
-        //             LEFT JOIN `t_intro` on `t_intro`.u_id = `t_user`.user_id 
-        //             LEFT JOIN `t_photo` on `t_photo`.u_id =`t_user`.user_id AND `t_photo`.using_or_not = true
-        //             WHERE  age = '.$age.' AND province ='.$province.' AND sex ='.$sex;
-        //     // $query = $this->db->get_where('mytable', array('user_name' => $user_name));
-        //     $query = $this->db->query($sql);
-        //     return $query->row();
-        // }
+        // 条件搜索
+        public function condition($year,$sex,$province){
+            $sql = 'SELECT  * FROM  `t_user` 
+                    LEFT JOIN `t_intro` on `t_intro`.u_id = `t_user`.user_id 
+                    LEFT JOIN `t_photo` on `t_photo`.u_id =`t_user`.user_id AND `t_photo`.using_or_not = "using"
+                    WHERE  `t_user`.age = '.$year.' AND `t_user`.province ='.$province.' AND `t_user`.sex ='.$sex;
+            $query = $this->db->query($sql);
+            return $query->row();
+        }
         // 根据uid,获取其用户表的资料,其自我介绍，其作为头像的图片
         public function get_user_by_uid($uid){
              $sql = 'SELECT  * FROM  `t_user` 
                     LEFT JOIN `t_intro` on `t_intro`.u_id = `t_user`.user_id 
-                    LEFT JOIN `t_photo` on `t_photo`.u_id = `t_user`.user_id AND `t_photo`.using_or_not = "true"
+                    LEFT JOIN `t_photo` on `t_photo`.u_id = `t_user`.user_id AND `t_photo`.using_or_not = "using"
                     WHERE `t_user`.user_id in ('.$uid.')';
             // $query = $this->db->get_where('mytable', array('user_name' => $user_name));
             $query = $this->db->query($sql);
@@ -96,7 +94,7 @@
         public function get_message($uid){
             $sql = 'SELECT DISTINCT * FROM  `t_message` 
                     LEFT JOIN `t_user` on `t_message`.sender_uid = `t_user`.user_id 
-                    LEFT JOIN `t_photo` on `t_photo`.u_id = `t_message`.sender_uid AND `t_photo`.using_or_not = true
+                    LEFT JOIN `t_photo` on `t_photo`.u_id = `t_message`.sender_uid AND `t_photo`.using_or_not = "using"
                     WHERE  reciver_uid = '.$uid.' OR sender_uid = '.$uid;
             $query = $this->db->query($sql);
             // var_dump($query);

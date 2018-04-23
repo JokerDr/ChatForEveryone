@@ -41,63 +41,55 @@
             // 加载搜索页
            $this->load->view('search');
         }
-        // 搜索结果
+        // 昵称搜索结果
         public function search_res(){
            $user_name  = $this->input->get('user_name');
-           $user_name_new = '"'.$user_name.'"';
-           $this->load->library('pagination'); 
-           $res = $this->Welcome_model->name_search($user_name_new);//搜索的结果
-        //    var_dump($res);
-           $config['base_url'] = base_url().'welcome/searched';
-           $config['total_rows'] = count($res);//结果总数
-           $config['per_page'] = 4;//每页显示条数
-           $this->pagination->initialize($config);
-           $links = $this->pagination->create_links();       
-           echo json_encode(array('links'=>$links,'res'=>$res));
+           $user_name_new = '"'.$user_name.'"';  
+           $res = $this->Welcome_model->name_search($user_name_new);//搜索的结果  
+           echo json_encode($res);
+        }
+        // 条件搜索结果
+        public function condition(){
+            $year  = $this->input->get('year');
+            $sex  = $this->input->get('sex');
+            $province  = $this->input->get('province');            
+            $province_1 = '"'.$province.'"';
+            $res = $this->Welcome_model->name_search($year,$sex,$province_1);//搜索的结果  
+           echo json_encode($res);
         }
         //访问别人自资料卡页
         public function about_one(){
             $uid = $this->input->get('uid');
             $friends = $this->input->get('another');
+            $result = $this->Welcome_model->get_user_by_uid($friends);//获取被访问者的信息
+            $res = json_encode($result);
+            $this->load->view('aboutOne',array('res'=>$res));
+        } 
+        //客户端返回     
+        public function firend_or_not(){
+            // $uid = $this->input->get('uid');
+            $friends = $this->input->get('another');
             // print($friends);
-            $row_1 = $this->Welcome_model->visit_someone($uid,$friends);
-            $row_2 = $this->Welcome_model->power_visit_me($friends);
+            $row_2 = $this->Welcome_model->power_visit_me($friends);//用户访问的权限为1还是0
             // var_dump($row_2);
             // var_dump($row_1);
-            $result = $this->Welcome_model->get_user_by_uid($friends);
-             var_dump($result) ;
-            $res = json_encode($result);
+            // $res = json_encode($result);
             if($row_2->power_value == '1'){//允许所有人访问
                 echo 'all_visit';
-                $this->load->view('aboutOne',array('res'=>$res));
             }else{//只允许朋友访问
+                $row_1 = $this->Welcome_model->visit_someone($uid,$friends);//是否有改好友
                 //查看朋友表是否包含访问者
                 if(count($row_1)>0){//包含
-                    echo 'friend_visit';
-                    $this->load->view('aboutOne',array('res'=>$res));
+                    // $count = count($row_1);
+                    echo 'friend_visit'; 
                 }else{//不包含
                     echo 'not_allow';
                 }
             }   
-        }      
+        }
         // 取出十二个人的资料，包括相片
         public function find12(){
             $results = $this->Welcome_model->get_infor_photo();//向后台查找用户的个人信息以及个人照片，以json格式返回
-            // $res=[];
-            // for($i = 0;$i<12;$i++){
-            //     $arr = ['
-            //     uname'=>$results[i]->user_name,
-            //     'sex'=>$results[i]->sex,
-            //     'province'=>$results[i]->province,
-            //     'city'=>$results[i]->city,
-            //     'others'=>$results[i]->height,
-            //     'diplomas'=>$results[i]->diplomas,
-            //     // 'photoCounts'=>,//几张照片
-            //     // 'photoHead'=>,//头像图片的地址
-            //     // 'intro_self'=>//自我介绍
-            //     ];
-            //     $res[i] = $arr;
-            // }
              echo json_encode($res);
         }
         // 获得与指定用户的对话信息
@@ -154,25 +146,22 @@
                 echo 'failed';
             }            
         }
-        // 昵称搜索
-        // public function name_search(){
-        //     $name = $this->input->get('user_name');
-        //     $results = $this->Welcome_model->
-        // }
-        // 条件搜索
-        public function condition(){
-
-        }
+        
         //  添加好友
         public function addfriend(){
             $asker = $this->input->post('user_id');//询问者
             $accept  = $this->input->post('accepter_id');//接受者
-            $results = $this->Welcome_model->add_friends($asker,$accept);//
-            $results = $this->Welcome_model->add_friends($accept,$asker);
-            if(count($results)>0){
-                echo 'success'; //插入数据成功
+            $rows = $this->Welcome_model->visit_someone($asker,$accept);
+           if(count($rows)>0){
+                echo 'already exist';
             }else{
-                echo 'false';
+                $results = $this->Welcome_model->add_friends($asker,$accept);//
+                $results_2 = $this->Welcome_model->add_friends($accept,$asker);
+                 if(count($results)>0 && count($results_2)>0){
+                     echo 'success'; //插入数据成功
+                }else{
+                    echo 'false';
+                }
             }
         }  
         //是否有该好友

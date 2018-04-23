@@ -52,7 +52,7 @@
 .myData .picList .pic .icon .del { background-position:0 -616px;}
 .myData .picList .pic .txt { display:none; position:absolute; bottom:7px; left:7px; width:170px; height:30px; padding:0 10px; line-height:30px; color:#000; background:#fff; filter:alpha(opacity=80); -moz-opacity:0.8; opacity:0.8; white-space:nowrap; word-break:keep-all; overflow:hidden; text-overflow:ellipsis;}
 .myData .explain { height:52px; margin:30px 0; padding:8px 30px 0 55px; font-size:16px; background:#f7f7f7 url(../images/icon_02_1.gif) no-repeat 31px 11px; overflow:hidden; zoom:1;}
-.myData .upload {  overflow:hidden; zoom:1;} 
+.myData .upload,.set-avatar {  overflow:hidden; zoom:1;} 
 .myData .upload .flash { float:left; width:440px; overflow:hidden; zoom:1;}
 .myData .right { float:right; width:255px; overflow:hidden; zoom:1; }
 .myData .right ul { width:225px; overflow:hidden; zoom:1; }
@@ -203,10 +203,10 @@
 #cropedBigImg{ height: 400px;}
 .data .my-avatar-box{height: 400px;;background-color: #ccc; overflow: hidden;}
 .data .my-avatar-box .not-avatar{height: 400px;text-align: center;line-height: 400px; font-size: 60px; color: #666}
-.file, .upload{cursor: pointer;position: relative;display: inline-block;background: #ff7f00;border: 1px solid #ff7f00;border-radius: 4px;padding: 4px 12px;overflow: hidden;color: #fff;text-decoration: none;text-indent: 0;line-height: 20px;}
-.upload{padding-bottom: 4px;}
-.file input,.upload input{cursor: pointer; position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;}
-.file:hover,.upload:hover {cursor: pointer;background: #f36500;border-color: #78C3F3;text-decoration: none;}
+.file, .upload, .set-avatar{cursor: pointer;position: relative;display: inline-block;background: #ff7f00;border: 1px solid #ff7f00;border-radius: 4px;padding: 4px 12px;overflow: hidden;color: #fff;text-decoration: none;text-indent: 0;line-height: 20px;}
+.upload,.set-avatar{padding-bottom: 4px;}
+.set-avatar input,.file input,.upload input{cursor: pointer; position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;}
+.file:hover,.upload:hover ,.set-avatar:hover{cursor: pointer;background: #f36500;border-color: #78C3F3;text-decoration: none;}
 .button-group{display: inline-block;}
 .data{text-align: center;}
 /*---- 黑名单 ----*/

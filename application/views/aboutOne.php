@@ -175,7 +175,7 @@
     });  
     var data = <?php echo $res;?>;
     var imgSrc = "photo/"+ data.photo; 
-    console.log(data);    
+    console.log(data);
     $('.pic img').attr('src',imgSrc);
     $('.year').text(data.year);
     $('.height').text(data.height);
@@ -186,7 +186,8 @@
     $('.findher').attr('uid',data.user_id);
     $('.addFriend').attr('uid',data.user_id);
     // 发送消息
-    $('.findHer').on('click', function () {
+    $('.findher').on('click', function () {
+        // console.log(22);
          <?php if(isset($user)){?>
             var other = $(this).attr('uid');
             var date_1 = new Date();
@@ -198,6 +199,7 @@
             var create_time_YMD = year + "-" + month + "-" + days;
             var create_time_HS = hour + ":" + seconds;
             // 模板的显隐性切换
+            // console.log(11);
             var dialog = `<div id='dialog_content'>
                                 <div id="mask">
                                     <div class="msg_inpt" style="display: block;">
@@ -209,7 +211,7 @@
                                 </div>
                             </div>`
             
-             $('#content').append(dialog);
+            $('#content').append(dialog);
             $('.close').on('click', function () {
                  $('#dialog_content').remove();
             });
@@ -254,6 +256,10 @@
             accepter_id:accepter_id
         },function(data){
             console.log(data);
+            var $data = $.trim(data);
+            if($data=="already exist"){
+                alert('对方已经是你的好友');
+            }
          },'text')
     })
 </script>

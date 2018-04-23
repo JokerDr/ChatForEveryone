@@ -196,10 +196,7 @@
     </div>
    <script type="text/javascript" src="public/js/jquery.min.js"></script>
    <script src="public/js/message/message.js"></script>
-   <script>
-   
-       
-        
+   <script>   
         // 删除选定的信息
         $('.del').on('click',function(){  
             var selector = '.uesr_'+$(this).attr('uid'); 

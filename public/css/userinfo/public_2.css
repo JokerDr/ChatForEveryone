@@ -47,7 +47,7 @@ a { text-decoration:none; outline:none}
 .black:hover { color:#ff8000}
 .error { float:left; margin-left:6px; padding:0 0 0 16px; background:url(../images/icon_11_1.gif) no-repeat left center; color:#f00; }
 input { float:left; font-family:"Microsoft Yahei"; color:#bdbdbd; }
-textarea {font:14px/22px "Microsoft Yahei"; color:#bdbdbd; resize: none; overflow-y:auto; overflow-x:hidden;}
+textarea {font:14px/22px "Microsoft Yahei"; color:#666; resize: none; overflow-y:auto; overflow-x:hidden;}
 a.BHclose { display:block; position:absolute; width:15px; height:15px; top:10px; right:10px; background:url(../images/close_1.gif) no-repeat; text-indent:-99999px; overflow:hidden; zoom:1; }
 
 #BAIHE { width:1000px; margin:0 auto; padding:25px 0 0 0; font:13px/20px microsoft yahei; color:#666; background:#fff; overflow:hidden; zoom:1; }
