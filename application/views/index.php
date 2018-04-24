@@ -18,6 +18,7 @@
             <div class="containerHead">
                <?php 
                 $user = $this->session->userdata('user');
+                $photo = $this->session->userdata('photo');
                 if(isset($user)==false){?>
                 <div class="unlogin">
                     <a href='user/login'>登陆</a>
@@ -120,7 +121,7 @@
                             <form name="loginForm" id="loginForm" ,action = "" target="_self" method="post" enctype="multipart/form-data">
                             <div class="cont">
                                <a href='user/info?id=<?php echo $user->user_id?>' id='uid'>
-                                    <img src="public/image/upload_pic.jpg" alt="上传图片">
+                                    <img src="<?php $pic = $photo->photo != ''?$photo->photo :'public/image/not_avatar.gif';echo $pic;?>" alt="上传图片">
                                </a>
                                 <p><?php echo $user->user_name?></p>
                                 <ul class='list'>
@@ -244,20 +245,20 @@
     </div>
  
     <script>     
-        var data = <?php echo $users_width_photos ;?>;           
+        var data = <?php echo $users_width_photos ;?>;        
         for(var i = 0;i<12;i++){
-             $('.photo img')[i].src="photo/"+ data[i].photo;
+             $('.photo img')[i].src= data[i].photo;
              $('.photo')[i].setAttribute('uid',data[i].user_id );
              $('.photo img')[i].alt = data[i].user_name;
              $('.infor strong')[i].innerHTML = data[i].user_name;
              $('.infor span')[i].innerHTML = data[i].height +"    "+ data[i].diplomas+"    "+ data[i].province+ data[i].city+data[i].others;          
              $('.findHer')[i].setAttribute('uid',data[i].user_id );
         }
-        //cha看资料
-       
+        //cha看资料 
         $('.photo').on('click',function(){
             <?php if(isset($user)){?>
                 var another = $(this).attr('uid');
+                // console.log(another);
                 $.get('Welcome/firend_or_not',{
                     another:another
                 },function(data){
@@ -270,7 +271,7 @@
                             location.href="Welcome/about_one?uid=<?php echo $user->user_id?>&another="+another//跳转到控制器下的方法里
                             break;
                         case 'not_allow'://只允许朋友访问，但朋友列表里没有它
-                            alert('对方设置了只允许好友访问，请单击头像，添加对方为好友！');
+                            alert('对方设置了只允许好友访问，请搜索对方昵称，添加对方为好友！');
                             break;
                         default:
                         console.log($data);
@@ -281,6 +282,7 @@
                 alert("请登录后，再查看该用户资料！");
             <?php }?>
         })
+        //发送消息
         $('.findHer').on('click', function () {
             <?php if(isset($user)){?>
                 var other = $(this).attr('uid');

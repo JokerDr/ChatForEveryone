@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Controller{
     public function __construct(){
         parent::__construct();
-    // session_start();//开启session
+        // session_start();//开启session
         $this->load->helper('cookie');
         $this->load->model("User_model");
     }  
@@ -72,6 +72,7 @@ class User extends CI_Controller{
             // if($data == $captcha){                 
         $result = $this->User_model->get_user_by_account($account);//对数据库搜索 //用户表搜索
         $result_2 =$this->User_model->get_admin_by_account($account);//搜索管理员表
+        $photo = $this->User_model->get_user_avatar($result[0]->user_id);
         if(count($result_2) == 0){ //优先检索管理员表
             if(count($result) == 0){
             //若数据库搜索结果不存在
@@ -79,7 +80,8 @@ class User extends CI_Controller{
             }else{//若数据库搜索结果存在
                  if($result[0]->password == $pwd){ 
                      $this->session->set_userdata(array(
-                    'user' => $result[0]
+                    'user' => $result[0],
+                    'photo'=>$photo[0]
                     // 将搜索结果存在session里，方便使用
                     ));
                     echo 'success';
@@ -216,45 +218,46 @@ class User extends CI_Controller{
             $re = '/^1\d{10}$/';
             return  strstr($str,$re) ? true : false;           
     } 
-    // // 用户权限：好友查看，谁都能看
-    // // public function look_me(){
-    // //     // if(  == true){
-    // //         //跳转到资料页
-    // //     }else{
-    // //         echo 'not allow'
-    // //     }
-    // // }
-    
-    // // by ccy
-    // //跳转到用户资料页
-    // public function info(){
-    //     $this->load->view("userInfo");
-    // }
-    // // 更新用户信息
-    // public function updateUserInfo(){
-    //     // 提交到数据库
-    //     // 重新设置session
-    //     // 刷新页面
-    // }
-    // // 设置头像
-    // public function uploadPhoto() {
-    //     // 更新头像
-    //     // 更新数据库
-    //     // 刷新页面(前台跳转)
-    
-    // by ccy
+       
     //跳转到用户资料页
     public function info(){
         $id = $this->session->user->user_id;
         $photo_list = $this->get_user_photos();
         $avatar = $this->get_user_avatar();
         $self_content = $this->get_user_content();
-        // var_dump($result);
+        $user = $this->User_model->get_user($id);
+        $friend_num = $this->get_friend_num();
+        $msg_num = $this->get_msg_num();
+        $friend_list = $this->User_model->get_friend($id);
+        $friend_length = count($friend_list);
+        $f_list = array();
+        for($i = 0; $i < $friend_length; $i++){
+            $friend_name = $friend_list[$i]->user_name;
+
+            $result = $this->User_model->get_user_avatar($friend_list[$i]->user_id);
+            if(count($result) == 1){
+                $friend_avatar = $result[0]->photo;
+            }else{
+                $friend_avatar = "public/image/not_avatar.gif";
+            }
+
+            $friend_id = $friend_list[$i]->user_id;
+            array_push($f_list, array(
+                'friend_name' => $friend_name,
+                'friend_avatar' => $friend_avatar,
+                'friend_id' => $friend_id
+            ));
+        }
+        // var_dump($f_list);
         // die();
         $this->load->view("userInfo", array(
             "photos" => $photo_list,
             "avatar" => $avatar,
-            'self_content' => $self_content
+            'self_content' => $self_content,
+            'user' => $user[0],
+            'friend_num' => $friend_num,
+            'msg_num' => $msg_num,
+            'friend_list' => $f_list
         ));
     }
     // 更新用户信息
@@ -262,6 +265,29 @@ class User extends CI_Controller{
         // 提交到数据库
         // 重新设置session
         // 刷新页面
+        $id = $this->session->user->user_id;
+        $user_info = array(
+            'user_name' => $this->input->get('nickname'),
+            'height' => $this->input->get('height'),
+            'diplomas' => $this->input->get('education'),
+            'province' => $this->input->get('sheng'),
+            'city' => $this->input->get('shi'),
+            'others' => $this->input->get('qu'),
+            'year' => $this->input->get('year'),
+            'month' => $this->input->get('month'),
+            'days' => $this->input->get('day'),
+            'mood'=> $this->input->get('mood')
+        );
+        
+
+        $result = $this->User_model->update_user_info($id, $user_info);
+        // birthday: birthday,
+        if($result > 0){
+            echo 'success';
+        }else{
+            echo 'fail';
+        }
+
     }
     // 设置头像
     public function uploadPhoto() {
@@ -386,6 +412,33 @@ class User extends CI_Controller{
             return '';
         }
     }
+    public function get_friend_num(){
+        $id = $this->session->user->user_id;
+        $result = $this->User_model->get_friend($id);
+        $friend_num = count($result);
+        return $friend_num;
+    }
+    public function get_msg_num() {
+        $id = $this->session->user->user_id;
+        $result = $this->User_model->get_message($id);
+        $msg_num = count($result);
+        return $msg_num;
+    }
+
+    public function delete_friend(){
+        $id = $this->session->user->user_id;
+        $friend_id = $this->input->get('friend_id');
+        // var_dump($friend_id);
+        // die();
+        $result = $this->User_model->del_friend($id, $friend_id);
+        if($result > 0){
+            echo 'success';
+        }else{
+            echo 'fail';
+        }
+    }
+
+    
 }
 ?>
 

@@ -432,6 +432,7 @@
     width:1000px;
     height:600px;
     margin: 0 auto;
+    overflow-y: scroll;
 }
 /* 结果展示 */
 #message-container {
@@ -497,3 +498,213 @@
 .hello span{
     color:#ff7f00;
 }
+
+/* 查询结果 */
+
+.user_data {
+    width: 600px;
+    height: 70px;
+    margin: 5px auto;
+    border: 1px solid #000;
+    background: rgb(236, 234, 234);
+    border-left: none;
+    border-right: none;
+}
+
+.pic {
+    float: left;
+    width: 46px;
+    height: 46px;
+    margin: 12px 0;
+    border: 1px solid #000;
+    margin-left: 20px;
+}
+
+.pic img {
+    width: 100%;
+    height: 100%;
+}
+
+.other_data {
+    float: right;
+    height: 46px;
+    width: 500px;
+    margin: 12px 0;
+    line-height: 46px;
+}
+
+.other_data span {
+    font-size: 14px;
+    float: left;
+    margin-top: -9px;
+}
+
+.other_data .btns {
+    float: right;
+    height: 46px;
+}
+
+.other_data a {
+    float: right;
+    display: block;
+    height: 26px;
+    width: 70px;
+    margin: 10px 20px 0 10px;
+    /* margin-right:20px; */
+    font: 13px/24px "Microsoft Yahei";
+    color: #fff;
+    text-align: center;
+    background: #ff5a4d;
+    overflow: hidden;
+    zoom: 1;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* 对话弹层 */
+
+#dialog_content {
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    margin-top: -50%;
+    margin-left: -50%;
+    margin: 0 auto;
+    width: 1000px;
+    height: 600px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+#mask {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 500px;
+    height: 280px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#dialog_content textarea {
+    position: absolute;
+    top: 30px;
+    width: 480px;
+    height: 100px;
+    padding: 19px 10px;
+    overflow: auto;
+    margin: 0 auto;
+    text-align: left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border-style: solid;
+    border-color: #FFFFFF;
+    resize: none;
+    overflow: scroll;
+    overflow-x: hidden;
+    border: none;
+    border-top: 1px solid #000;
+    outline: none;
+    background: beige;
+}
+
+.msg_inpt {
+    z-index: 20;
+}
+
+.close {
+    position: absolute;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    text-align: center;
+    margin-right: 0;
+    color: #fff;
+    cursor: pointer;
+}
+
+.send {
+    position: absolute;
+    top: 169px;
+    left: 32.5%;
+    /* margin-left:-50%; */
+    display: block;
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    background: #ff7f00;
+    color: #fff;
+    margin: 20px auto;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+/* 查看图片 */
+.showpic {
+    display: none;
+    position: fixed;
+    top:400px;
+    width:920px;
+    height:220px;
+    margin:0 auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: rgba(0, 0, 0, 0.5);
+    filter:alpha(50);
+}
+.showpic .photos {
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin:10px 10px;
+    position: relative;
+}
+.showpic .photos img{ 
+    width:200px;
+    height:200px;
+    border: 2px solid #ccc;
+}
+.show .title {
+    display: none;
+    position: fixed;
+    top:370px;
+    width:920px;
+    height:30px;
+    margin:0 auto;
+    background: rgba(0, 0, 0, 0.5);
+    filter:alpha(50);
+    color:#fff;
+    border-bottom: 1px solid #fff;
+}
+.show .title i{
+    height:30px;
+    line-height: 30px;
+    margin-left: 20px;
+}
+.title span{
+    float: right;
+    width:30px;
+    height:30px;
+    font-size: 16px;
+    line-height: 30px;
+    cursor: pointer;
+}
+.container .showpic .delPhoto {
+    position: absolute;
+    left:3px;
+    width:200px;
+    height:30px;
+    line-height: 30px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    background: #ff7f00;
+    margin-top:-30px;
+    text-align: center;
+}
+
+/* .showpic .photos img:hover{
+    transform: scale(1.2) 0.8s;
+} */

@@ -406,6 +406,7 @@
     height:100px;
     margin:0 auto;
     border-radius: 50%;
+    border: 1px solid #ccc;
 }
 .list{
     width:234px;
@@ -578,6 +579,17 @@
     height:150px;
     overflow: hidden;
     zoom: 1;
+}
+#message-container .photo img{
+    width: 120px;
+    height:150px;
+}
+#message-container .photo img:hover{
+    transition: all 0.8s;
+    transform: scale(1.1);
+    box-shadow: #3d3d3d 0px 5px 10px 0px,
+    #3d3d3d 0px 10px 20px 0px;
+    overflow: hidden;
 }
 #message-container .infor {
     float: left;

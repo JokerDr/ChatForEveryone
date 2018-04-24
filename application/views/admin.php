@@ -11,7 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="public/image/favicon.ico" media="screen" />
 </head>
 <body>
-
+    
     <div id="header">       
         <div id="headerTop">
             <div class="containerHead">
@@ -25,12 +25,13 @@
                     <!-- <div class=" top message">
                          <a href="welcome/message" class="message">消息</a>
                     </div> -->
-                    <a href='user/logout'>
-                    <div class="setting">退出
-                        <!-- <div class="select">
-                            <!-- <div ><a href='user/info'>我的疯言疯语</a></div> -->
-                            <!-- <div ><a href='user/logout'>退出</a></div> -->
-                        </div> </a>
+                    <!-- <a href='user/logout'> -->
+                    <div class="setting">设置
+                         <div class="select">
+                             <div ><a href='user/info'>我的疯言疯语</a></div>
+                             <div ><a href='user/logout'>退出</a></div>
+                        </div>
+                    <!-- </a> -->
                         
                     </div>
                 </div>
@@ -50,7 +51,7 @@
                         <label for="">搜索用户</label>
                     </div>         
                     <div class='way2'>
-                        <label for="">发送通知</label>
+                        <label for="">发送公告</label>
                     </div>
                 </div>
         </div>
@@ -58,18 +59,20 @@
             <div class="inpt">
                 <input type="text" class="inpUname" placeholder="输入昵称">
             </div>
-            <div class='conditions'>
-                           
-                         
+            <div class='conditions'>            
+            </div>         
+        </div>
+        <div class="startSearch"> search</div>
+        <div class="results"></div> 
+        <div class="show">
+            <div class="title">
+                <i>该用户的图片</i>
+                <span>[X]</span>
             </div>
-            
+            <div class="showpic"></div>
         </div>
-        <div class="startSearch">
-                search
-        </div>
-        <div class="results">
-        </div> 
-        <div class="pages">echo $page </div>
+        
+        <!-- <div class="pages"> </div> -->
     </div>
 
     <div id="BHFooter">
@@ -147,6 +150,226 @@
        }).mouseleave(function(){
         $('.select').hide();
        }); 
+       //选择昵称搜索时，清空接界面
+        $('.way1').on('click',function(){
+           $('#dialog_content').remove();
+        });
+        // 选择发布公告时，清空接界面
+        $('.way2').on('click',function(){
+           $('.results').html('');
+        });
+        $('.startSearch').on('click',function(){      
+            if($('.way1').css('background-color') == 'rgb(255, 127, 0)' && $('.inpUname').val()!=""){
+               $.get('welcome/search_res',{
+                    user_name:$('.inpUname').val()
+                },function(data){
+                    if(data == '[]'){
+                        alert('用户不存在！');
+                    }else{
+                        var $data = $.parseJSON(data);
+                        function show($data) {
+                            for(var i in $data){
+                                var model = ` <div class="user_data">
+                                <div class="pic">
+                                    <img src="photo/${$data[i].photo}" alt="${$data[i].user_name}" uid="${$data[i].user_id}">
+                                </div>
+                                <div class="other_data">
+                                    <span>${$data[i].user_name}</span>
+                                    <div class="btns">
+                                        <a href="javascript:;" class="findher" uid="${$data[i].user_id}">发送通知</a>
+                                        <a href="javascript:;" class="del_intro" uid="${$data[i].user_id}">删除介绍</a>
+                                        <a href="javascript:;" class="visit_photo" uid="${$data[i].user_id}">查看照片</a>
+                                    </div>
+                                </div>
+                            </div>` ;
+                            $('.results').append(model);
+                            }
+                        }
+                        $('.results').html("");
+                        show($data);//生成搜索结果模板
+                    }     
+                    //发送消息
+                    $('.findher').on('click', function () {
+                        // console.log(11);
+                    <?php if(isset($user)){?>
+                        var other = $(this).attr('uid');
+                        var date_1 = new Date();
+                        var year = date_1.getFullYear();
+                        var month = date_1.getMonth();
+                        var days = date_1.getDate();
+                        var hour = date_1.getHours();
+                        var seconds = date_1.getMinutes();
+                        var create_time_YMD = year + "-" + month + "-" + days;
+                        var create_time_HS = hour + ":" + seconds;
+                        // 模板的显隐性切换
+                        var dialog = `<div id='dialog_content'>
+                                            <div id="mask">
+                                                <div class="msg_inpt" style="display: block;">
+                                                    <div class="close">[X]</div>
+                                                    <textarea name="" id="content_input">                   
+                                                    </textarea>
+                                                    <div class="send" >发送</div>
+                                                </div>
+                                            </div>
+                                        </div>`
+                        console.log(22222);
+                        $('.container').append(dialog);
+                        $('.close').on('click', function () {
+                            $('#dialog_content').remove();
+                        });
+                        //发送消息   
+                        $('.send').on('click', function () {
+                            if ($.trim($('#content_input').val()) != "") {
+                                $.post('Welcome/acceptInfo', {
+                                    uid:<?php echo $user->user_id?>,
+                                    other: other,
+                                    content: $.trim($('#content_input').val()),
+                                    create_time_YMD: create_time_YMD,
+                                    create_time_HS: create_time_HS
+                                }, function(data) {
+                                    console.log({
+                                        uid:<?php echo $user->user_id?>,
+                                        other: other,
+                                        content: $.trim($('#content_input').val()),
+                                        create_time_YMD: create_time_YMD,
+                                        create_time_HS: create_time_HS
+                                    });                           
+                                        alert('success!!!')
+                                }, 'text')
+                            }else {
+                                alert("发送内容不能为空！！！")
+                            } 
+                        })    
+                    <?php }else{?>
+                        alert("登陆后才能发送消息！");
+                    <?php }?>
+                    });
+                    //加为好友
+                    $('.addFriend').on('click',function () {
+                        <?php if(isset($user)){?>
+                            var accepter_id = $(this).attr('uid');     
+                            $.post('Welcome/addfriend',{
+                                user_id:<?php echo $user->user_id;?>,
+                                accepter_id:accepter_id
+                            },function(data){
+                                console.log(data);
+                                var $data = $.trim(data);
+                                if($data=="already exist"){
+                                    alert('对方已经是你的好友');
+                                }
+                            },'text');
+                        <?php }else{?>
+                            alert("登陆后才能加为好友！");
+                        <?php }?>
+                    });
+                    //cha看资料 
+                    $('.pic img').on('click',function(){
+                        var another = $(this).attr('uid');
+                        location.href="Welcome/about_one?uid=<?php echo $user->user_id?>&another="+another//跳转到控制器下的方法里
+                    })
+                    //删除介绍
+                    $('.del_intro').on('click',function(){
+                        $.get('admin/del_intro',{
+                            uid:$('.del_intro').attr('uid')
+                        },function(data){
+                            alert(data);
+                        },'text')
+                    })
+                    //查看图片，并选择删除
+                    $('.visit_photo').on('click',function(){
+                        $('.showpic').css('display','block');
+                        $('.show .title').css('display','block');
+                        // 获得该用户的所有图片
+                        $.get('Admin/get_all_pic',{
+                            uid:$('.visit_photo').attr('uid')
+                        },function(data){
+                            console.log(data);
+                            console.log($.parseJSON(data));
+                            var $data = $.parseJSON(data);
+                            // 插入dom
+                            for(var i in $data){
+                                var model =
+                                    `<div  class="photos">
+                                        <img src="${$data[i].photo}" alt="图片" />
+                                        <span class="delPhoto"  photoId="${$data[i].photo_id}">删除</span>
+                                    </div>`;
+                                $('.showpic').append(model);                                  
+                            }
+                            //点击[x]移除dom
+                            $('.title span').on('click',function(){
+                                $('.show').remove();
+                            });
+                           $('.delPhoto').on('click',function(){
+                                   $.get('Admin/del_one_pic',{
+                                       uid:$('.visit_photo').attr('uid'),
+                                       photo_id:$(this).attr('photoId')  
+                                   },function(data){
+                                       alert(data);
+                                       $data  =$.trim(data)
+                                       if( $data = 'delete success'){
+                                           location.href = 'Admin/admin';
+                                       }
+                                   },'text');
+                               
+                           })
+
+                            // });
+                        });
+                    })
+                },'text') 
+            }            
+        });
+        //选择发布公告
+        $('.way2').on('click',function(){
+            //  var other = $(this).attr('uid');
+            var date_1 = new Date();
+            var year = date_1.getFullYear();
+            var month = date_1.getMonth();
+            var days = date_1.getDate();
+            var hour = date_1.getHours();
+            var seconds = date_1.getMinutes();
+            var create_time_YMD = year + "-" + month + "-" + days;
+            var create_time_HS = hour + ":" + seconds;
+            // 模板的显隐性切换
+            var dialog = `<div id='dialog_content'>
+                                        <div id="mask">
+                                                <div class="msg_inpt" style="display: block;">
+                                                    <div class="close">[X]</div>
+                                                    <textarea name="" id="content_input">                   
+                                                    </textarea>
+                                                    <div class="send" >发送</div>
+                                                </div>
+                                            </div>
+                         </li>`
+            $('.container').append(dialog);
+            $('.close').on('click', function () {
+                $('#dialog_content').remove();
+            });
+            //发送消息   
+            $('.send').on('click', function () {
+                if ($.trim($('#content_input').val()) != "") {
+                    $.post('Admin/notice', {
+                        uid:<?php echo $user->user_id?>,
+                        // other: other,
+                        content: $.trim($('#content_input').val()),
+                        create_time_YMD: create_time_YMD,
+                        create_time_HS: create_time_HS
+                    }, function(data) {
+                        console.log({
+                            uid:<?php echo $user->user_id?>,
+                            // other: other,
+                            content: $.trim($('#content_input').val()),
+                            create_time_YMD: create_time_YMD,
+                            create_time_HS: create_time_HS
+                        });                           
+                        alert('success!!!')
+                    }, 'text')
+                }else {
+                    alert("发送内容不能为空！！！")
+               } 
+            }) 
+
+         })
     </script>
 </body>
 </html>

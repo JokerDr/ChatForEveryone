@@ -82,15 +82,15 @@
                     </dt>         
                 </dl>        
                 <div class="icon">            
-                    <a href="http://msg.baihe.com/" onclick="baihe.bhtongji.clickTongJi({'event':'3','spm':'2.15.43.148.224'});">
-                        <strong>0</strong><br>消息<span></span>
+                    <a href="welcome/message" onclick="baihe.bhtongji.clickTongJi({'event':'3','spm':'2.15.43.148.224'});">
+                        <strong><?php echo $msg_num?></strong><br>消息<span></span>
                     </a>            
-                    <a href="http://product.baihe.com/coin" onclick="baihe.bhtongji.clickTongJi({'event':'3','spm':'2.15.43.186.289'});">
-                        <strong>0</strong><br>好友<span></span>
+                    <a href="" onclick="baihe.bhtongji.clickTongJi({'event':'3','spm':'2.15.43.186.289'});">
+                        <strong><?php echo $friend_num?></strong><br>好友<span></span>
                     </a>			
-                    <!-- <a href="http://trade.baihe.com/myOrder?orderStatus=0" onclick="baihe.bhtongji.clickTongJi({'event':'3','spm':'2.15.43.150.226'});">
-                        <strong id="persDataPetalNum">0</strong><br>订单
-                    </a>         -->
+                    <a href="" onclick="baihe.bhtongji.clickTongJi({'event':'3','spm':'2.15.43.150.226'});">
+                        <strong id="persDataPetalNum"><?php echo $user->mood?></strong><br>心情
+                    </a>        
                 </div>    
             </div>
         </div>
@@ -118,7 +118,10 @@
                         <strong>修改密码</strong>
                         <em class="angleB"></em>
                     </a>
-                    <a></a>
+                    <a href="javascript:;" class="">
+                        <strong>好友列表</strong>
+                        <em class="angleB"></em>
+                    </a>
                     
                 </div>
                 <form class="nav-data user_form info-detail">
@@ -138,6 +141,19 @@
                                 <dt>生日：</dt>
                                 <dd id="birthDay">
                                     <div class="datepicker"></div>
+                                    <!-- <span class="orangeT">* 只能修改一次</span> -->
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>心情：</dt>
+                                <dd id="ssssss">
+                                    <select id="mood">
+                                        <option value="super">极好</option>
+                                        <option value="good">好</option >
+                                        <option value="soso">一般</option>
+                                        <option value="bad">差</option>
+                                    </select>
+                                    <!-- <div class="datepicker"></div> -->
                                     <!-- <span class="orangeT">* 只能修改一次</span> -->
                                 </dd>
                             </dl>
@@ -245,8 +261,9 @@
                                 <dt>家乡：</dt>
                                 <dd>
                                     <div class="selCity">
-                                        <input name="" id="homeDistrict" autocomplete="off" type="text" value="请选择您的家乡" class="city_input  inputFocus proCityQueryAll proCitySelAll"
-                                            ov="请选择/输入城市名称" />
+                                        &nbsp;&nbsp;省<input value="<?php echo $user->province?>" style="text-align: right" type="text" id="sheng"><br>
+                                        &nbsp;&nbsp;市<input value="<?php echo $user->city?>" style="text-align: right" type="text" id="shi"><br>
+                                        &nbsp;&nbsp;区<input value="<?php echo $user->others?>" style="text-align: right" type="text" id="qu"><br>
                                     </div>
                                 </dd>
                             </dl>
@@ -332,6 +349,24 @@
                         <a class="orange" id="savePwd" style="display: inline-block">确认修改</a>
                     </div>
                 </form>
+                <form class="nav-data user_form" action=""  style="display: none">
+                    <div class="data">
+                        <?php foreach ($friend_list as $friend) {?>
+                        <div class="user_data">
+                            <div class="pict">
+                                <img src="<?php echo $friend["friend_avatar"]?>">
+                            </div>
+                            <div class="other_data">
+                                <span class="nick_name"><?php echo $friend["friend_name"]?></span>
+                                <div class="btns">
+                                    <a href="javascript:;" class="delFriend" uid="<?php echo $friend["friend_id"]?>">删除好友</a>
+                                    <a href="javascript:;" class="sendFriend" uid="<?php echo $friend["friend_id"]?>">发送消息</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>   
+                    </div>
+                </form>
                 
             </div>
         </div>
@@ -409,10 +444,14 @@
     <script type="text/javascript" src="public/js/userinfo/baihe_1.js" charset="utf-8"></script>
     <script src="public/js/userinfo/tongji-1.0.1.min_1.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="public/js/userinfo/userinfo.js" charset="utf-8"></script>
+    <script type="text/javascript" src="public/js/userinfo/distpicker.data.js" charset="utf-8"></script>
+    <script type="text/javascript" src="public/js/userinfo/distpicker.js" charset="utf-8"></script>
+    <!-- <script type="text/javascript" src="public/js/userinfo/main.js" charset="utf-8"></script> -->
+
     <script>
         // 选项卡
         $(function() {
-
+            $("#distpicker").distpicker();
             form_list = $(".myData > form");
             $(".mainNav a").each(function(index, ele) {
                 $(ele).on('click', function(){
@@ -464,6 +503,9 @@
             
                 $('.big-image').attr('src',src);
             });  
+            $('.delFriend').on("click", function() {
+                delFriend(this);
+            });
             $(".upload").on('click', function() {
                 uploadPhoto();
             })
@@ -484,6 +526,21 @@
                 $(".my-avatar-box .image img").attr('src',$(this).attr('src'));
             })
             
+            function delFriend(that) {
+                var friend_id = $(that).attr('uid');
+                console.log(friend_id);
+                $.get("user/delete_friend",{
+                    friend_id: friend_id
+                }, function(res) {
+                    res = res.trim();
+                    if(res == 'success'){
+                        alert('删除成功...');
+                        location.href="user/info"
+                    }else{
+                        alert('删除失败...')
+                    }
+                },'text')
+            }
             function setAvatar() {
                 var photo_id = $(".avatar_active").attr('data-set');
                 var u_id = $(".avatar_active").attr('user-id');
@@ -542,28 +599,30 @@
             //更新头像
             function uploadPhoto() {
                 var file = $('#chooseImg')[0].files[0];
-                console.log(file);
-                var formdata = new FormData();
-                formdata.append('photo', file);
-                console.log(file);
-                console.log(formdata);
-                $.ajax({
-                    url: "user/uploadPhoto",
-                    type: "POST",
-                    data: formdata,
-                    dataType: 'text',
-                    contentType: false,
-                    processData: false,
-                    cache: false,
-                    success: function (data) { 
-                        console.log(typeof(data));
-                        console.log(data.length);
-                        if(data.trim() === "success"){
-                            alert("成功保存头像..3秒之后刷新页面....");
-                            location.href="user/info";
+                if(file){
+                    var formdata = new FormData();
+                    formdata.append('photo', file);
+                    console.log(file);
+                    console.log(formdata);
+                    $.ajax({
+                        url: "user/uploadPhoto",
+                        type: "POST",
+                        data: formdata,
+                        dataType: 'text',
+                        contentType: false,
+                        processData: false,
+                        cache: false,
+                        success: function (data) { 
+                            console.log(typeof(data));
+                            console.log(data.length);
+                            if(data.trim() === "success"){
+                                alert("成功保存头像..3秒之后刷新页面....");
+                                location.href="user/info";
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                
             }
         });
     </script>
@@ -709,20 +768,7 @@
             } else {
                 options['marriage'] ? baihe.setBaiHeSelectVal('#marriage', options['marriage']) : '-1';
             }
-            // if (options['marriage'] == '1' || options['marriage'] == '2') {
-            //     $('#marriage select')[0].onchange = function () {
-            //         if ($(this).val() == '1') {
-            //             baihe.block({
-            //                 title: '提示',
-            //                 text: '婚姻状况由离异或丧偶改成未婚状态时，请联系客服修改',
-            //                 callback: function () {
-            //                     baihe.setBaiHeSelectVal('#marriage', options['marriage']);
-            //                 }
-            //             });
-            //         }
 
-            //     };
-            // }
             validateUserInfo(options);
 
             $('#saveInfo').click(function () {
@@ -760,91 +806,64 @@
                         marriage = $("input[name='marriage']").val();
                     }
 
-
+                    var sheng = $('#sheng').val();
+                    var shi = $('#shi').val();
+                    var qu = $('#qu').val();
+                    var edu = ['初中','中专/职高/技校','高中','大专','本科','硕士','博士']
+                    var year = birthday.slice(0,4);
+                    var month = birthday.slice(4,6);
+                    var day = birthday.slice(6,8);
+                    var mood = $('#mood').val();
                     var options = {
                         nickname: $("input[name='nickname']").val(),
-                        birthday: birthday,
-                        height: height,
-                        education: education,
+                        // birthday: birthday,
+                        height: height/100,
+                        education: edu[education-1],
+                        sheng: sheng.includes("省")?sheng:sheng + '省',
+                        shi: shi.includes("市")?shi:shi + '市',
+                        qu: qu.includes("区")?qu:qu + '区',
+                        year: year,
+                        month: month,
+                        day: day,
+                        mood: mood
                         // occupation: baihe.getBaiHeSelectVal('#occupation') == '-1' ? '' : baihe.getBaiHeSelectVal('#occupation'),
                         // marriage: marriage,
                         // children: baihe.getBaiHeSelectVal('#children') == '-1' ? '' : baihe.getBaiHeSelectVal('#children'),
-                        district: district,
-                        homeDistrict: baihe.getBaiHeDistrictDataVal('#homeDistrict') ? baihe.getBaiHeDistrictDataVal('#homeDistrict') : '',
-                        income: income,
+                        // district: district,
+                        // homeDistrict: baihe.getBaiHeDistrictDataVal('#homeDistrict') ? baihe.getBaiHeDistrictDataVal('#homeDistrict') : '',
+                        // income: income,
                         // housing: baihe.getBaiHeSelectVal('#housing') == '-1' ? '' : baihe.getBaiHeSelectVal('#housing'),
                         // car: baihe.getBaiHeSelectVal('#car') == '-1' ? '' : baihe.getBaiHeSelectVal('#car'),
                         // mobileContact: $("#mobileContact span").val(),
-                        phoneContact: $("input[name='phoneContact']").val(),
-                        weiXinContact: $("input[name='weiXinContact']").val(),
-                        qqContact: $("input[name='qqContact']").val(),
+                        // phoneContact: $("input[name='phoneContact']").val(),
+                        // weiXinContact: $("input[name='weiXinContact']").val(),
+                        // qqContact: $("input[name='qqContact']").val(),
                         // otherContact: $("input[name='otherContact']").val()
                     };
-                    if (options['nickname'].length > 12) {
-                        baihe.block({
-                            title: '提示',
-                            text: '昵称最长不能超过12个字符'
-                        });
-                        return;
-                    }
-                    if (new RegExp(baihe.validateRegExp.nikename).test(options['nickname']) == false) {
-                        baihe.block({
-                            title: '提示',
-                            text: '昵称最多可输入12个汉字、字母或数字'
-                        });
-                        return;
-                    }
-                    if (options['district'].slice(0, 2) == "86" && options['district'].slice(0, 5) != "8623" && options['district'].slice(0, 5) != "8681" && options['district'].slice(0, 5) != "8682" && options['district'].slice(0, 5) != "8683" && options['district'].length < 6) {
-                        baihe.block({
-                            title: '提示',
-                            text: '请选择所在地区'
-                        });
-                        return;
-                    }
                     console.log(options);
+                    $.get('user/updateUserInfo',options,function(res) {
+                        res = res.trim();
+                        if(res == 'success'){
+                            alert("成功保存...")
+                        }else{
+                            alert("保存失败...")
+                        }
+                    }, 'text')
+                    
+                    // if (options['district'].slice(0, 2) == "86" && options['district'].slice(0, 5) != "8623" && options['district'].slice(0, 5) != "8681" && options['district'].slice(0, 5) != "8682" && options['district'].slice(0, 5) != "8683" && options['district'].length < 6) {
+                    //     baihe.block({
+                    //         title: '提示',
+                    //         text: '请选择所在地区'
+                    //     });
+                    //     return;
+                    // }
                     // saveUserInfo(options);
                 }
             });
         }
 
-        function saveUserInfo(opt) {
-            // $.ajax({
-            //     url: 'http://my.baihe.com/Userinfo/subBasicInfo?jsonCallBack=?',
-            //     dataType: 'jsonp',
-            //     data: opt,
-            //     success: function (msg) {
-            //         if (msg && msg['state'] == "-1") {
-            //             location.href = msg['data'];
-            //         } else if (msg && msg['state'] == "1") {
-            //             baihe.block({
-            //                 title: '提示',
-            //                 text: '保存完成',
-            //                 callback: function () {
-            //                     getIntegrity();
-            //                 }
-            //             });
-            //             return true;
-            //         } else if (msg && msg['state'] == "0") {
-            //             baihe.block({
-            //                 title: '提示',
-            //                 text: '保存完成',
-            //                 callback: function () {
-            //                     getIntegrity();
-            //                 }
-            //             });
-            //             return true;
-            //         }
-            //         else {
-            //             baihe.block({
-            //                 title: '提示',
-            //                 text: msg['data']
-            //             });
-            //             return false;
-            //         }
-            //     }
-            // });
-        }
-        init({ "nickname": "\u591c\u7684\u7ec8\u7ae0", "gender": "1", "birthday": "19961228", "height": "170", "education": "5", "occupation": null, "marriage": "1", "children": null, "district": "86230103", "income": "4", "housing": null, "car": null, "mobileContact": "15945697079", "phoneContact": null, "weiXinContact": null, "qqContact": null, "otherContact": null, "districtChn": "\u54c8\u5c14\u6ee8\u5e02\u5357\u5c97\u533a", "provinceChn": "\u9ed1\u9f99\u6c5f\u7701", "constellation": "10", "animalSign": "1", "constellationChn": "\u9b54\u7faf\u5ea7", "animalSignChn": "\u9f20", "educationChn": "\u672c\u79d1", "incomeChn": "2000-5000" });
+        
+        init({ "nickname": "<?php echo $user->user_name?>", "gender": "<?php echo $user->sex?>", "birthday": "20021213", "height": "170", "education": "5", "occupation": null, "marriage": "1", "children": null, "district": "86230103", "income": "4", "housing": null, "car": null, "mobileContact": "15945697079", "phoneContact": null, "weiXinContact": null, "qqContact": null, "otherContact": null, "districtChn": "\u54c8\u5c14\u6ee8\u5e02\u5357\u5c97\u533a", "provinceChn": "\u9ed1\u9f99\u6c5f\u7701", "constellation": "10", "animalSign": "1", "constellationChn": "\u9b54\u7faf\u5ea7", "animalSignChn": "\u9f20", "educationChn": "\u672c\u79d1", "incomeChn": "2000-5000" });
 
     </script>
 </body>

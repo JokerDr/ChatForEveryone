@@ -33,7 +33,7 @@
                     </div>
                     <div class="setting">设置
                         <div class="select">
-                            <div ><a href=''>我的疯言疯语</a></div>
+                            <div ><a href='user/info'>我的疯言疯语</a></div>
                             <div ><a href='user/logout'>退出</a></div>
                         </div>
                         
@@ -69,8 +69,8 @@
                 <?php foreach ($results as $row){?>
                      <?php if( $user->user_id != $row->user_id){?><!-- paoo-->
                         <div class="msg" >
-                            <a href="javascript:;" class="del <?php echo 'uesr_'.$row->user_id;?>" uid="<?php echo $row->user_id;?>" time="<?php echo $row->create_time_YMD ;?>" >删除</a>
-                            <div class='wriper' uid="<?php echo $row->user_id;?>" time="<?php echo $row->create_time_YMD ;?>">
+                            <a href="javascript:;" class="del <?php echo 'uesr_'.$row->user_id;?>" uid="<?php echo $row->user_id;?>" time="<?php echo $row->create_time_YMD ;?>" time_1="<?php echo $row->create_time_HS ;?>" >删除</a>
+                            <div class='wriper' uid="<?php echo $row->user_id;?>" time="<?php echo $row->create_time_YMD ;?>" time_1="<?php echo $row->create_time_HS ;?>">
                                 <div class="pic">
                                 <a href="user/ ?uid=<?php echo $row->user_id;?>">
                                     <img src="photo/<?php echo $row->photo; ?>" alt="<?php echo $row->user_name;?>">
@@ -203,7 +203,8 @@
              $.get('Welcome/del_one_message',{
                 uid:<?php echo $user->user_id ;?>,
                 other: $(this).attr('uid'),
-                time:$(this).attr('time')
+                time:$(this).attr('time'),
+                time_1:$(this).attr('time_1')
             },function(data){
                  $(selector).parent().remove();
             },'text')
@@ -224,13 +225,9 @@
             $.get('Welcome/get_message',{
                 uid:<?php echo $user->user_id ;?>,
                 other: $(this).attr('uid'),
-                time:$(this).attr('time')
+                time:$(this).attr('time'),
+                time_1:$(this).attr('time_1')
             },function(data){     
-                console.log({
-                    uid:<?php echo $user->user_id ;?>,
-                    other: $(this).attr('uid'),
-                    time:$(this).attr('time')
-                 });
                 var $data = $.parseJSON(data);
                 console.log($data);
                 var date = $data.create_time_YMD +"   "+$data.create_time_HS;   
@@ -264,8 +261,8 @@
                             create_time_YMD:create_time_YMD,
                             create_time_HS:create_time_HS
                         },function(data){
-                            
-                            console.log(data);                   
+                            alert(data);
+                            // console.log(data);                   
                         },'text')  
                 }else{
                     alert("发送内容不能为空！！！")

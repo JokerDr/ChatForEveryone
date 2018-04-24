@@ -54,12 +54,11 @@
             $sex  = $this->input->get('sex');
             $province  = $this->input->get('province');            
             $province_1 = '"'.$province.'"';
-            $res = $this->Welcome_model->name_search($year,$sex,$province_1);//搜索的结果  
+            $res = $this->Welcome_model->condition($year,$sex,$province_1);//搜索的结果  
            echo json_encode($res);
         }
         //访问别人自资料卡页
         public function about_one(){
-            $uid = $this->input->get('uid');
             $friends = $this->input->get('another');
             $result = $this->Welcome_model->get_user_by_uid($friends);//获取被访问者的信息
             $res = json_encode($result);
@@ -67,12 +66,10 @@
         } 
         //客户端返回     
         public function firend_or_not(){
-            // $uid = $this->input->get('uid');
+            $uid = $this->input->get('uid');
             $friends = $this->input->get('another');
-            // print($friends);
             $row_2 = $this->Welcome_model->power_visit_me($friends);//用户访问的权限为1还是0
             // var_dump($row_2);
-            // var_dump($row_1);
             // $res = json_encode($result);
             if($row_2->power_value == '1'){//允许所有人访问
                 echo 'all_visit';
@@ -97,8 +94,9 @@
             $uid = $this->input->get('uid');
             $other = $this->input->get('other');
             $time = $this->input->get('time');
+            $time_1 = $this->input->get('time_1');
             // var_dump($other) ;
-            $messages = $this->Welcome_model-> chat_with($uid, $other,$time);
+            $messages = $this->Welcome_model-> chat_with($uid, $other,$time,$time_1);
             // // var_dump ($messages) ;
             echo  json_encode($messages);
         }
@@ -107,7 +105,8 @@
             $uid = $this->input->get('uid');
             $other = $this->input->get('other');
             $time = $this->input->get('time');
-            $res = $this->Welcome_model->del_message($other,$uid,$time);
+            $time_1 = $this->input->get('time_1');
+            $res = $this->Welcome_model->del_message($other,$uid,$time,$time_1);
             if($res>0){
                 echo 'success';
             }else{

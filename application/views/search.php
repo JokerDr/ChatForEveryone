@@ -329,7 +329,7 @@
                                     </div>
                                 </div>
                             </div>` ;
-                            $('.results').append(model);
+                        $('.results').append(model);
                         }
                     }
                     $('.results').html("");

@@ -52,9 +52,9 @@
             $sql = 'SELECT  * FROM  `t_user` 
                     LEFT JOIN `t_intro` on `t_intro`.u_id = `t_user`.user_id 
                     LEFT JOIN `t_photo` on `t_photo`.u_id =`t_user`.user_id AND `t_photo`.using_or_not = "using"
-                    WHERE  `t_user`.age = '.$year.' AND `t_user`.province ='.$province.' AND `t_user`.sex ='.$sex;
+                    WHERE  `t_user`.year = ' .$year. ' AND `t_user`.province = '.$province. ' AND `t_user`.sex ='.$sex;
             $query = $this->db->query($sql);
-            return $query->row();
+            return $query->result();
         }
         // 根据uid,获取其用户表的资料,其自我介绍，其作为头像的图片
         public function get_user_by_uid($uid){
@@ -102,18 +102,18 @@
             return $query->result();     
         }
         // 获得指定用户的消息的(收到的和发送的)，以及其ID关联的用户信息
-        public function chat_with($uid,$other,$time){
+        public function chat_with($uid,$other,$time,$time_1){
              $query =  $this->db->select('*')->from('t_message')
                     ->group_start()
-                        ->where(array('reciver_uid'=>$uid,'sender_uid'=>$other,'create_time_YMD'=>$time)) 
+                        ->where(array('reciver_uid'=>$uid,'sender_uid'=>$other,'create_time_YMD'=>$time,'create_time_HS'=>$time_1)) 
                         // ->or_where(array('reciver_uid'=>$other,'sender_uid'=>$uid,'create_time_YMD'=>$time))
                     ->group_end()
                     ->get();         
             return $query->row();    
         }
         // 删除某条消息
-        public function del_message($sender,$reciver,$time){
-            $arr = array('sender_uid'=>$sender,'reciver_uid'=>$reciver,'create_time_YMD'=>$time);
+        public function del_message($sender,$reciver,$time,$time_1){
+            $arr = array('sender_uid'=>$sender,'reciver_uid'=>$reciver,'create_time_YMD'=>$time,'create_time_HS'=>$time_1);
             $this->db->where($arr);
             $this->db->delete('t_message');
             return $this->db->affected_rows();

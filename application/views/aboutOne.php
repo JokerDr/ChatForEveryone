@@ -174,7 +174,7 @@
         $('.select').hide();
     });  
     var data = <?php echo $res;?>;
-    var imgSrc = "photo/"+ data.photo; 
+    var imgSrc =  data.photo; 
     console.log(data);
     $('.pic img').attr('src',imgSrc);
     $('.year').text(data.year);
