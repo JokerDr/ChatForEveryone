@@ -362,7 +362,7 @@
                             create_time_YMD: create_time_YMD,
                             create_time_HS: create_time_HS
                         });                           
-                        alert('success!!!')
+                        // alert(data);
                     }, 'text')
                 }else {
                     alert("发送内容不能为空！！！")

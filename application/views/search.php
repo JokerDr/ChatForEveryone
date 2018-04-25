@@ -46,18 +46,21 @@
         </div>   
         <div class="wrip">
             <div id="nav">
-                <a href="" class="home"></a>
-                <div id="select">
-                    <a href="welcome/index">首页</a>
-                    <?php if(isset($user) ){?>
-                    <a href="user/info">我的疯言疯语</a>
-                    <a href="welcome/searched">搜索</a>
-                    <?php }else{?>
-                    <a href="user/login">我的疯言疯语</a>
-                    <a href="welcome/searched">搜索</a>
-                    <?php } ?>
-
-                </div>
+                <?php if(isset($user) ){?>
+                    <a href="welcome/index_logined" class="home"></a>
+                    <div id="select">      
+                        <a href="welcome/index_logined">首页</a>
+                        <a href="user/info">我的疯言疯语</a>
+                        <a href="welcome/searched">搜索</a>
+                    </div>
+                 <?php }else{?> 
+                    <a href="welcome/index_logined" class="home"></a>
+                    <div id="select">
+                        <a href="welcome/index">首页</a>
+                        <a href="user/login">我的疯言疯语</a>
+                        <a href="welcome/searched">搜索</a>
+                    </div>
+                <?php } ?> 
             </div>
         </div>     
         
@@ -198,14 +201,15 @@
         $('.startSearch').on('click',function(){
             if($('.way1').css('background-color') == 'rgb(255, 127, 0)' && $('.inpUname').val()!=""){
                $.get('welcome/search_res',{
-                user_name:$('.inpUname').val()
+                     user_name:$('.inpUname').val()
                 },function(data){
                     var $data = $.parseJSON(data);
+                        console.log($data)
                     function show($data) {
                         for(var i in $data){
                             var model = ` <div class="user_data">
                             <div class="pic">
-                                <img src="photo/${$data[i].photo}" alt="${$data[i].user_name}">
+                                <img src="${$data[i].photo}" alt="${$data[i].user_name}">
                             </div>
                             <div class="other_data">
                                 <span>${$data[i].user_name}</span>
@@ -285,7 +289,7 @@
                                 user_id:<?php echo $user->user_id;?>,
                                 accepter_id:accepter_id
                             },function(data){
-                                console.log(data);
+                                alert(data);
                                 var $data = $.trim(data);
                                 if($data=="already exist"){
                                     alert('对方已经是你的好友');
@@ -319,7 +323,7 @@
                         for(var i in $data){  
                             var model = ` <div class="user_data">
                                 <div class="pic">
-                                    <img src="photo/${$data[i].photo}" alt="${$data[i].user_name}">
+                                    <img src="${$data[i].photo}" alt="${$data[i].user_name}">
                                 </div>
                                 <div class="other_data">
                                     <span>${$data[i].user_name}</span>

@@ -45,20 +45,21 @@
         </div>   
         <div class="wrip">
             <div id="nav">
-                <a href="" class="home"></a>
-                <div id="select">
-                    <a href="welcome/index">首页</a>
-                    <?php if(isset($user) ){?>
-                    <a href="?uid=<?php if(isset($user)){
-                        $user->user_id;
-                    } ?>">我的疯言疯语</a>
-                    <a href="welcome/searched">搜索</a>
-                    <?php }else{?>
-                    <a href="welcome/searched">我的疯言疯语</a>
-                    <!-- <a href="user/login">搜索</a> -->
-                    <?php } ?>
-
-                </div>
+                <?php if(isset($user) ){?>
+                    <a href="welcome/index_logined" class="home"></a>
+                    <div id="select">      
+                        <a href="welcome/index_logined">首页</a>
+                        <a href="user/info">我的疯言疯语</a>
+                        <a href="welcome/searched">搜索</a>
+                    </div>
+                 <?php }else{?> 
+                    <a href="welcome/index_logined" class="home"></a>
+                    <div id="select">
+                        <a href="welcome/index">首页</a>
+                        <a href="user/login">我的疯言疯语</a>
+                        <a href="welcome/searched">搜索</a>
+                    </div>
+                <?php } ?> 
             </div>
         </div>     
         
@@ -73,7 +74,7 @@
                             <div class='wriper' uid="<?php echo $row->user_id;?>" time="<?php echo $row->create_time_YMD ;?>" time_1="<?php echo $row->create_time_HS ;?>">
                                 <div class="pic">
                                 <a href="user/ ?uid=<?php echo $row->user_id;?>">
-                                    <img src="photo/<?php echo $row->photo; ?>" alt="<?php echo $row->user_name;?>">
+                                    <img src="<?php echo $row->photo; ?>" alt="<?php echo $row->user_name;?>">
                                 </a>
                             </div>
                             <div class ="info">
@@ -132,7 +133,7 @@
     <div id="BHFooter">
         <div class="cont">
             	<div class="logo">
-                    <img src="public/image/logo.png.png" alt="疯言疯语网实名婚恋开创者">
+                    <img src="public/image/logo.png.png" alt="疯言疯语网">
                 </div>
                 	<ul>
                         <li style='float:right'>
@@ -206,7 +207,9 @@
                 time:$(this).attr('time'),
                 time_1:$(this).attr('time_1')
             },function(data){
-                 $(selector).parent().remove();
+                //  $(selector).parent().remove();
+                alert(data);
+                 location.href = "welcome/message"
             },'text')
         })  
         // 删除所有信息

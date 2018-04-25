@@ -20,6 +20,11 @@ class Admin extends CI_Controller{
         $create_time_YMD = $this->input->post('create_time_YMD');
         $create_time_HS = $this->input->post('create_time_HS');
         $res = $this->Admin_model->get_users();
+        // var_dump($sender);
+        // var_dump($content);
+        // var_dump($create_time_YMD);
+        // var_dump($create_time_HS);
+        // var_dump($res);
         foreach($res as $row){
             $rows = $this->Welcome_model->add_message(array(
                             'reciver_uid'=>$row->user_id,
@@ -28,8 +33,7 @@ class Admin extends CI_Controller{
                             'create_time_YMD'=>$create_time_YMD,
                             'create_time_HS'=>$create_time_HS
                         ));
-        }
-        
+        }    
         // if($rows>0){
         //         echo 'success';
         // }else{

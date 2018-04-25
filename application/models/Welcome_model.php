@@ -79,6 +79,14 @@
              $sql = $this->db->get_where('t_friends',array('uid'=>$friend,'friends'=>$asker));
             return $sql->row();
         }
+        // 当自己查看自己时
+         public function visit_me($asker,$friend){//需要询问者的u_id和被询问者的u_id
+             $sql ='SELECT * FROM `t_friends`  where `t_friends`.uid = '.$friend 
+                    .' and (`t_friends`.friends = '.$friend .' or `t_friends`.friends ='.$asker.')' ; 
+                
+            $query = $this->db->query($sql);
+            return $query->result();
+        }
         //查看关于 是否允许 非朋友用户 访问的自己资料卡 的权限
         //规定： 0->不允许
         //       1->允许
@@ -134,25 +142,6 @@
             $query = $this->db->query($sql);
             return $query->row();
         }
-        //  public function SendMessge($message){
-        // //    $sql = "insert into message values(NULL ,'{$reciverUid}','{$senderUid}','{$message}','{$time}','1')";       
-        //     $sql = $this->insert($message);
-        //     return $query->result(); 
-        // }
-        // // 更新聊天信息
-        // public function update_message($ids){
-        //     $sql = "update t_message set status = 2 where id in ({$ids})";
-        //     $query = $this->db->query($sql);
-        //     return $query->result();   
-        // }
-        // public function getMessage($reciver_uid,$sender_uid){
-        //     $sql = "select * from t_message where 
-        //     reciver_uid='{$reciver_uid}'
-        //      and sender_uid='{$sender_uid}' 
-        //      and status='1'";
-        //      $query = $this->db->query($sql);
-        //      return $query->result();
-        // }
 
         
     }   

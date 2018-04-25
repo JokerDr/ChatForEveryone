@@ -72,18 +72,26 @@ class User extends CI_Controller{
             // if($data == $captcha){                 
         $result = $this->User_model->get_user_by_account($account);//对数据库搜索 //用户表搜索
         $result_2 =$this->User_model->get_admin_by_account($account);//搜索管理员表
-        $photo = $this->User_model->get_user_avatar($result[0]->user_id);
+        $photo = $this->User_model->get_user_avatar($result[0]->user_id); //获取头像
         if(count($result_2) == 0){ //优先检索管理员表
             if(count($result) == 0){
             //若数据库搜索结果不存在
                  echo 'email or phone not exist';
             }else{//若数据库搜索结果存在
                  if($result[0]->password == $pwd){ 
-                     $this->session->set_userdata(array(
-                    'user' => $result[0],
-                    'photo'=>$photo[0]
-                    // 将搜索结果存在session里，方便使用
-                    ));
+                     if($photo){
+                        $this->session->set_userdata(array(
+                            'user' => $result[0],
+                            'photo'=>$photo[0]
+                            // 将搜索结果存在session里，方便使用
+                        ));
+                     }else{
+                       $this->session->set_userdata(array(
+                            'user' => $result[0]
+                            // 将搜索结果存在session里，方便使用
+                        ));  
+                     }
+                    
                     echo 'success';
                 }else{
                     echo 'password error';
@@ -100,9 +108,9 @@ class User extends CI_Controller{
                echo 'password error';
            }
         }
-                    // }else{                     
-                    //     echo 'captcha error' ;                   
-                    // }  
+         // }else{                     
+        //     echo 'captcha error' ;                   
+        // }  
     }
     // 登出
     public function logout(){
@@ -218,7 +226,7 @@ class User extends CI_Controller{
             $re = '/^1\d{10}$/';
             return  strstr($str,$re) ? true : false;           
     } 
-       
+        
     //跳转到用户资料页
     public function info(){
         $id = $this->session->user->user_id;
@@ -407,7 +415,7 @@ class User extends CI_Controller{
         $id = $this->session->user->user_id;
         $result = $this->User_model->get_user_content($id);
         if(count($result) == 1){
-            return $result[0]->intro_content;
+            return $result[0]->intro_content;   
         }else{
             return '';
         }
@@ -438,7 +446,5 @@ class User extends CI_Controller{
         }
     }
 
-    
 }
-?>
-
+?>    

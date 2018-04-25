@@ -48,18 +48,21 @@
         </div>   
         <div class="wrip">
             <div id="nav">
-                <a href="" class="home"></a>
-                <div id="select">
-                    <a href="welcome/index">首页</a>
-                    <?php if(isset($user) ){?>
-                    <a href="user/info">我的疯言疯语</a>
-                    <a href="welcome/searched">搜索</a>
-                    <?php }else{?>
-                    <a href="user/login">我的疯言疯语</a>
-                    <a href="welcome/searched">搜索</a>
-                    <?php } ?>
-
-                </div>
+                <?php if(isset($user) ){?>
+                    <a href="welcome/index_logined" class="home"></a>
+                    <div id="select">      
+                        <a href="welcome/index_logined">首页</a>
+                        <a href="user/info">我的疯言疯语</a>
+                        <a href="welcome/searched">搜索</a>
+                    </div>
+                 <?php }else{?> 
+                    <a href="welcome/index_logined" class="home"></a>
+                    <div id="select">
+                        <a href="welcome/index">首页</a>
+                        <a href="user/login">我的疯言疯语</a>
+                        <a href="welcome/searched">搜索</a>
+                    </div>
+                <?php } ?>  
             </div>
         </div>     
         
@@ -121,20 +124,20 @@
                             <form name="loginForm" id="loginForm" ,action = "" target="_self" method="post" enctype="multipart/form-data">
                             <div class="cont">
                                <a href='user/info?id=<?php echo $user->user_id?>' id='uid'>
-                                    <img src="<?php $pic = $photo->photo != ''?$photo->photo :'public/image/not_avatar.gif';echo $pic;?>" alt="上传图片">
+                                    <img src="<?php $pic = $photo ?$photo->photo :'public/image/not_avatar.gif';echo $pic;?>" alt="上传图片">
                                </a>
                                 <p><?php echo $user->user_name?></p>
                                 <ul class='list'>
                                     <li>
                                         <a>
-                                            <strong></strong>
+                                            <strong><?php echo $msg_num?></strong>
                                             <span>我的消息</span>
                                         </a>
                                         
                                     </li>
                                     <li>
                                         <a>
-                                            <strong></strong>
+                                            <strong><?php echo $friend_num?></strong>
                                             <span>我的好友</span>
                                         </a>
                                     </li>
@@ -258,8 +261,9 @@
         $('.photo').on('click',function(){
             <?php if(isset($user)){?>
                 var another = $(this).attr('uid');
-                // console.log(another);
+                console.log(another);
                 $.get('Welcome/firend_or_not',{
+                    uid:<?php echo $user->user_id;?>,
                     another:another
                 },function(data){
                     var $data = $.trim(data);

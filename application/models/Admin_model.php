@@ -26,7 +26,7 @@
     // 获取用户表中所有用户
     public function get_users(){
         $query = $this->db->get('t_user');
-        // return $query->result();
+        return $query->result();
     }
     // 插入消息
     public function add_message($arr){

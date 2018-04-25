@@ -7,6 +7,7 @@
             // session_start();//开启session
             $this->load->helper('cookie');
             $this->load->model("Welcome_model");
+            $this->load->model("User_model");
         }   
         // 自动跳转到主页（默认未登录状态下）
          public function index(){       
@@ -21,14 +22,20 @@
             $uname = $this->session->userdata('user_name');
             $config['base_url'] = base_url().'welcome/index_logined';//当前控制器方法
              $results = $this->Welcome_model->get_infor_photo();
+            $friend_num = $this->get_friend_num();
+            $msg_num = $this->get_msg_num();
             $users_width_photos = json_encode($results); 
-            $this->load->view('index',array('users_width_photos'=>$users_width_photos));
+            $this->load->view('index',array(
+                'users_width_photos'=>$users_width_photos,
+                'friend_num'=>$friend_num,
+                'msg_num'=>$msg_num
+            ));
         }
         // 加载消息页
         public function message(){
             $user = $this->session->userdata('user');
             $results = $this->Welcome_model->get_message($user->user_id);
-             $this->load->library('pagination');
+            $this->load->library('pagination');
             $config['base_url'] = base_url().'welcome/message';
             $config['total_rows'] = count($results);
             $config['per_page'] = 6;
@@ -41,9 +48,23 @@
             // 加载搜索页
            $this->load->view('search');
         }
+        // 好友数量
+        public function get_friend_num(){
+            $id = $this->session->user->user_id;
+            $result = $this->User_model->get_friend($id);
+            $friend_num = count($result);
+            return $friend_num;
+        }
+        // 消息数量
+        public function get_msg_num() {
+            $id = $this->session->user->user_id;
+            $result = $this->User_model->get_message($id);
+            $msg_num = count($result);
+            return $msg_num;
+        }
         // 昵称搜索结果
         public function search_res(){
-           $user_name  = $this->input->get('user_name');
+           $user_name  = $this->input->get('user_name');//接收到前端传来的参数
            $user_name_new = '"'.$user_name.'"';  
            $res = $this->Welcome_model->name_search($user_name_new);//搜索的结果  
            echo json_encode($res);
@@ -69,12 +90,14 @@
             $uid = $this->input->get('uid');
             $friends = $this->input->get('another');
             $row_2 = $this->Welcome_model->power_visit_me($friends);//用户访问的权限为1还是0
+            // var_dump($uid);
+            // var_dump($row_2);
             // var_dump($row_2);
             // $res = json_encode($result);
             if($row_2->power_value == '1'){//允许所有人访问
                 echo 'all_visit';
             }else{//只允许朋友访问
-                $row_1 = $this->Welcome_model->visit_someone($uid,$friends);//是否有改好友
+                $row_1 = $this->Welcome_model->visit_me($uid,$friends);//是否有改好友
                 //查看朋友表是否包含访问者
                 if(count($row_1)>0){//包含
                     // $count = count($row_1);
@@ -151,7 +174,7 @@
             $asker = $this->input->post('user_id');//询问者
             $accept  = $this->input->post('accepter_id');//接受者
             $rows = $this->Welcome_model->visit_someone($asker,$accept);
-           if(count($rows)>0){
+           if(count($rows)>0 || $asker==$accept){
                 echo 'already exist';
             }else{
                 $results = $this->Welcome_model->add_friends($asker,$accept);//

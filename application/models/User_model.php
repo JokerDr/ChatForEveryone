@@ -27,33 +27,14 @@ class User_model extends CI_Model
                     ->get();
         return $query->result();
     }
-//     public function user_list(){
-//         $query = $this -> db -> get("t_user");
-// //        $query = $this -> db -> get_where("t_user",array('name'=>'lisi'));
+/// by ccy
 
-//         return $query->result();
-//     }
-    // public function del_user($id){
-    //     $this->db->delete('t_user', array('id' => $id));
-    //     return $this->db->affected_rows();
-    // }
-    
-    // public function update($id,$name){
-    //     $this->db->where('id', $id);
-    //     $this->db->update('t_user', array(
-    //         "name" => $name,
-    //     ));
-    //     return $this->db->affected_rows();
-    // }
-
-
-    // 更新头像
-    public function update_avatar() {
-        
-    }
     // 更新用户信息
-    public function update_user_info() {
+    public function update_user_info($id, $user_info) {
+        $this->db->where('user_id', $id);
+        $this->db->update('t_user', $user_info);
 
+        return $this->db->affected_rows();
     }
     // 更新用户简介
     public function update_user_content($id, $content, $flag){
@@ -125,6 +106,36 @@ class User_model extends CI_Model
         $sql = "SELECT * FROM t_photo WHERE u_id = ".$u_id." and using_or_not = 'using'";
         $query = $this->db->query($sql);
         return $query->result();
+    }
+    // get用户
+    public function get_user($id){
+        $sql = "SELECT * FROM t_user WHERE user_id = ".$id;
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+    // get朋有列表
+    public function get_friend($id){
+        $sql = "SELECT * FROM t_friends WHERE uid = ".$id;
+        $query = $this->db->query($sql);
+        $friends = array();
+        foreach ($query->result() as $f){
+            array_push($friends, $this->get_user($f->friends)[0]);
+        }
+
+        return $friends;
+    }
+    // 得到消息列表
+    public function get_message($id){
+        $sql = "SELECT * FROM t_message WHERE reciver_uid = ".$id;
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+    
+    // 删除好友
+    public function del_friend($id, $friend_id){
+        $sql = "delete from t_friends where friends=".$friend_id." and uid=".$id;
+        $query = $this->db->query($sql);
+        return $this->db->affected_rows();
     }
     // get 用户自我介绍
     // public function get_user_content($u_id) {
