@@ -118,7 +118,7 @@
     text-decoration: none;
     /* margin-left:  */
 }
-#nav a:hover{
+#select a:hover{
     background: #ff7f00;
     color:#fff
 }
@@ -486,13 +486,13 @@
     background: url("../image/sprit.png") no-repeat left -57px;
     background-color: #fff;
 }
-.cont p{
+#BHFooter .cont p{
     padding-top:10px;
     height: 37px;
     _height: 24px;
     _padding-top: 10px;
     text-align: center;
-    font-size: 18px;
+    /* font-size: 18px; */
     line-height: 40px;
 }
 .forgetpwd{   
@@ -584,13 +584,13 @@
     width: 120px;
     height:150px;
 }
-#message-container .photo img:hover{
+/* #message-container .photo img:hover{
     transition: all 0.8s;
     transform: scale(1.1);
     box-shadow: #3d3d3d 0px 5px 10px 0px,
     #3d3d3d 0px 10px 20px 0px;
     overflow: hidden;
-}
+} */
 #message-container .infor {
     float: left;
     width: 184px;
@@ -771,24 +771,24 @@
     color: #999;
 }
 #dialog_content{
-    position: fixed;
-    top: 25%;
-    left: 25%;
-    margin-top: -50%;
-    margin-left: -50%;
-    margin: 0 auto;
-    width: 1000px;
-    height: 600px;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 10;
+     position: fixed;
+    top: 25%; 
+     left: 30%;
+    /* margin-top: -50%; */
+    /* margin-left: -50%; */
+    /* margin: 0 auto; */
+    /* width: 1000px; */
+    /* height: 600px; */
+    /* background: rgba(0, 0, 0, 0.5);
+     /* z-index: 10;   */
 }
 #mask {
     position: absolute;
-    top:25%;
-    left:25%;
+    /* top:25%; */
+    /* left:25%; */
     width:520px;
     height:280px;
-    margin:0 auto;
+    /* margin:0 auto; */
     background: rgba(0, 0, 0, 0.5);
 }
 #dialog_content textarea{

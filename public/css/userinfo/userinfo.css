@@ -130,9 +130,9 @@
     /* margin-left:  */
 }
 
-#nav a:hover {
+#select a:hover {
     background: #ff7f00;
-    color: #fff
+    color: #fff;
 }
 .hat {
     display: inline-block;
@@ -317,8 +317,9 @@ body{
 
 
 /* 查询结果 */
+
 .user_data{
-    /* margin-top:20px; */
+    margin-top:20px;
     width:600px;
     height:70px;
     margin:0 auto;
@@ -372,4 +373,23 @@ body{
     zoom: 1;
     cursor: pointer;
     text-decoration: none;
+}
+
+
+
+
+
+
+.show_friends{
+    overflow-y:scroll;
+}
+.u_name{
+    font-size:18px;
+}
+.pic{
+    text-align:center;
+}
+.home{
+    background:url('../image/logo.png.png') no-repeat center center;
+    background-size: contain; 
 }

@@ -537,11 +537,11 @@
                         var other = $(this).attr('uid');
                         var date_1 = new Date();
                         var year = date_1.getFullYear();
-                        var month = date_1.getMonth();
+                        var month = date_1.getMonth() + 1;
                         var days = date_1.getDate();
                         var hour = date_1.getHours();
                         var seconds = date_1.getMinutes();
-                        var create_time_YMD = year + "-" + month + "-" + days;
+                        var create_time_YMD = year + "-" + month + "-" + days;+
                         var create_time_HS = hour + ":" + seconds;
                         // 模板的显隐性切换
                         var dialog = `<div id='dialog_content'>

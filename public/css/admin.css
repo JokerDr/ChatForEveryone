@@ -130,7 +130,7 @@
     /* margin-left:  */
 }
 
-#nav a:hover {
+#select a:hover {
     background: #ff7f00;
     color: #fff
 }
@@ -704,7 +704,10 @@
     margin-top:-30px;
     text-align: center;
 }
-
+.home{
+    background:url('../image/logo.png.png') no-repeat center center;
+    background-size: contain; 
+}
 /* .showpic .photos img:hover{
     transform: scale(1.2) 0.8s;
 } */

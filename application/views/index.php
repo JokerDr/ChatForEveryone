@@ -292,7 +292,7 @@
                 var other = $(this).attr('uid');
                 var date_1 = new Date();
                 var year = date_1.getFullYear();
-                var month = date_1.getMonth();
+                var month = date_1.getMonth()+1;
                 var days = date_1.getDate();
                 var hour = date_1.getHours();
                 var seconds = date_1.getMinutes();
