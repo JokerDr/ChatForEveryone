@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">                                
     <link rel="shortcut icon" type="image/x-icon" href="public/image/favicon.ico" media="screen" />
     <link rel="stylesheet" href="public/css/reset.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="public/css/aboutOne.css" />
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="public/css/lunbo.css" />    -->  
+    <link rel="stylesheet" type="text/css" media="screen" href="public/css/aboutUs.css" />
 </head>
 <body>
     <div id="header">       
@@ -52,8 +51,7 @@
                         <a href="welcome/index_logined">首页</a>
                         <a href="user/info">我的疯言疯语</a>
                         <a href="welcome/searched">搜索</a>
-                        <a href="welcome/about_us">关于我们</a>
-
+                        <a href="user/info">关于我们</a>
                     </div>
                  <?php }else{?> 
                     <a href="welcome/index_logined" class="home"></a>
@@ -61,50 +59,27 @@
                         <a href="welcome/index">首页</a>
                         <a href="user/login">我的疯言疯语</a>
                         <a href="welcome/searched">搜索</a>
-                        <a href="welcome/about_us">关于我们</a>
+                        <a href="user/info">关于我们</a>
                     </div>
                 <?php } ?> 
             </div>
         </div>     
         
     </div> 
+    
     <div id="content">
-        <div class="profile">
-            <div class="userData">
-                <div class="pic">
-                    <img src="" alt="">
-                </div>
-                <div class="data">
-                    <div class="name"></div>
-                    <div class="others">
-                        <div>
-                            <span>生年:</span>
-                            <span class="year"></span>
-                        </div>
-                        <div>
-                            <span>身高:</span>
-                            <span class="height"></span>
-                        </div>
-                        <div>
-                            <span>省市:</span>
-                            <span class="area"></span>
-                        </div>
-                        <div>
-                            <span>学历:</span>
-                            <span class="diploma"></span>
-                        </div>
-                    </div>            
-                </div>
-            </div>
-        </div>
-        <div class="intro">
-            <span>自我介绍</span>
-            <p></p>
-            <div class="buttons">
-                        <a href="javascript:;" class="findher">发送消息</a>
-                        <a href="javascript:;" class="addFriend">加为好友</a>
-            </div>
-        </div>
+        <div id="mask"></div>
+         <h3>关于我们</h3>
+        <p> 
+           
+            疯言疯语社交网站是一次大胆的尝试型网站，<br/>
+            按照当前的社交网站的模式，给好友们一个沟通交流的平台。<br/>
+            主要有用户注册模块、会员中心模块、管理员模块、好友信息模块，<br/>
+            其中用户注册模块包括账户、密码和个人信息；<br/>
+            会员中心包括修改信息、上传图片和修改密码，<br/>
+            其中修改信息包括修改头像修改昵称；管理员模块包括会员信息和平台公告；<br/>
+            好友信息管理模块包括好友管理和留言管理，其中好友管理又分为添加好友和删除好友。
+        </p>
     </div>
     <div id="BHFooter">
         <div class="cont">
@@ -170,106 +145,15 @@
                 </p>	
                
             </div>
-    </div>
-<script src="public/js/jquery.min.js"></script> 
-<script>
-    // 滑入滑出特效
+    </div>    
+    <script src="public/js/jquery.min.js"></script> 
+    <script>
+            // 滑入滑出特效
     $('.setting').mouseenter(function(){
         $('.select').show();
     }).mouseleave(function(){
         $('.select').hide();
     });  
-    var data = <?php echo $res;?>;
-    var imgSrc =  data.photo; 
-    console.log(data);
-    $('.pic img').attr('src',imgSrc);
-    $('.year').text(data.year);
-    $('.height').text(data.height);
-    $('.area').text(data.province+data.city);
-    $('.diploma').text(data.diplomas);
-    $('.name').text(data.user_name);
-    $('.intro p').text(data.intro_content);
-    $('.findher').attr('uid',data.user_id);
-    $('.addFriend').attr('uid',data.user_id);
-    // 发送消息
-    $('.findher').on('click', function () {
-        // console.log(22);
-         <?php if(isset($user)){?>
-            var other = $(this).attr('uid');
-            var date_1 = new Date();
-            var year = date_1.getFullYear();
-            var month = date_1.getMonth();
-            var days = date_1.getDate();
-            var hour = date_1.getHours();
-            var seconds = date_1.getMinutes();
-            var create_time_YMD = year + "-" + month + "-" + days;
-            var create_time_HS = hour + ":" + seconds;
-            // 模板的显隐性切换
-            // console.log(11);
-            var dialog = `<div id='dialog_content'>
-                                <div id="mask">
-                                    <div class="msg_inpt" style="display: block;">
-                                        <div class="close">[X]</div>
-                                        <textarea name="" id="content_input">                   
-                                        </textarea>
-                                        <div class="send" >发送</div>
-                                    </div>
-                                </div>
-                            </div>`
-            
-            $('#content').append(dialog);
-            $('.close').on('click', function () {
-                 $('#dialog_content').remove();
-            });
-            //发送消息
-                
-            $('.send').on('click', function () {
-                if ($.trim($('#content_input').val()) != "") {
-                    $.post('Welcome/acceptInfo', {
-                        uid:<?php echo $user->user_id?>,
-                        other: other,
-                        content: $.trim($('#content_input').val()),
-                        create_time_YMD: create_time_YMD,
-                        create_time_HS: create_time_HS
-                    }, function(data) {
-                        console.log({
-                            uid:<?php echo $user->user_id?>,
-                            other: other,
-                            content: $.trim($('#content_input').val()),
-                            create_time_YMD: create_time_YMD,
-                            create_time_HS: create_time_HS
-                        }); 
-                            $('#dialog_content').remove();                      
-                            alert('success!!!')
-
-                    }, 'text')
-                }else {
-                    alert("发送内容不能为空！！！")
-                } 
-            })    
-        <?php }else{?>
-            alert("登陆后才能发送消息！");
-        <?php }?>
-    });
-
-    //加为好友
-    $('.addFriend').on('click',function () {
-        var accepter_id = $(this).attr('uid');
-        console.log({
-            user_id:<?php echo $user->user_id;?>,
-            accepter_id:accepter_id
-            });       
-        $.post('Welcome/addfriend',{
-            user_id:<?php echo $user->user_id;?>,
-            accepter_id:accepter_id
-        },function(data){
-            console.log(data);
-            var $data = $.trim(data);
-            if($data=="already exist"){
-                alert('对方已经是你的好友');
-            }
-         },'text')
-    })
-</script>
+    </script>
 </body>
-</html> 
+</html>

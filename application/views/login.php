@@ -42,7 +42,7 @@
                     </div> --> 
                     
                     <div class="line">
-                        <a href="" target="_blank" >忘记密码？</a>
+                        <!-- <a href="" target="_blank" >忘记密码？</a> -->
                         <!-- <input type="checkbox"  checked="true" value="Yes" name="chkRememberMe" id="chkRememberMe" class="checkbox">
                         <label for="chkRememberMe" >三天内自动登录</label> -->
                     </div>

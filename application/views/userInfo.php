@@ -14,6 +14,13 @@
     <link href="public/css/userinfo/mydata.css" rel="stylesheet" type="text/css" />
     <link href="public/css/userinfo/userinfo.css"  rel="stylesheet" type="text/css" media="screen"/>  
     <link href="public/css/userinfo/ccy.css" rel="stylesheet"  type="text/css" media="screen"/>  
+    <style>
+        #my-power{
+            float: right;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+    </style>
 </head>
 
 <body>
@@ -57,6 +64,7 @@
                         <a href="welcome/index_logined">首页</a>
                         <a href="user/info">我的疯言疯语</a>
                         <a href="welcome/searched">搜索</a>
+                        <a href="welcome/about_us">关于我们</a>
                     </div>
                  <?php }else{?> 
                     <a href="welcome/index_logined" class="home"></a>
@@ -64,6 +72,7 @@
                         <a href="welcome/index">首页</a>
                         <a href="user/login">我的疯言疯语</a>
                         <a href="welcome/searched">搜索</a>
+                        <a href="welcome/about_us">关于我们</a>
                     </div>
                 <?php } ?> 
             </div>
@@ -78,7 +87,7 @@
                 <dl>
                     <dt>                
                         <a href="user/info">
-                            <img src="<?php $p = $avatar != ''?$avatar :'public/image/not_avatar.gif';echo $p;?>">
+                            <img src="<?php $p = $avatar?$avatar->photo :'public/image/not_avatar.gif';echo $p;?>">
 
                         </a>
                         <span class="u_name"><?php echo $user->user_name;?><span>
@@ -90,11 +99,11 @@
                     <a href="welcome/message" onclick="baihe.bhtongji.clickTongJi({'event':'3','spm':'2.15.43.148.224'});">
                         <strong><?php echo $msg_num?></strong><br>消息<span></span>
                     </a>            
-                    <a href="" onclick="baihe.bhtongji.clickTongJi({'event':'3','spm':'2.15.43.186.289'});">
+                    <a href="javascript:;" id="my-friend">
                         <strong><?php echo $friend_num?></strong><br>好友<span></span>
                     </a>			
-                    <a href="" onclick="baihe.bhtongji.clickTongJi({'event':'3','spm':'2.15.43.150.226'});">
-                        <strong id="persDataPetalNum"><?php echo $user->mood?></strong><br>心情
+                    <a href="javascript:;">
+                        <strong id="persDataPetalNum"><?php echo $luser->mood?></strong><br>心情
                     </a>        
                 </div>    
             </div>
@@ -105,7 +114,10 @@
             <div class="myData">
                 <h3>
                     <strong>我的资料</strong>
-                    
+                    <div id="my-power"><select name="power" id="power">
+                            <option <?php if($user_power == '0'){echo 'selected="selected"';}else{}?> value="0">好友</option>
+                            <option <?php if($user_power == '1'){echo 'selected="selected"';}else{}?> value="1">全部</option>
+                        </select> <span>谁能查看我：</span> </div>
                 </h3>
                 <!-- <div class="changeWay">
                     <input type="radio" name="visit"><label for="visit">允许所有人访问<label/>
@@ -297,7 +309,7 @@
 
 
                             <div class="left image">
-                                <img class="big-image" src="<?php $p = $avatar != ''?$avatar :'public/image/not_avatar.gif';echo $p;?>" alt="">
+                                <img class="big-image" src="<?php $p = $avatar?$avatar->photo :'public/image/not_avatar.gif';echo $p;?>" data-set="<?php $pp = $avatar?$avatar->photo_id :'';echo $pp;?>">
                             </div>
                             <div class="right image-list">
                                 <?php foreach ($photos as $photo) {?>
@@ -319,6 +331,9 @@
                                 <input type="text"/>
                             </a>
                             <a href="javascript:;" class="set-avatar">设为头像
+                                <input type="text"/>
+                            </a>
+                            <a href="javascript:;" class="del-photo">删除
                                 <input type="text"/>
                             </a>
                              <!-- <a href="javascript:;" class="del_one">删除当前照片
@@ -417,7 +432,7 @@
                         </li>
 
                         <li style="width:475px;">
-                            <span>北京市朝阳区阜通东大街1号院望京SOHO 塔3 B座 6层(100102)
+                            <span>黑龙江省哈尔滨市南岗区学府路74号
                                 <br>
                                 服务城市：<a target="_blank" href="javascript:;">北京</a> |
                                  		<a target="_blank" href="javascript:;">上海</a> |
@@ -532,16 +547,22 @@
             $('.set-avatar').on('click', function() {
                 setAvatar();
             })
+            $(".del-photo").on('click', function() {
+                delPhoto();
+            })
+            $('#my-friend').on('click', function() {
+                $('.mainNav a:last').trigger('click');
+            });
             $('.sendFriend').on('click', function () {
                         // console.log(11);          
                         var other = $(this).attr('uid');
                         var date_1 = new Date();
                         var year = date_1.getFullYear();
-                        var month = date_1.getMonth() + 1;
+                        var month = date_1.getMonth();
                         var days = date_1.getDate();
                         var hour = date_1.getHours();
                         var seconds = date_1.getMinutes();
-                        var create_time_YMD = year + "-" + month + "-" + days;+
+                        var create_time_YMD = year + "-" + month + "-" + days;
                         var create_time_HS = hour + ":" + seconds;
                         // 模板的显隐性切换
                         var dialog = `<div id='dialog_content'>
@@ -575,7 +596,8 @@
                                         content: $.trim($('#content_input').val()),
                                         create_time_YMD: create_time_YMD,
                                         create_time_HS: create_time_HS
-                                    });                           
+                                    });   
+                                     $('#dialog_content').remove();                        
                                         alert('success!!!')
                                 }, 'text')
                             }else {
@@ -585,16 +607,48 @@
                     });
             // 显示选择的图片 
             $(".image-list-item img").on('click', function() {
-                console.log($(this));
+                // console.log($(this));
                 $(this).siblings().removeClass("avatar_active");
                 $(this).addClass("avatar_active");
-                $(".my-avatar-box .image img").attr('src',$(this).attr('src'));
+                $(".my-avatar-box .image img").attr('src',$(this).attr('src')).attr('data-set',$(this).attr('data-set'));
             })
+            $('#my-power li a').on('click', function() {
+                changePower(this);
+            }); 
+
+            function changePower(that) {
+                console.log($(that).attr('index'));
+                $.get('user/change_power', {
+                    power_value: $(that).attr('index')
+                }, function(res) {
+                    res = res.trim()
+                    if(res == 'success'){
+                        console.log(res);
+                    }else{
+                        console.log(res);
+                    }
+                }, 'text')
+            }
             // 删除当前照片
-            // function del_pic(that){
-            //     var uid  = $(that).attr('user-id');
-            //     $.get()
-            // }
+            function delPhoto(that){
+                var photoId = $(".my-avatar-box .image img").attr('data-set');
+                if(!photoId){
+                    alert('操作错误。。。');
+                }else{
+                    $.get('user/del_photo', {
+                        photo_id: photoId
+                    }, function(res) {
+                        res = res.trim();
+                        if(res == 'success'){
+                            alert("删除图片成功...");
+                            location.href="user/info"
+                        }else{
+                            alert("删除图片失败...");
+                        }
+                    }, 'text')
+                }
+                
+            }
             // 删除好友
             function delFriend(that) {
                 var friend_id = $(that).attr('uid');
@@ -747,7 +801,7 @@
                 options['marriage'] ? baihe.setBaiHeSelectVal('#marriage', options['marriage']) : '-1';
             }
 
-            validateUserInfo(options);
+            // validateUserInfo(options);
 
             $('#saveInfo').click(function () {
                 if (validatePhone($("input[name='phoneContact']"))) {
@@ -810,6 +864,7 @@
                         res = res.trim();
                         if(res == 'success'){
                             alert("成功保存...")
+                            // location.href="user/info"
                         }else{
                             alert("保存失败...")
                         }
@@ -822,6 +877,13 @@
         init({ "nickname": "<?php echo $user->user_name?>", "gender": "<?php echo $user->sex?>"});
 
     
+    </script>
+    <script>
+        $('#my-power option').each(function(index, ele){
+            if($(ele).attr('selected') === 'selected'){
+                $($('#my-power li a')[index]).trigger('click');
+            }
+        })
     </script>
 </body>
 

@@ -137,6 +137,38 @@ class User_model extends CI_Model
         $query = $this->db->query($sql);
         return $this->db->affected_rows();
     }
+
+    public function del_photo($id, $photo_id) {
+        $sql = "delete from t_photo where photo_id=".$photo_id." and u_id=".$id;
+        $query = $this->db->query($sql);
+        return $this->db->affected_rows();
+    }
+
+    public function get_power($id){
+        $sql = "SELECT * FROM t_power WHERE uid = ".$id;
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+    public function update_power($id, $power_value) {
+        // 查询有不有此项数据
+        // 有 =》 update
+        // wu =》 insert
+        $result = $this->get_power($id);
+        if(count($result) > 0){
+            // 有
+            $this->db->where('uid', $id);
+            $this->db->update('t_power', array(
+                "power_value" => $power_value
+            ));
+        }else{
+            // 无
+            $this->db->insert('t_power', array(
+                "uid" => (int)$id,
+                "power_value" => $power_value
+            ));
+        }
+        return $this->db->affected_rows();
+    }
     // get 用户自我介绍
     // public function get_user_content($u_id) {
     //     $sql = "SELECT * FROM t_intro WHERE u_id = ".$u_id;

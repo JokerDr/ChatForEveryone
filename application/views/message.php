@@ -51,6 +51,7 @@
                         <a href="welcome/index_logined">首页</a>
                         <a href="user/info">我的疯言疯语</a>
                         <a href="welcome/searched">搜索</a>
+                        <a href="welcome/about_us">关于我们</a>
                     </div>
                  <?php }else{?> 
                     <a href="welcome/index_logined" class="home"></a>
@@ -58,6 +59,7 @@
                         <a href="welcome/index">首页</a>
                         <a href="user/login">我的疯言疯语</a>
                         <a href="welcome/searched">搜索</a>
+                        <a href="welcome/about_us">关于我们</a>
                     </div>
                 <?php } ?> 
             </div>
@@ -159,7 +161,7 @@
                         </li>
 
                         <li style="width:475px;">
-                            <span>北京市朝阳区阜通东大街1号院望京SOHO 塔3 B座 6层(100102)
+                            <span>黑龙江省哈尔滨市南岗区学府路74号
                                 <br>
                                 服务城市：<a target="_blank" href="javascript:;">北京</a> |
                                  		<a target="_blank" href="javascript:;">上海</a> |
@@ -242,7 +244,7 @@
             $('.send').on('click',function(){
                 var date_1 = new Date();
                 var year  = date_1.getFullYear();
-                var month = date_1.getMonth()+1;
+                var month = date_1.getMonth();
                 var days = date_1.getDate();
                 var hour = date_1.getHours();
                 var seconds = date_1.getMinutes();
@@ -264,6 +266,7 @@
                             create_time_YMD:create_time_YMD,
                             create_time_HS:create_time_HS
                         },function(data){
+                             $('#dialog_content').remove();
                             alert(data);
                             // console.log(data);                   
                         },'text')  

@@ -54,6 +54,8 @@
                         <a href="welcome/index_logined">首页</a>
                         <a href="user/info">我的疯言疯语</a>
                         <a href="welcome/searched">搜索</a>
+                        <a href="welcome/about_us">关于我们</a>
+
                     </div>
                  <?php }else{?> 
                     <a href="welcome/index_logined" class="home"></a>
@@ -61,6 +63,8 @@
                         <a href="welcome/index">首页</a>
                         <a href="user/login">我的疯言疯语</a>
                         <a href="welcome/searched">搜索</a>
+                        <a href="welcome/about_us">关于我们</a>
+
                     </div>
                 <?php } ?>  
             </div>
@@ -99,7 +103,7 @@
                                 </div> --> 
                                 
                                 <div class="line">
-                                    <a href="" target="_blank" >忘记密码？</a>
+                                    <!-- <a href="" target="_blank" >忘记密码？</a> -->
                                     <!-- <input type="checkbox"  checked="true" value="Yes" name="chkRememberMe" id="chkRememberMe" class="checkbox">
                                     <label for="chkRememberMe" >三天内自动登录</label> -->
                                 </div>
@@ -108,7 +112,7 @@
                                 
                                 <span class="noLogin">没有账号？</span>
                                 <a href="user/register" class="register" onclick="">立即注册&gt;</a>
-                                <a href="" target="_blank" class='forgetpwd'>忘记密码？</a>
+                                <!-- <a href="" target="_blank" class='forgetpwd'>忘记密码？</a> -->
                                 
                             </div>
                             </form>
@@ -180,8 +184,22 @@
             </div>
             
     </div>
-
+    <div id="selected_cards">
+        <div class="cards_name">
+            <div class="selector_f selected">1</div>
+            <div class="selector_f">2</div>
+            <div class="selector_f">3</div>
+            <div class="selector_f">4</div>
+        </div>
+        <div class="cards_pic">
+            <a  href="javascript:;" class="selected_pic"><img src="public/image/选项卡图1.png" alt="图一"></a>
+            <a href="javascript:;"><img src="public/image/选项卡图2.png" alt="图二"></a>
+            <a href="javascript:;"><img src="public/image/选项卡图3.png" alt="图三"></a>
+            <a href="javascript:;"><img src="public/image/选项卡图4.png" alt="图四"></a>
+        </div>
+    </div>
     <div id="BHFooter">
+        
         <div class="cont">
             	<div class="logo">
                     <img src="public/image/logo.png.png" alt="疯言疯语网实名婚恋开创者">
@@ -210,7 +228,7 @@
                         </li>
 
                         <li style="width:475px;">
-                            <span>北京市朝阳区阜通东大街1号院望京SOHO 塔3 B座 6层(100102)
+                            <span>黑龙江省哈尔滨市南岗区学府路74号
                                 <br>
                                 服务城市：<a target="_blank" href="javascript:;">北京</a> |
                                  		<a target="_blank" href="javascript:;">上海</a> |
@@ -248,6 +266,26 @@
     </div>
  
     <script>     
+        //页脚选项卡
+        // 鼠标点击
+    //     $('.cards_name div').on('click',function(){
+    //         $(".tab-menu li").mouseover(function(){
+           
+    //             var _index = $(this).index();
+    //         //让内容框的第 _index 个显示出来，其他的被隐藏
+    //             $(".tab-box>div").eq(_index).show().siblings().hide();
+    //         //改变选中时候的选项框的样式，移除其他几个选项的样式
+    //         $(this).addClass("change").siblings().removeClass("change");
+    // });
+        
+    //     })
+        // 鼠标滑动
+        $('.cards_name div').mouseover(function(){
+             var _index = $(this).index(); //通过 .index()方法获取元素下标，从0开始，赋值给某个变量
+             $(this).addClass("selected").siblings().removeClass("selected");
+             $(".cards_pic a").eq(_index).addClass("selected_pic").siblings().removeClass("selected_pic");//改变选中时候的选项框的样式，移除其他几个选项的样式
+        })
+        //生成推荐版块
         var data = <?php echo $users_width_photos ;?>;        
         for(var i = 0;i<12;i++){
              $('.photo img')[i].src= data[i].photo;
@@ -292,7 +330,7 @@
                 var other = $(this).attr('uid');
                 var date_1 = new Date();
                 var year = date_1.getFullYear();
-                var month = date_1.getMonth()+1;
+                var month = date_1.getMonth();
                 var days = date_1.getDate();
                 var hour = date_1.getHours();
                 var seconds = date_1.getMinutes();
@@ -331,7 +369,8 @@
                                 content: $.trim($('#content_input').val()),
                                 create_time_YMD: create_time_YMD,
                                 create_time_HS: create_time_HS
-                            });                           
+                            });            
+                             $('#dialog_content').remove();               
                                 alert('success!!!')
                             }, 'text')
                     }else {

@@ -1,5 +1,15 @@
-﻿#header{
+﻿body{
+    background: #444;
+}
+html{
+    background: url('../image/html背景图.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+#header{
     height:90px;
+    background: url('../image/header.png') no-repeat center center;
+    background-size: cover;
 }
 #headerTop{
     background: #f3f3f3; 
@@ -10,6 +20,7 @@
     height:30px;
     width:1000px;
     margin: 0 auto;
+    border-bottom: 1px solid #ff7f00;
 }
 .home{
     background:url('../image/logo.png.png') no-repeat center center;
@@ -61,7 +72,7 @@
     line-height: 30px;
     cursor: pointer;
     /* color: #6e6e6e; */
-    background:#f3f3f3;
+    /* background:#f3f3f3; */
 }
 
 .setting:hover{
@@ -518,7 +529,8 @@
     position: relative;
     height: 33px;
     font-size: 18px;
-    color: #333;
+    /* color: #333; */
+    color:#bdbdbd;
         /* margin-bottom: 10px; */
         border-bottom: 1px solid #dddddd;
         zoom: 1;
@@ -535,6 +547,7 @@
     width:1000px;
     height:870px;
     margin:0 auto;
+    /* background: #fff; */
 }
 #pubuliu strong{
     display: block;
@@ -563,12 +576,14 @@
     zoom: 1;
     cursor: pointer;
     text-decoration: none;
+    border-radius:5%;
 }
 #message-container{
     float: left;
     width: 333px;
     height: 185px;
-    color: #333;
+    /* color: #333; */
+    color:#bdbdbd;
     overflow: hidden;
     zoom: 1;
     margin-top:40px;
@@ -715,7 +730,7 @@
     background: #fff;
     overflow: hidden;
     zoom: 1;
-    margin-top: 40px;
+    /* margin-top: 40px; */
 }
 
 #BHFooter a {
@@ -771,24 +786,25 @@
     color: #999;
 }
 #dialog_content{
-     position: fixed;
-    top: 25%; 
-     left: 30%;
-    /* margin-top: -50%; */
-    /* margin-left: -50%; */
-    /* margin: 0 auto; */
-    /* width: 1000px; */
-    /* height: 600px; */
-    /* background: rgba(0, 0, 0, 0.5);
-     /* z-index: 10;   */
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    margin-top: -50%;
+    margin-left: -50%;
+    margin: 0 auto;
+    width: 1000px;
+    height: 600px;
+    /* background: rgba(0, 0, 0, 0.5); */
+   
+    z-index: 10;
 }
 #mask {
     position: absolute;
-    /* top:25%; */
-    /* left:25%; */
+    top:25%;
+    left:25%;
     width:520px;
     height:280px;
-    /* margin:0 auto; */
+    margin:0 auto;
     background: rgba(0, 0, 0, 0.5);
 }
 #dialog_content textarea{
@@ -810,7 +826,8 @@
     border: none;
     border-top: 1px solid #000;
     outline: none;
-    background: beige;
+     background: url('../image/消息背景图.jpg') no-repeat center center;
+     background-size: cover;
 }
 .msg_inpt{
     z-index:20;
@@ -841,4 +858,52 @@
     margin: 20px auto;
     line-height: 40px;
     cursor: pointer;
+}
+
+/* 尾部选项卡 */
+#selected_cards{
+    width:1000px;
+    height:150px;
+    margin: 20px auto;
+    margin-bottom: 0;
+    /* background: #fff; */
+}
+.cards_name{
+    color:#ccc;
+    text-align: center;
+    height:50px;
+    width:100%;
+}
+.selector_f{
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+    vertical-align: middle;
+    width:100px;
+    height:40px;
+    padding:5px 20px;
+    line-height: 40px;
+    cursor: pointer;
+}
+.selected{
+    background: #ff7f00;
+}
+.cards_pic{    
+    width:100%;
+    height:100px;
+}
+.cards_pic a{
+    display: none;
+     *display: inline;
+     *zoom:1;
+     vertical-align: middle;
+    width:100%;
+    height:100px;
+}
+a.selected_pic {
+    display: inline-block;
+}
+a.selected_pic img{
+    width:100%;
+    height:100px;
 }

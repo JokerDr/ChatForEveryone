@@ -48,11 +48,16 @@
             // 加载搜索页
            $this->load->view('search');
         }
+        //加载 关于我们 页
+        public function about_us(){
+            $this->load->view('aboutUs');
+        }
         // 好友数量
         public function get_friend_num(){
             $id = $this->session->user->user_id;
             $result = $this->User_model->get_friend($id);
             $friend_num = count($result);
+
             return $friend_num;
         }
         // 消息数量

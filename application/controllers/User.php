@@ -234,6 +234,9 @@ class User extends CI_Controller{
         $avatar = $this->get_user_avatar();
         $self_content = $this->get_user_content();
         $user = $this->User_model->get_user($id);
+        $user_power = $this->User_model->get_power($id);
+        // var_dump($user_power);
+        // die();
         $friend_num = $this->get_friend_num();
         $msg_num = $this->get_msg_num();
         $friend_list = $this->User_model->get_friend($id);
@@ -241,7 +244,6 @@ class User extends CI_Controller{
         $f_list = array();
         for($i = 0; $i < $friend_length; $i++){
             $friend_name = $friend_list[$i]->user_name;
-
             $result = $this->User_model->get_user_avatar($friend_list[$i]->user_id);
             if(count($result) == 1){
                 $friend_avatar = $result[0]->photo;
@@ -262,10 +264,11 @@ class User extends CI_Controller{
             "photos" => $photo_list,
             "avatar" => $avatar,
             'self_content' => $self_content,
-            'user' => $user[0],
+            'luser' => $user[0],
             'friend_num' => $friend_num,
             'msg_num' => $msg_num,
-            'friend_list' => $f_list
+            'friend_list' => $f_list,
+            'user_power' => count($user_power) == 0?'1':$user_power[0]->power_value
         ));
     }
     // 更新用户信息
@@ -404,7 +407,7 @@ class User extends CI_Controller{
         $id = $this->session->user->user_id;
         $result = $this->User_model->get_user_avatar($id);
         if(count($result) == 1){
-            return $result[0]->photo;
+            return $result[0];
         }else{
             return '';
         }
@@ -439,6 +442,32 @@ class User extends CI_Controller{
         // var_dump($friend_id);
         // die();
         $result = $this->User_model->del_friend($id, $friend_id);
+        if($result > 0){
+            echo 'success';
+        }else{
+            echo 'fail';
+        }
+    }
+
+    public function del_photo() {
+        $id = $this->session->user->user_id;
+        $photo_id = $this->input->get('photo_id');
+        // var_dump($photo_id);
+        // die();
+        $result = $this->User_model->del_photo($id, $photo_id);
+        if($result > 0){
+            echo 'success';
+        }else{
+            echo 'fail';
+        }
+    }
+
+    public function change_power() {
+        
+        $id = $this->session->user->user_id;
+        $power_value = $this->input->get('power_value');
+        
+        $result = $this->User_model->update_power($id, $power_value);
         if($result > 0){
             echo 'success';
         }else{

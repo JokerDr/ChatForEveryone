@@ -1,5 +1,7 @@
 #header {
     height: 90px;
+    background: url('../image/header.png') no-repeat center center;
+    background-size: cover;
 }
 
 #headerTop {
@@ -50,7 +52,7 @@
     vertical-align: middle;
     /*兼容ie 6 7*/
     font-size: 12px;
-    color: #6e6e6e;
+    /* color: #6e6e6e; */
 }
 
 .logined a {

@@ -104,7 +104,7 @@
                         </li>
 
                         <li style="width:475px;">
-                            <span>北京市朝阳区阜通东大街1号院望京SOHO 塔3 B座 6层(100102)
+                            <span>黑龙江省哈尔滨市南岗区学府路74号
                                 <br>
                                 服务城市：<a target="_blank" href="javascript:;">北京</a> |
                                  		<a target="_blank" href="javascript:;">上海</a> |
@@ -195,7 +195,7 @@
                         var other = $(this).attr('uid');
                         var date_1 = new Date();
                         var year = date_1.getFullYear();
-                        var month = date_1.getMonth()+1;
+                        var month = date_1.getMonth();
                         var days = date_1.getDate();
                         var hour = date_1.getHours();
                         var seconds = date_1.getMinutes();
@@ -233,7 +233,8 @@
                                         content: $.trim($('#content_input').val()),
                                         create_time_YMD: create_time_YMD,
                                         create_time_HS: create_time_HS
-                                    });                           
+                                    });              
+                                     $('#dialog_content').remove();             
                                         alert('success!!!')
                                 }, 'text')
                             }else {
@@ -324,7 +325,7 @@
             //  var other = $(this).attr('uid');
             var date_1 = new Date();
             var year = date_1.getFullYear();
-            var month = date_1.getMonth()+1;
+            var month = date_1.getMonth();
             var days = date_1.getDate();
             var hour = date_1.getHours();
             var seconds = date_1.getMinutes();
@@ -361,7 +362,8 @@
                             content: $.trim($('#content_input').val()),
                             create_time_YMD: create_time_YMD,
                             create_time_HS: create_time_HS
-                        });                           
+                        });
+                         $('#dialog_content').remove();                           
                         // alert(data);
                     }, 'text')
                 }else {
