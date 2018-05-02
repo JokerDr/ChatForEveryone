@@ -292,8 +292,9 @@
              $('.photo')[i].setAttribute('uid',data[i].user_id );
              $('.photo img')[i].alt = data[i].user_name;
              $('.infor strong')[i].innerHTML = data[i].user_name;
-             $('.infor span')[i].innerHTML = data[i].height +"    "+ data[i].diplomas+"    "+ data[i].province+ data[i].city+data[i].others;          
-             $('.findHer')[i].setAttribute('uid',data[i].user_id );
+            //  $('.infor span')[i].innerHTML = data[i].height +"    "+ data[i].diplomas+"    "+ data[i].province+ data[i].city+data[i].others;          
+            $('.findHer')[i].setAttribute('uid',data[i].user_id );
+             $('.infor p')[i].innerHTML=data[i].intro_content;
         }
         //cha看资料 
         $('.photo').on('click',function(){
