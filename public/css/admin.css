@@ -314,7 +314,7 @@
     width:1000px;
     border-top:2px solid #ff7f00; 
     height:60px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ff7f00;
     margin-top:2px;
 }
 .Way {
@@ -329,7 +329,7 @@
     *zoom: 1;
     vertical-align:middle;
     height:60px;
-    width:300px;
+    width:200px;
     text-align: center;  
 }
 /* .way1 {
@@ -339,10 +339,7 @@
 .way1,.way2{
     position: relative;
 }
-.way1{
-    background: #ff7f00;
-    color: #fff;
-}
+
 .Way label{
     display: block;
     height:60px;
@@ -713,3 +710,8 @@
 /* .showpic .photos img:hover{
     transform: scale(1.2) 0.8s;
 } */
+
+.selected {
+    background: #ff7f00;
+    color: #fff;
+}

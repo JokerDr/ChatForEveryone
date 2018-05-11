@@ -119,7 +119,11 @@ class User_model extends CI_Model
         $query = $this->db->query($sql);
         $friends = array();
         foreach ($query->result() as $f){
-            array_push($friends, $this->get_user($f->friends)[0]);
+            $row = $this->get_user($f->friends);
+            if($row){
+                array_push($friends, $row[0]);
+            }
+            
         }
 
         return $friends;

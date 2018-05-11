@@ -17,16 +17,31 @@
         $this->db->delete('t_photo');
         return $this->db->affected_rows();  
     }
-    // // 删除用户
-    // public function delete_user($user){
-    //     $this->db->where_in('user_id',$user);
-    //     $this->db->delete('t_user');
-    //     return $this->db->affected_rows();
-    // }
+    // // 删除用户及其关联的表的所有项
+    public function delete_user($user_id){
+        // $this->db->where_in('user_id',$user_id);
+        // $this->db->delete('t_user');
+        // return $this->db->affected_rows();
+        $sql = 'DELETE `t_user`,`t_friends`,`t_intro`,`t_message`,`t_photo` ,`t_power` 
+                FROM `t_user` 
+                LEFT JOIN `t_friends` ON (`t_user`.user_id = `t_friends`.uid  ) AND (`t_friends`.friends =`t_user`.user_id )
+                LEFT JOIN `t_intro` ON `t_user`.user_id = `t_intro`.u_id
+                LEFT JOIN `t_message` ON (`t_user`.user_id  = `t_message`.reciver_uid) OR (`t_user`.user_id  = `t_message`.sender_uid)
+                LEFT JOIN `t_photo` ON `t_user`.user_id  = `t_photo`.u_id
+                LEFT JOIN `t_power` ON `t_user`.user_id  = `t_power`.uid 
+                WHERE `t_user`.user_id in (' .$user_id. ')' ;
+        $query = $this->db->query($sql);
+         return $this->db->affected_rows();
+    }
     // 获取用户表中所有用户
     public function get_users(){
-        $query = $this->db->get('t_user');
-        return $query->result();
+        // $query = $this->db->get('t_user');
+        // return $query->result();
+        $sql = 'SELECT  * FROM `t_user`
+                 LEFT JOIN `t_photo` ON `t_user`.user_id = `t_photo`.u_id  AND `t_photo`.using_or_not = "using" 
+                 LEFT JOIN  `t_intro` ON `t_user`.user_id = `t_intro`.u_id' ;
+        $query = $this->db->query($sql);
+        return $query->result();   
     }
     // 插入消息
     public function add_message($arr){

@@ -252,13 +252,13 @@
                 var create_time_HS = hour+ ":" +seconds;
                 if($.trim($('#content_input').val())!=""){
                     // console.log($(this).call($('.wriper')));
-                    console.log({
+                        console.log({
                                 uid:<?php echo $user->user_id ;?>,
                                 other: $(this).attr('uid'),
                                 content:$.trim($('#content_input').val()),
                                 create_time_YMD:create_time_YMD,
                                 create_time_HS:create_time_HS
-                             });
+                        });
                         $.post('Welcome/acceptInfo',{
                             uid:<?php echo $user->user_id ;?>,
                             other: $(this).attr('uid'),

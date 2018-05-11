@@ -10,8 +10,13 @@ class Admin extends CI_Controller{
     } 
     //加载管理员页面
     public function admin(){
-
+        // $users = $this->Admin_model->get_users();
         $this->load->view('admin');
+    }
+    //获得所有用户
+    public function get_uers(){
+        $results = $this->Admin_model->get_users();
+        echo json_encode($results);
     }
     // 群体发送公告
     public function notice(){
@@ -45,6 +50,18 @@ class Admin extends CI_Controller{
         $user_name = $this->input->get('uname');
         return $this->Admin_model->name_search($user_name); 
     }
+    // 删除用户
+    public function del_user(){
+        $user_id = $this->input->get('user_Id');
+        $result = $this->Admin_model->delete_user($user_id);
+        // echo json_encode($result);
+        if($result>0){
+            echo "delete success";
+        }
+        var_dump( $result);
+
+        
+    }
     // 删除用户的自我介绍
     public function del_intro(){
         $uid = $this->input->get('uid');
@@ -69,7 +86,7 @@ class Admin extends CI_Controller{
         if($results>0){
             echo 'delete success';
         }else{
-            echo "nothing to delete";
+            echo "nothing to be deleted";
         }
     }
     
